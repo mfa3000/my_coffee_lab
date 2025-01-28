@@ -9,4 +9,12 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
+  get '/profile', to: 'users#profile', as: :profile
+
+  resources :users, only: [] do
+    member do
+      get 'profile'
+    end
+  end
 end
