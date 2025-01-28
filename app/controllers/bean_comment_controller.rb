@@ -1,2 +1,0 @@
-class BeanCommentController < ApplicationController
-end
