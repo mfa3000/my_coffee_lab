@@ -17,4 +17,7 @@ Rails.application.routes.draw do
       get 'profile'
     end
   end
+
+  resources :roasteries, only: [:index, :show]
+  resources :beans, only: [:index, :show]
 end
