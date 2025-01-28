@@ -1,2 +1,9 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="home-page">
+  <h1>Welcome to My Coffee Lab</h1>
+  <p>Choose what you’d like to explore:</p>
+
+  <div class="options">
+    <%= link_to "Explore Beans", beans_path, class: "btn btn-primary" %>
+    <%= link_to "Explore Roasteries", roasteries_path, class: "btn btn-secondary" %>
+  </div>
+</div>

@@ -10,8 +10,6 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-  resources :roasteries
-
-  
-
+  resources :roasteries, only: [:index, :show]
+  resources :beans, only: [:index, :show]
 end
