@@ -6,7 +6,7 @@ class RoasteriesController < ApplicationController
   end
 
   def index
-    @roasteries = Roastery.all
+    @roasteries = Roastery.includes(:locations).all
   end
 
   def new
