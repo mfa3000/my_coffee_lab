@@ -1,0 +1,2 @@
+class BeanReviewsController < ApplicationController
+end

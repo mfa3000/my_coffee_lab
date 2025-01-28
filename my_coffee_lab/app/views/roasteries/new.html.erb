@@ -1,0 +1,32 @@
+<h1 class="text-center text-3xl font-bold mb-6">Create a New Roastery</h1>
+<div class="container">
+  <div class="max-w-4xl mx-auto bg-gray-100 p-6 rounded-lg shadow-md">
+    <%= simple_form_for @roastery, html: { multipart: true } do |f| %>
+
+      <div class="grid grid-cols-2 gap-6">
+        <div>
+          <%= f.input :name, required: true, label: "Roastery Name", input_html: { class: "w-full p-3 border rounded-lg" } %>
+        </div>
+        <div>
+          <%= f.input :description, as: :text, label: "Roastery Description", input_html: { class: "w-full p-3 border rounded-lg" } %>
+        </div>
+
+        <div>
+          <%= f.input :address, required: true, label: "Roastery Address", input_html: { class: "w-full p-3 border rounded-lg" } %>
+        </div>
+        <div>
+          <%= f.input :roastery_url, as: :url, label: "Roastery Website", input_html: { class: "w-full p-3 border rounded-lg" } %>
+        </div>
+
+        <div class="col-span-2">
+          <%= f.input :image, as: :file, label: "Upload Roastery Image", input_html: { class: "w-full p-3 border rounded-lg" } %>
+        </div>
+      </div>
+
+      <div class="mt-6 text-center">
+        <%= f.submit "Create Roastery", class: "text-white py-3 px-6 rounded-lg" %>
+      </div>
+
+    <% end %>
+  </div>
+<div>
