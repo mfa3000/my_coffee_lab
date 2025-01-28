@@ -1,0 +1,13 @@
+
+<h1>Our Coffee Beans</h1>
+
+<ul>
+  <% @beans.each do |bean| %>
+    <li>
+      <strong><%= bean.name %></strong><br>
+      <em><%= bean.origin %></em><br>
+      <%= bean.description %>
+    </li>
+  <% end %>
+</ul>
+
