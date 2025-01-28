@@ -1,5 +1,5 @@
 class BeansController < ApplicationController
-<<<<<<< HEAD
+
   before_action :set_bean, only: [:show]
 
   def show
