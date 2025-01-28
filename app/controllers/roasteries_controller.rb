@@ -1,11 +1,12 @@
 class RoasteriesController < ApplicationController
   before_action :authenticate_user! , only: [:new, :create]
-  def index
-    @roasteries = Roastery.all
-  end
+  before_action :set_roastery, only: [:show]
 
   def show
-    @roastery = Roastery.find(params[:id])
+  end
+
+  def index
+    @roasteries = Roastery.all
   end
 
   def new
@@ -28,5 +29,9 @@ class RoasteriesController < ApplicationController
 
   def roastery_params
     params.require(:roastery).permit(:name, :description, :image, :roastery_url, locations_attributes: [:id, :address, :location_type, :_destroy])
+  end
+
+  def set_roastery
+    @roastery = Roastery.find(params[:id])
   end
 end

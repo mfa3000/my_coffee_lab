@@ -1,0 +1,15 @@
+<h1><%=@roastery.name%></h1>
+<li>
+  <ul>Description: <%=@roastery.description%></ul>
+  <ul>Image: <%=@roastery.image%></ul>
+  <ul>Address: <%=@roastery.address%></ul>
+  <ul>Roastery URL: <%=@roastery.roastery_url%></ul>
+  <ul>Roastery User:<%=@roastery.user_id%></ul>
+  <ul>Roastery Locations:
+  <%@roastery.locations.each do |location| %>
+    <ul><%=location.address %></ul>
+    <ul><%=location.type %></ul>
+  <%end%>
+  </ul>
+
+</li>
