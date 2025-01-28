@@ -4,24 +4,35 @@ import "controllers"
 import "@popperjs/core"
 import "bootstrap"
 
+import { application } from "./controllers/application";
+
 document.addEventListener("DOMContentLoaded", function () {
-  const addLocationButton = document.getElementById("add_location");
-  if (addLocationButton) {
+  const addLocationButton = document.getElementById("add-location-btn");
+  const locationsContainer = document.getElementById("locations-container");
+
+  if (addLocationButton && locationsContainer) {
     addLocationButton.addEventListener("click", function () {
-      const locationsDiv = document.getElementById("locations");
-      const lastLocationFields = locationsDiv.lastElementChild;
 
-      const newFields = lastLocationFields.cloneNode(true);
+      const firstLocationFields = locationsContainer.querySelector(".location-fields");
+      if (!firstLocationFields) return;
 
-      newFields.querySelectorAll("input").forEach((input) => {
-        input.value = "";
-      });
+      const newFields = firstLocationFields.cloneNode(true);
 
-      newFields.querySelectorAll("select").forEach((select) => {
-        select.value = "";
-      });
+      newFields.querySelector(".location-type").value = "";
+      newFields.querySelector(".location-address").value = "";
 
-      locationsDiv.appendChild(newFields);
+      const index = locationsContainer.children.length;
+
+      newFields.querySelector(".location-type").setAttribute(
+        "name",
+        `roastery[locations_attributes][${index}][location_type]`
+      );
+      newFields.querySelector(".location-address").setAttribute(
+        "name",
+        `roastery[locations_attributes][${index}][address]`
+      );
+
+      locationsContainer.appendChild(newFields);
     });
   }
 });

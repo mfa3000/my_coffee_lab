@@ -1,0 +1,20 @@
+<h1>All Roasteries</h1>
+
+<div>
+  <%= link_to "Add New Roastery", new_roastery_path %>
+</div>
+
+<div>
+  <% @roasteries.each do |roastery| %>
+    <div>
+      <h2><%= link_to roastery.name, roastery_path(roastery) %></h2>
+      <p><%= truncate(roastery.description, length: 100) %></p>
+      <div>
+        <strong>Locations:</strong>
+        <% roastery.locations.each do |location| %>
+          <p><%= location.address %> (<%= location.location_type %>)</p>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

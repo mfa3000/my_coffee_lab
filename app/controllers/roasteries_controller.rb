@@ -28,7 +28,10 @@ class RoasteriesController < ApplicationController
   private
 
   def roastery_params
-    params.require(:roastery).permit(:name, :description, :image, :roastery_url, locations_attributes: [:id, :address, :location_type, :_destroy])
+    params.require(:roastery).permit(
+      :name, :description, :image, :roastery_url,
+      locations_attributes: [:id, :location_type, :address, :_destroy]
+    )
   end
 
   def set_roastery
