@@ -12,4 +12,7 @@ Rails.application.routes.draw do
 
   resources :roasteries, only: [:index, :show]
   resources :beans, only: [:index, :show]
+
+  get 'beans', to: 'beans#index'
+  
 end
