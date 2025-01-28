@@ -3,6 +3,7 @@ class RoasteriesController < ApplicationController
 
   def new
     @roastery = Roastery.new
+    @roastery.locations.build
   end
 
   def create
@@ -18,6 +19,6 @@ class RoasteriesController < ApplicationController
   private
 
   def roastery_params
-    params.require(:roastery).permit(:name, :description, :image, :address, :roastery_url)
+    params.require(:roastery).permit(:name, :description, :image, :address, :roastery_url, locations_attributes: [:id, :address, :location_type, :_destroy])
   end
 end

@@ -1,4 +1,5 @@
 <h1 class="text-center text-3xl font-bold mb-6">Create a New Roastery</h1>
+
 <div class="container">
   <div class="max-w-4xl mx-auto bg-gray-100 p-6 rounded-lg shadow-md">
     <%= simple_form_for @roastery, html: { multipart: true } do |f| %>
@@ -10,10 +11,6 @@
         <div>
           <%= f.input :description, as: :text, label: "Roastery Description", input_html: { class: "w-full p-3 border rounded-lg" } %>
         </div>
-
-        <div>
-          <%= f.input :address, required: true, label: "Roastery Address", input_html: { class: "w-full p-3 border rounded-lg" } %>
-        </div>
         <div>
           <%= f.input :roastery_url, as: :url, label: "Roastery Website", input_html: { class: "w-full p-3 border rounded-lg" } %>
         </div>
@@ -23,10 +20,45 @@
         </div>
       </div>
 
+      <h2 class="text-xl font-bold mt-6">Locations</h2>
+
+      <div id="locations">
+        <div class="grid grid-cols-2 gap-4 mt-4">
+          <div>
+            <%= f.fields_for :locations, @roastery.locations.build do |location_fields| %>
+              <%= location_fields.input :address, required: true, label: "Location Address", input_html: { class: "w-full p-3 border rounded-lg" } %>
+            <% end %>
+          </div>
+          <div>
+            <%= f.fields_for :locations, @roastery.locations.build do |location_fields| %>
+              <%= location_fields.input :location_type, collection: ["Cafe", "Roastery and Cafe", "Warehouse"], label: "Location Type", prompt: "Select a Type", required: true, input_html: { class: "w-full p-3 border rounded-lg" } %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-4">
+        <button type="button" id="add_location" class="bg-blue-500 text-white px-4 py-2 rounded">Add Location</button>
+      </div>
+
       <div class="mt-6 text-center">
-        <%= f.submit "Create Roastery", class: "text-white py-3 px-6 rounded-lg" %>
+        <%= f.submit "Create Roastery", class: "bg-orange-500 text-white py-3 px-6 rounded-lg hover:bg-orange-600 transition" %>
       </div>
 
     <% end %>
   </div>
-<div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("add_location").addEventListener("click", function() {
+      const locationsDiv = document.getElementById("locations");
+      const newFields = locationsDiv.firstElementChild.cloneNode(true);
+
+      newFields.querySelectorAll("input").forEach(input => input.value = "");
+      newFields.querySelectorAll("select").forEach(select => select.value = "");
+
+      locationsDiv.appendChild(newFields);
+    });
+  });
+</script>
