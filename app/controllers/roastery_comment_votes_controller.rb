@@ -1,0 +1,2 @@
+class RoasteryCommentVotesController < ApplicationController
+end

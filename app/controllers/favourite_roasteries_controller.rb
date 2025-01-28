@@ -1,0 +1,2 @@
+class FavouriteRoasteriesController < ApplicationController
+end

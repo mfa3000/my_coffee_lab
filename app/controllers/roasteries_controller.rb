@@ -1,0 +1,2 @@
+class RoasteriesController < ApplicationController
+end
