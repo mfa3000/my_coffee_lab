@@ -7,5 +7,8 @@
   <ul><strong>Roastery:</strong>
     <%= link_to @bean.roastery.name, roastery_path(@bean.roastery), class: "text-blue-500 hover:underline" %>
   </ul>
-
 </li>
+
+<div class="mt-4">
+  <%= link_to "Edit Bean", edit_bean_path(@bean), class: "btn" %>
+</div>
