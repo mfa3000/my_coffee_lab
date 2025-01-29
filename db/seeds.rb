@@ -31,7 +31,7 @@ User.destroy_all
 puts "creating fake data for users"
 # Create fake users
 users = []
-2.times do
+10.times do
   users << User.create!(
     user_name: Faker::Internet.username,
     email: Faker::Internet.unique.email,
@@ -105,9 +105,9 @@ end
 puts "fake bean comments created"
 
 puts "creating fake data for roastery comments"
-roastery_comments1 = []
+roastery_comments = []
 50.times do
-  roastery_comments1 << RoasteryComment.create!(
+  roastery_comments << RoasteryComment.create!(
     comment: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
     user: users.sample,
     roastery: roasteries.sample,
