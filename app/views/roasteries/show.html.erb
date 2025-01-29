@@ -14,3 +14,18 @@
   <% end %>
   <%= link_to "Edit Roastery", edit_roastery_path(@roastery), class: "btn mt-4" %>
 </ul>
+
+<h3>Comments</h3>
+
+<div id="roastery_<%= @roastery.id %>_comments">
+  <%= render @roastery.roastery_comments %>
+</div>
+
+<%= turbo_stream_from "roastery_#{@roastery.id}_comments" %>
+
+<%= form_with model: [@roastery, RoasteryComment.new], data: { turbo: true } do |form| %>
+  <div class="mb-2">
+    <%= form.text_area :content, placeholder: "Write a comment...", class: "form-control" %>
+  </div>
+  <%= form.submit "Post", class: "btn btn-primary" %>
+<% end %>
