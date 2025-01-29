@@ -18,12 +18,17 @@
 <h3>Comments</h3>
 
 <div id="roastery_<%= @roastery.id %>_comments">
-  <%= render @roastery.roastery_comments %>
+  <% @roastery.roastery_comments.each do |comment| %>
+    <%= render "roastery_comments/roastery_comment", roastery_comment: comment %>
+  <% end %>
 </div>
 
 <%= turbo_stream_from "roastery_#{@roastery.id}_comments" %>
 
-<%= simple_form_for [@roastery, RoasteryComment.new], remote: true, html: { id: "new_roastery_comment" } do |f| %>
-  <%= f.input :comment, as: :text, placeholder: "Write a comment..." %>
-  <%= f.submit "Post", class: "btn btn-primary" %>
+<%= simple_form_for [@roastery, RoasteryComment.new],
+  html: { data: { controller: "reset-form", action: "turbo:submit-end->reset-form#reset" } } do |f| %>
+
+  <%= f.text_area :comment, placeholder: "Write a comment..." %>
+  <%= f.submit "Post" %>
+
 <% end %>
