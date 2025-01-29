@@ -75,4 +75,4 @@ group :test do
 end
 
 gem "faker"
-gem 'fake_picture'
+

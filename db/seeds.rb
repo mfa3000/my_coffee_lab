@@ -9,63 +9,76 @@
 #   end
 
 require 'faker'
-require 'fake-picture'
+
 
 puts "clears exiting data"
 # Clear existing data (optional)
-User.destroy_all
+Location.destroy_all
+Bean.destroy_all
 Roastery.destroy_all
-Beans.destroy_all
+User.destroy_all
+
 
 
 puts "creating fake data for users"
 # Create fake users
 users = []
 2.times do
-  users << User.create(
-    first_name: Faker::Name.first_name,
-    last_name: Faker::Name.last_name,
+  users << User.create!(
+    user_name: Faker::Internet.username,
     email: Faker::Internet.unique.email,
-    password: "password"
+    password: "password",
   )
 end
 puts "fake users created"
 
-puts "creating fake data for Roasteries"
-# Create fake cooking classes
-categories = ["Mexican", "Japanese", "Italian", "Thai", "Street Food", "Indian", "French", "Other"]
-
+puts "creating fake data for roasteries"
+roasteries = []
+picture_id = 0
 16.times do
 
-  Roastery.create(
+  roasteries << Roastery.create!(
     name: "#{Faker::Restaurant.name} Roastery",
     description: Faker::Restaurant.description,
-    image: FakePicture::Company.logo
+    image: "https://picsum.photos/id/#{200+picture_id}/320/240",
     roastery_url: "https://www.lewagon.com/",
-    user: users.sample
+    user: users.sample,
   )
+  picture_id += 1
 end
+puts "fake roasteries created"
 
+puts "creating fake data for beans"
+
+brewing_method = ["espresso", "filter"]
+roast_level = ["dark", "medium", "light"]
+picture_id = 0
 16.times do
 
-  Bean.create(
+  Bean.create!(
     name: Faker::Coffee.blend_name,
     description: Faker::Coffee.notes,
-    image: FakePicture::Company.logo
-    roastery_url: "https://www.lewagon.com/",
-    user: users.sample
+    image: "https://picsum.photos/id/#{100+picture_id}/320/240",
+    brewing_method: brewing_method.sample,
+    roast_level: roast_level.sample,
+    roastery: roasteries.sample,
+    user: users.sample,
+  )
+  picture_id += 1
+end
+
+puts "fake beans created"
+
+
+puts "creating fake data for locations"
+location_category = ["Cafe", "Roastery and Cafe", "Warehouse"]
+
+16.times do
+  Location.create!(
+    address: Faker::Address.full_address,
+    type: location_category.sample,
+    roastery: roasteries.sample,
   )
 end
 
-
-puts "fake cooking class created"
-
-# Faker::Coffee.blend_name #=> "Summer Solstice"
-
-# Faker::Coffee.origin #=> "Antigua, Guatemala"
-
-# Faker::Coffee.variety #=> "Pacas"
-
-# Faker::Coffee.notes #=> "balanced, silky, marzipan, orange-creamsicle, bergamot"
-
-# Faker::Coffee.intensifier #=> "quick"
+puts "fake locations created"

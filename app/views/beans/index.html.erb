@@ -5,9 +5,13 @@
   <% @beans.each do |bean| %>
     <li>
       <strong><%= bean.name %></strong><br>
-      <em><%= bean.origin %></em><br>
+      <%
+=begin%>
+ <em><%= bean.origin %></em><br>
+<%
+=end%>
       <%= bean.description %>
+      <img src="<%= bean.image%>">
     </li>
   <% end %>
 </ul>
-
