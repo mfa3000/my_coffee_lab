@@ -1,6 +1,6 @@
 class RoasteryCommentsController < ApplicationController
   before_action :authenticate_user!
-  
+
   def create
     @roastery = Roastery.find(params[:roastery_id])
     @roastery_comment = @roastery.roastery_comments.build(comment_params)
@@ -19,6 +19,6 @@ class RoasteryCommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:roastery_comment).permit(:content)
+    params.require(:roastery_comment).permit(:comment)
   end
 end
