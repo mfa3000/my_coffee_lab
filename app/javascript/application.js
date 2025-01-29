@@ -45,7 +45,6 @@ document.addEventListener("DOMContentLoaded", function () {
     searchInput.addEventListener("input", function () {
       const query = searchInput.value;
 
-      // Clear the dropdown while searching
       dropdown.innerHTML = "";
 
       // If the search is empty, do nothing
@@ -57,7 +56,6 @@ document.addEventListener("DOMContentLoaded", function () {
       })
         .then((response) => response.json())
         .then((roasteries) => {
-          // Populate the dropdown with search results
           roasteries.forEach((roastery) => {
             const option = document.createElement("option");
             option.value = roastery.id;
