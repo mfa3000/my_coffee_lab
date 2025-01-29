@@ -5,6 +5,7 @@
     <ul><%=@bean.image%></ul>
     <ul><strong>Roast:</strong><%=@bean.roast_level%></ul>
     <ul><%=@bean.brewing_method%></ul>
+    <ul>User ID: <%=@bean.user_id%></ul>
     <ul><strong>Roastery:</strong>
       <%= link_to @bean.roastery.name, roastery_path(@bean.roastery), class: "hover:underline" %>
     </ul>
@@ -33,4 +34,8 @@
   <% end %>
 
   <%= link_to "Add Recipe", new_bean_recipe_path(@bean), class: "btn btn-submit mt-4" %>
-</div>
+  <div class="mt-4">
+  <%= link_to "Edit Bean", edit_bean_path(@bean), class: "btn" %>
+  </div>
+
+

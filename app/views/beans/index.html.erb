@@ -1,13 +1,63 @@
 
 <h1>Our Coffee Beans</h1>
 
-<ul>
-  <% @beans.each do |bean| %>
-    <li>
-      <strong><%= bean.name %></strong><br>
-      <em><%= bean.origin %></em><br>
-      <%= bean.description %>
-    </li>
-  <% end %>
-</ul>
+<!-- Filters  -->
+<%= form_with(url: beans_path, method: :get, local: true) do |form| %>
 
+
+  <div>
+    <%= form.label :brewing_method, 'Filter by Brewing Method' %>
+    <%= form.select :brewing_method, options_for_select(['Espresso', 'French Press', 'Pour Over', 'AeroPress'], params[:brewing_method]), include_blank: 'All Methods' %>
+  </div>
+
+
+  <div>
+    <%= form.label :roast_level, 'Filter by Roast Level' %>
+    <%= form.select :roast_level, options_for_select(['Light', 'Medium', 'Dark'], params[:roast_level]), include_blank: 'All Roasts' %>
+  </div>
+
+
+  <div>
+    <%= form.label :origin, 'Filter by Origin' %>
+    <%= form.select :origin, options_for_select(['Ethiopia', 'Colombia', 'Brazil', 'Vietnam'], params[:origin]), include_blank: 'All Origins' %>
+  </div>
+
+
+  <div>
+    <%= form.label :flavour, 'Filter by Flavour' %>
+    <%= form.select :flavour, options_for_select(['Fruity', 'Nutty', 'Chocolatey', 'Floral', 'Spicy'], params[:flavour]), include_blank: 'All Flavours' %>
+  </div>
+
+  <div>
+    <%= form.submit 'Filter' %>
+  </div>
+
+  <div>
+    <%= link_to 'Reset Filters', beans_path, class: 'btn btn-secondary', id: 'reset-filters' %>
+  </div>
+  
+<% end %>
+
+
+<div class="container mt-4">
+  <div class="row">
+    <% @beans.each do |bean| %>
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <img src="<%= bean.image %>" class="card-img-top" alt="<%= bean.name %>">
+          <div class="card-body">
+            <h5 class="card-title"><%= bean.name %></h5>
+            <p class="card-text"><%= bean.description %></p>
+            <ul class="list-unstyled">
+              <li><strong>Origin:</strong> <%= bean.origin %></li>
+              <li><strong>Roast:</strong> <%= bean.roast_level %></li>
+              <li><strong>Brewing Method:</strong> <%= bean.brewing_method %></li>
+              <li><strong>Flavour:</strong> <%= bean.flavour %></li>
+            </ul>
+            <a href="#" class="btn btn-primary">See More</a>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

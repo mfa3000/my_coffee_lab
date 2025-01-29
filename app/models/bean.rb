@@ -6,7 +6,6 @@ class Bean < ApplicationRecord
   has_many :bean_comments
   has_many :recipes, dependent: :destroy
 
-  validates :name, presence: true
-  validates :description, presence: true
+  validates :name, :description, presence: true
   validates :roastery_id, presence: true
 end

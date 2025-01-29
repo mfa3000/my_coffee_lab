@@ -22,12 +22,13 @@ Rails.application.routes.draw do
     collection do
       get 'search'
     end
+    
+    resources :roastery_comments, only: [:create]
   end
 
-  resources :beans, only: [:index, :new, :create, :show] do
+  resources :beans, only: [:index, :new, :create, :show, :edit, :update] do
     resources :recipes, only: [:new, :create, :edit, :update, :destroy]
   end
 
   get 'beans', to: 'beans#index'
-
 end
