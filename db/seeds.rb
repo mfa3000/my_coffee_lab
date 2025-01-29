@@ -60,6 +60,8 @@ puts "creating fake data for beans"
 
 brewing_method = ["espresso", "filter"]
 roast_level = ["dark", "medium", "light"]
+origins = ["Ethiopia", "Colombia", "Brazil", "Vietnam"]
+flavours = ["Fruity", "Nutty", "Chocolatey", "Floral", "Spicy"]
 picture_id = 0
 beans = []
 
@@ -70,6 +72,8 @@ beans = []
     image: "https://picsum.photos/id/#{100+picture_id}/320/240",
     brewing_method: brewing_method.sample,
     roast_level: roast_level.sample,
+    origin: origins.sample,         
+    flavour: flavours.sample,
     roastery: roasteries.sample,
     user: users.sample,
   )

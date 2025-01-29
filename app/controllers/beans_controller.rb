@@ -11,10 +11,20 @@ class BeansController < ApplicationController
   def index
     @beans = Bean.all
 
-    @beans = @beans.where(brewing_method: params[:brewing_method]) if params[:brewing_method].present?
-    @beans = @beans.where(roast_level: params[:roast_level]) if params[:roast_level].present?
-    @beans = @beans.where(origin: params[:origin]) if params[:origin].present?
-    @beans = @beans.where(flavour: params[:flavour]) if params[:flavour].present?
+    puts @beans.inspect
+
+    if params[:brewing_method].present?
+      @beans = @beans.where(brewing_method: params[:brewing_method])
+    end
+    if params[:roast_level].present?
+      @beans = @beans.where(roast_level: params[:roast_level])
+    end
+    if params[:origin].present?
+      @beans = @beans.where(origin: params[:origin])
+    end
+    if params[:flavour].present?
+      @beans = @beans.where(flavour: params[:flavour])
+    end
   end
 
   def new
@@ -52,7 +62,7 @@ class BeansController < ApplicationController
   private
 
   def bean_params
-    params.require(:bean).permit(:name, :description, :image, :roast_level, :brewing_method, :roastery_id)
+    params.require(:bean).permit(:name, :description, :image, :roast_level, :origin, :flavour, :brewing_method, :roastery_id)
   end
 
   def set_bean
