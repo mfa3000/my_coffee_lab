@@ -18,14 +18,13 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :roasteries, only: [:index, :show, :new, :create] do
+  resources :roasteries, only: [:index, :show, :new, :create, :edit, :update] do
     collection do
       get 'search'
     end
   end
 
-  resources :beans, only: [:index, :new, :create, :show]
+  resources :beans, only: [:index, :new, :create, :show, :edit, :update]
 
   get 'beans', to: 'beans#index'
-
 end

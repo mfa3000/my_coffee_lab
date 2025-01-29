@@ -6,15 +6,39 @@ import "bootstrap"
 
 import { application } from "./controllers/application";
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("turbo:load", function () {
+  initializeLocationFunctionality();
+  initializeRoasterySearch();
+});
+
+function initializeLocationFunctionality() {
   const addLocationButton = document.getElementById("add-location-btn");
   const locationsContainer = document.getElementById("locations-container");
 
   if (addLocationButton && locationsContainer) {
     addLocationButton.addEventListener("click", function () {
+      let firstLocationFields = locationsContainer.querySelector(".location-fields");
 
-      const firstLocationFields = locationsContainer.querySelector(".location-fields");
-      if (!firstLocationFields) return;
+      if (!firstLocationFields) {
+        firstLocationFields = document.createElement("div");
+        firstLocationFields.classList.add("location-fields", "grid", "grid-cols-2", "gap-4", "mt-4");
+        firstLocationFields.innerHTML = `
+          <div>
+            <label>Location Type *</label>
+            <select name="roastery[locations_attributes][0][location_type]" class="form-input location-type">
+              <option value="">Select a Type</option>
+              <option value="Cafe">Cafe</option>
+              <option value="Roastery and Cafe">Roastery and Cafe</option>
+              <option value="Warehouse">Warehouse</option>
+            </select>
+          </div>
+          <div>
+            <label>Address *</label>
+            <input type="text" name="roastery[locations_attributes][0][address]" class="form-input location-address" required>
+          </div>
+        `;
+        locationsContainer.appendChild(firstLocationFields);
+      }
 
       const newFields = firstLocationFields.cloneNode(true);
 
@@ -32,12 +56,40 @@ document.addEventListener("DOMContentLoaded", function () {
         `roastery[locations_attributes][${index}][address]`
       );
 
+      const destroyInput = newFields.querySelector(".location-destroy");
+      if (destroyInput) {
+        destroyInput.value = "0";
+      }
+
+      newFields.querySelectorAll(".remove-location-btn").forEach(button => button.remove());
+
+      const removeButton = document.createElement("button");
+      removeButton.type = "button";
+      removeButton.textContent = "Remove";
+      removeButton.classList.add("remove-location-btn", "bg-red-500", "text-white", "px-3", "py-1", "rounded", "ml-2");
+
+      newFields.appendChild(removeButton);
       locationsContainer.appendChild(newFields);
     });
   }
-});
 
-document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("click", function (event) {
+    if (event.target.classList.contains("remove-location-btn")) {
+      event.preventDefault();
+      const locationField = event.target.closest(".location-fields");
+
+      if (locationField) {
+        const destroyInput = locationField.querySelector(".location-destroy");
+        if (destroyInput) {
+          destroyInput.value = "1";
+        }
+        locationField.style.display = "none";
+      }
+    }
+  });
+}
+
+function initializeRoasterySearch() {
   const searchInput = document.getElementById("roastery-search");
   const dropdown = document.getElementById("roastery-dropdown");
 
@@ -47,10 +99,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
       dropdown.innerHTML = "";
 
-      // If the search is empty, do nothing
       if (query.trim() === "") return;
 
-      // Send an AJAX request to the server
       fetch(`/roasteries/search?query=${encodeURIComponent(query)}`, {
         headers: { Accept: "application/json" },
       })
@@ -68,4 +118,4 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
   }
-});
+}
