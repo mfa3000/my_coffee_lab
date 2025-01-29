@@ -1,18 +1,41 @@
-<h1><%=@bean.name%></h1>
-<img src="<%=@bean.image%>">
-<li>
-  <ul>Description: <%=@bean.description%></ul>
-  <ul>Roast Level:<%=@bean.roast_level%></ul>
-  <ul>Brewing Method: <%=@bean.brewing_method%></ul>
-  <ul>User ID: <%=@bean.user_id%></ul>
+<div class="container">
+  <h1><%=@bean.name%></h1>
+  <li>
+    <ul><%=@bean.description%></ul>
+    <ul><%=@bean.image%></ul>
+    <ul><strong>Roast:</strong><%=@bean.roast_level%></ul>
+    <ul><%=@bean.brewing_method%></ul>
+    <ul>User ID: <%=@bean.user_id%></ul>
+    <ul><strong>Roastery:</strong>
+      <%= link_to @bean.roastery.name, roastery_path(@bean.roastery), class: "hover:underline" %>
+    </ul>
+  </li>
 
+  <h2 class="font-bold mt-6">Recipes</h2>
 
+  <% if @bean.recipes.any? %>
+    <ul class="list-disc pl-6">
+      <% @bean.recipes.each do |recipe| %>
+        <li class="mb-2">
+          <strong><%= recipe.name %></strong>
+          <p><%= recipe.instructions %></p>
+          <% if recipe.user == current_user %>
+            <%= link_to "Edit", edit_bean_recipe_path(@bean, recipe), class: "underline" %>
+            <%= link_to "Delete", bean_recipe_path(@bean, recipe),
+                method: :delete,
+                data: { turbo_method: :delete, confirm: "Are you sure?" },
+                class: "underline ml-2" %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No recipes yet.</p>
+  <% end %>
 
-  <ul><strong>Roastery:</strong>
-    <%= link_to @bean.roastery.name, roastery_path(@bean.roastery), class: "text-blue-500 hover:underline" %>
-  </ul>
-</li>
-
-<div class="mt-4">
+  <%= link_to "Add Recipe", new_bean_recipe_path(@bean), class: "btn btn-submit mt-4" %>
+  <div class="mt-4">
   <%= link_to "Edit Bean", edit_bean_path(@bean), class: "btn" %>
-</div>
+  </div>
+
+

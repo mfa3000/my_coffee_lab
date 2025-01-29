@@ -13,5 +13,6 @@ class User < ApplicationRecord
   has_many :favourite_beans
   has_many :roastery_comment_votes
   has_many :bean_comment_votes
+  has_many :recipes
 
 end

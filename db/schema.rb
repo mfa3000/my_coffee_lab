@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema[7.1].define(version: 2025_01_29_143200) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,6 +88,17 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_29_143200) do
     t.index ["roastery_id"], name: "index_locations_on_roastery_id"
   end
 
+  create_table "recipes", force: :cascade do |t|
+    t.string "name"
+    t.text "instructions"
+    t.bigint "bean_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bean_id"], name: "index_recipes_on_bean_id"
+    t.index ["user_id"], name: "index_recipes_on_user_id"
+  end
+
   create_table "roasteries", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -157,6 +169,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_29_143200) do
   add_foreign_key "favourite_roasteries", "roasteries"
   add_foreign_key "favourite_roasteries", "users"
   add_foreign_key "locations", "roasteries"
+  add_foreign_key "recipes", "beans"
+  add_foreign_key "recipes", "users"
   add_foreign_key "roasteries", "users"
   add_foreign_key "roastery_comment_votes", "roastery_comments"
   add_foreign_key "roastery_comment_votes", "users"

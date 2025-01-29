@@ -4,13 +4,14 @@ import "controllers"
 import "@popperjs/core"
 import "bootstrap"
 
-import { application } from "./controllers/application";
+import { application } from "./controllers/application"
 
 document.addEventListener("turbo:load", function () {
   initializeLocationFunctionality();
   initializeRoasterySearch();
 });
 
+// Location Fields
 function initializeLocationFunctionality() {
   const addLocationButton = document.getElementById("add-location-btn");
   const locationsContainer = document.getElementById("locations-container");
@@ -89,6 +90,7 @@ function initializeLocationFunctionality() {
   });
 }
 
+// Roastery Search
 function initializeRoasterySearch() {
   const searchInput = document.getElementById("roastery-search");
   const dropdown = document.getElementById("roastery-dropdown");
