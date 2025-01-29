@@ -1,9 +1,13 @@
 <h1><%=@bean.name%></h1>
+<img src="<%=@bean.image%>">
 <li>
-  <ul><%=@bean.description%></ul>
-  <ul><%=@bean.image%></ul>
-  <ul><%=@bean.roast_level%></ul>
-  <ul><%=@bean.brewing_method%></ul>
+  <ul>Description: <%=@bean.description%></ul>
+  <ul>Roast Level:<%=@bean.roast_level%></ul>
+  <ul>Brewing Method: <%=@bean.brewing_method%></ul>
+  <ul>User ID: <%=@bean.user_id%></ul>
+
+
+
   <ul><strong>Roastery:</strong>
     <%= link_to @bean.roastery.name, roastery_path(@bean.roastery), class: "text-blue-500 hover:underline" %>
   </ul>
