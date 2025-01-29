@@ -10,3 +10,9 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+@import "roasteries/form";
+@import "beans/form";
+
+body {
+  background-color: white !important;
+}

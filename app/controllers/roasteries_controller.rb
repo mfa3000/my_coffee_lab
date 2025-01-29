@@ -6,7 +6,7 @@ class RoasteriesController < ApplicationController
   end
 
   def index
-    @roasteries = Roastery.all
+    @roasteries = Roastery.includes(:locations).all
   end
 
   def new
@@ -25,10 +25,32 @@ class RoasteriesController < ApplicationController
     end
   end
 
+  def search
+    @roasteries = Roastery.where("name ILIKE ?", "%#{params[:query]}%")
+    render json: @roasteries.map { |r| { id: r.id, name: r.name } }
+  end
+
+  def edit
+    @roastery = Roastery.find(params[:id])
+  end
+
+  def update
+    @roastery = Roastery.find(params[:id])
+    if @roastery.update(roastery_params)
+      redirect_to roastery_path(@roastery), notice: "Roastery successfully updated!"
+    else
+      flash.now[:alert] = "There was an error updating the roastery."
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def roastery_params
-    params.require(:roastery).permit(:name, :description, :image, :roastery_url, locations_attributes: [:id, :address, :location_type, :_destroy])
+    params.require(:roastery).permit(
+      :name, :description, :image, :roastery_url,
+      locations_attributes: [:id, :location_type, :address, :_destroy]
+    )
   end
 
   def set_roastery
