@@ -71,12 +71,12 @@ puts "fake beans created"
 
 
 puts "creating fake data for locations"
-location_category = ["Cafe", "Roastery and Cafe", "Warehouse"]
+location_type = ["Cafe", "Roastery and Cafe", "Warehouse"]
 
 16.times do
   Location.create!(
     address: Faker::Address.full_address,
-    type: location_category.sample,
+    location_type: location_type.sample,
     roastery: roasteries.sample,
   )
 end
