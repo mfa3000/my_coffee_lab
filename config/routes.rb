@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :roasteries, only: [:index, :show, :new, :create] do
+  resources :roasteries, only: [:index, :show, :new, :create, :edit, :update] do
     collection do
       get 'search'
     end
