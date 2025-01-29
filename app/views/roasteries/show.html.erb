@@ -25,9 +25,7 @@
 
 <%= turbo_stream_from "roastery_#{@roastery.id}_comments" %>
 
-<%= form_with model: [@roastery, RoasteryComment.new], data: { turbo: true } do |form| %>
-  <div class="mb-2">
-    <%= form.text_area :content, placeholder: "Write a comment...", class: "form-control" %>
-  </div>
-  <%= form.submit "Post", class: "btn btn-primary" %>
+<%= simple_form_for [@roastery, RoasteryComment.new], remote: true, html: { id: "new_roastery_comment" } do |f| %>
+  <%= f.input :comment, as: :text, placeholder: "Write a comment..." %>
+  <%= f.submit "Post", class: "btn btn-primary" %>
 <% end %>
