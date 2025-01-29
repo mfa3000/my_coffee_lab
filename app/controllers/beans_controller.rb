@@ -1,6 +1,6 @@
 class BeansController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_bean, only: [:show]
+  before_action :set_bean, only: [:show, :edit, :update]
 
   def show
   end
@@ -11,6 +11,9 @@ class BeansController < ApplicationController
 
   def new
     @bean = Bean.new
+  end
+
+  def edit
   end
 
 
@@ -29,6 +32,14 @@ class BeansController < ApplicationController
     end
   end
 
+  def update
+    if @bean.update(bean_params)
+      redirect_to bean_path(@bean), notice: "Bean successfully updated!"
+    else
+      flash.now[:alert] = @bean.errors.full_messages.to_sentence
+      render :edit, status: :unprocessable_entity
+    end
+  end
 
   private
 
