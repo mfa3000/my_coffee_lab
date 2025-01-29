@@ -29,6 +29,14 @@
         <%= location_fields.input :address, label: "Address", required: true,
           input_html: { class: "form-input location-address" } %>
       </div>
+
+      <%= location_fields.hidden_field :_destroy, class: "location-destroy" %>
+
+      <div class="flex items-center">
+        <button type="button" class="remove-location-btn bg-red-500 text-white px-3 py-1 rounded">
+          Remove
+        </button>
+      </div>
     </div>
   <% end %>
 </div>
@@ -38,6 +46,6 @@
 </div>
 
   <div class="mt-6 text-center">
-    <%= f.submit "Create Roastery", class: "submit-btn" %>
+    <%= f.submit "Save Roastery", class: "submit-btn" %>
   </div>
 <% end %>

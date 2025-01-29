@@ -30,6 +30,20 @@ class RoasteriesController < ApplicationController
     render json: @roasteries.map { |r| { id: r.id, name: r.name } }
   end
 
+  def edit
+    @roastery = Roastery.find(params[:id])
+  end
+
+  def update
+    @roastery = Roastery.find(params[:id])
+    if @roastery.update(roastery_params)
+      redirect_to roastery_path(@roastery), notice: "Roastery successfully updated!"
+    else
+      flash.now[:alert] = "There was an error updating the roastery."
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def roastery_params
