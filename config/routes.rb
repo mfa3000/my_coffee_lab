@@ -10,9 +10,23 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-  resources :roasteries, only: [:index, :show]
-  resources :beans, only: [:index, :show]
+  get '/profile', to: 'users#profile', as: :profile
+
+  resources :users, only: [] do
+    member do
+      get 'profile'
+    end
+  end
+
+  resources :roasteries, only: [:index, :show, :new, :create, :edit, :update] do
+    collection do
+      get 'search'
+    end
+    
+    resources :roastery_comments, only: [:create]
+  end
+
+  resources :beans, only: [:index, :new, :create, :show, :edit, :update]
 
   get 'beans', to: 'beans#index'
-  
 end

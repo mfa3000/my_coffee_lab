@@ -1,15 +1,33 @@
 <h1><%=@roastery.name%></h1>
 <img src="<%=@roastery.image%>">
 
-<li>
-  <ul>Description: <%=@roastery.description%></ul>
-  <ul>Roastery URL: <%=@roastery.roastery_url%></ul>
-  <ul>Roastery User:<%=@roastery.user_id%></ul>
-  <ul>Roastery Locations:
-  <%@roastery.locations.each do |location| %>
-    <ul><%=location.address %></ul>
-    <ul><%=location.type %></ul>
-  <%end%>
-  </ul>
+<ul>
+  <li>Description: <%=@roastery.description%></li>
+  <li>Roastery URL: <%=@roastery.roastery_url%></li>
+</ul>
 
-</li>
+<h3>Locations:</h3>
+<ul>
+  <% @roastery.locations.each do |location| %>
+    <ul>
+      <strong>Type:</strong> <%= location.location_type %><br>
+      <strong>Address:</strong> <%= location.address %>
+    </ul>
+  <% end %>
+  <%= link_to "Edit Roastery", edit_roastery_path(@roastery), class: "btn mt-4" %>
+</ul>
+
+<h3>Comments</h3>
+
+<div id="roastery_<%= @roastery.id %>_comments">
+  <%= render @roastery.roastery_comments %>
+</div>
+
+<%= turbo_stream_from "roastery_#{@roastery.id}_comments" %>
+
+<%= form_with model: [@roastery, RoasteryComment.new], data: { turbo: true } do |form| %>
+  <div class="mb-2">
+    <%= form.text_area :content, placeholder: "Write a comment...", class: "form-control" %>
+  </div>
+  <%= form.submit "Post", class: "btn btn-primary" %>
+<% end %>

@@ -1,15 +1,49 @@
 
 <h1>Our Coffee Beans</h1>
 
+<!-- Form -->
+<%= form_with(url: beans_path, method: :get, local: true) do |form| %>
+
+
+  <div>
+    <%= form.label :brewing_method, 'Filter by Brewing Method' %>
+    <%= form.select :brewing_method, options_for_select(['Espresso', 'French Press', 'Pour Over', 'AeroPress'], params[:brewing_method]), include_blank: 'All Methods' %>
+  </div>
+
+
+  <div>
+    <%= form.label :roast_level, 'Filter by Roast Level' %>
+    <%= form.select :roast_level, options_for_select(['Light', 'Medium', 'Dark'], params[:roast_level]), include_blank: 'All Roasts' %>
+  </div>
+
+
+  <div>
+    <%= form.label :origin, 'Filter by Origin' %>
+    <%= form.select :origin, options_for_select(['Ethiopia', 'Colombia', 'Brazil', 'Vietnam'], params[:origin]), include_blank: 'All Origins' %>
+  </div>
+
+
+  <div>
+    <%= form.label :flavour, 'Filter by Flavour' %>
+    <%= form.select :flavour, options_for_select(['Fruity', 'Nutty', 'Chocolatey', 'Floral', 'Spicy'], params[:flavour]), include_blank: 'All Flavours' %>
+  </div>
+
+  <div>
+    <%= form.submit 'Filter' %>
+  </div>
+<% end %>
+
+
 <ul>
   <% @beans.each do |bean| %>
     <li>
       <strong><%= bean.name %></strong><br>
-      <%
-=begin%>
- <em><%= bean.origin %></em><br>
-<%
-=end%>
+
+      <em>Origin: <%= bean.origin %></em><br>
+      <em>Roast: <%= bean.roast_level %></em><br>
+      <em>Brewing Method: <%= bean.brewing_method %></em><br>
+      <em>Flavour: <%= bean.flavour %></em><br>
+
       <%= bean.description %>
       <img src="<%= bean.image%>">
     </li>
