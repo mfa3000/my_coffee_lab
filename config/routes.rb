@@ -22,11 +22,13 @@ Rails.application.routes.draw do
     collection do
       get 'search'
     end
-    
+
     resources :roastery_comments, only: [:create]
   end
 
   resources :beans, only: [:index, :new, :create, :show, :edit, :update]
 
   get 'beans', to: 'beans#index'
+
+  resources :bean_comments, only: [:create]
 end
