@@ -1,7 +1,7 @@
 
 <h1>Our Coffee Beans</h1>
 
-<!-- Form -->
+<!-- Filters  -->
 <%= form_with(url: beans_path, method: :get, local: true) do |form| %>
 
 
@@ -34,18 +34,25 @@
 <% end %>
 
 
-<ul>
-  <% @beans.each do |bean| %>
-    <li>
-      <strong><%= bean.name %></strong><br>
-
-      <em>Origin: <%= bean.origin %></em><br>
-      <em>Roast: <%= bean.roast_level %></em><br>
-      <em>Brewing Method: <%= bean.brewing_method %></em><br>
-      <em>Flavour: <%= bean.flavour %></em><br>
-
-      <%= bean.description %>
-      <img src="<%= bean.image%>">
-    </li>
-  <% end %>
-</ul>
+<div class="container mt-4">
+  <div class="row">
+    <% @beans.each do |bean| %>
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <img src="<%= bean.image %>" class="card-img-top" alt="<%= bean.name %>">
+          <div class="card-body">
+            <h5 class="card-title"><%= bean.name %></h5>
+            <p class="card-text"><%= bean.description %></p>
+            <ul class="list-unstyled">
+              <li><strong>Origin:</strong> <%= bean.origin %></li>
+              <li><strong>Roast:</strong> <%= bean.roast_level %></li>
+              <li><strong>Brewing Method:</strong> <%= bean.brewing_method %></li>
+              <li><strong>Flavour:</strong> <%= bean.flavour %></li>
+            </ul>
+            <a href="#" class="btn btn-primary">En savoir plus</a>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
