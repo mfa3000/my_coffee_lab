@@ -1,9 +1,11 @@
 <h1><%=@roastery.name%></h1>
+<img src="<%=@roastery.image%>">
+
 <ul>
-  <ul>Description: <%=@roastery.description%></ul>
-  <ul>Image: <%=@roastery.image%></ul>
-  <ul>Roastery URL: <%=@roastery.roastery_url%></ul>
+  <li>Description: <%=@roastery.description%></li>
+  <li>Roastery URL: <%=@roastery.roastery_url%></li>
 </ul>
+
 <h3>Locations:</h3>
 <ul>
   <% @roastery.locations.each do |location| %>

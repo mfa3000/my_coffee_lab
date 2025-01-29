@@ -38,11 +38,14 @@
   <% @beans.each do |bean| %>
     <li>
       <strong><%= bean.name %></strong><br>
+
       <em>Origin: <%= bean.origin %></em><br>
       <em>Roast: <%= bean.roast_level %></em><br>
       <em>Brewing Method: <%= bean.brewing_method %></em><br>
       <em>Flavour: <%= bean.flavour %></em><br>
+
       <%= bean.description %>
+      <img src="<%= bean.image%>">
     </li>
   <% end %>
 </ul>
