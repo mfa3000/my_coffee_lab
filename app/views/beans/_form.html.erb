@@ -26,6 +26,7 @@
       class="form-input"
       placeholder="Start typing to search for a roastery"
       autocomplete="off"
+      value="<%= @bean.roastery&.name if @bean.roastery.present? %>"
       required
     />
     <select
@@ -35,6 +36,9 @@
       size="5"
       required
     >
+    <% if @bean.roastery.present? %>
+        <option value="<%= @bean.roastery.id %>" selected><%= @bean.roastery.name %></option>
+    <% end %>
     </select>
   </div>
 
@@ -44,6 +48,6 @@
   </p>
 
   <div class="mt-6 text-center">
-    <%= f.submit "Create Bean", class: "submit-btn" %>
+    <%= f.submit @bean.new_record? ? "Create Bean" : "Update Bean", class: "submit-btn" %>
   </div>
 <% end %>
