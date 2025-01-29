@@ -1,0 +1,43 @@
+<%= simple_form_for @roastery, html: { multipart: true } do |f| %>
+  <div class="grid grid-cols-2 gap-6">
+    <div>
+      <%= f.input :name, required: true, label: "Roastery Name", input_html: { class: "form-input" } %>
+    </div>
+    <div>
+      <%= f.input :description, as: :text, label: "Roastery Description", input_html: { class: "form-textarea" } %>
+    </div>
+    <div>
+      <%= f.input :roastery_url, as: :url, label: "Roastery Website", input_html: { class: "form-input" } %>
+    </div>
+    <div class="col-span-2">
+      <%= f.input :image, as: :file, label: "Upload Roastery Image", input_html: { class: "form-file-input" } %>
+    </div>
+  </div>
+
+<h2 class="text-xl font-bold mt-6">Locations</h2>
+
+<div id="locations-container">
+  <%= f.fields_for :locations do |location_fields| %>
+    <div class="location-fields grid grid-cols-2 gap-4 mt-4">
+      <div>
+        <%= location_fields.input :location_type, collection: ["Cafe", "Roastery and Cafe", "Warehouse"],
+          label: "Location Type", prompt: "Select a Type", required: true,
+          input_html: { class: "form-input location-type" } %>
+      </div>
+
+      <div>
+        <%= location_fields.input :address, label: "Address", required: true,
+          input_html: { class: "form-input location-address" } %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div class="mt-4">
+  <button type="button" id="add-location-btn" class="add-location-btn">Add Another Location</button>
+</div>
+
+  <div class="mt-6 text-center">
+    <%= f.submit "Create Roastery", class: "submit-btn" %>
+  </div>
+<% end %>
