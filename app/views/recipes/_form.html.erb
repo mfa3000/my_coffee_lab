@@ -1,0 +1,13 @@
+<%= form_with model: [bean, recipe], local: true do |f| %>
+  <div>
+    <%= f.label :name, "Recipe Name" %>
+    <%= f.text_field :name, class: "form-input", required: true %>
+  </div>
+  <div>
+    <%= f.label :instructions, "Instructions" %>
+    <%= f.text_area :instructions, class: "form-textarea", required: true %>
+  </div>
+  <div class="mt-4 text-center">
+    <%= f.submit recipe.persisted? ? "Update Recipe" : "Save Recipe", class: "submit-btn px-4 py-2 rounded" %>
+  </div>
+<% end %>

@@ -24,7 +24,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :beans, only: [:index, :new, :create, :show]
+  resources :beans, only: [:index, :new, :create, :show] do
+    resources :recipes, only: [:new, :create, :edit, :update, :destroy]
+  end
 
   get 'beans', to: 'beans#index'
 
