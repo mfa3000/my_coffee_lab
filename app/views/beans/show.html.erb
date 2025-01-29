@@ -4,6 +4,8 @@
   <ul><%=@bean.image%></ul>
   <ul><%=@bean.roast_level%></ul>
   <ul><%=@bean.brewing_method%></ul>
-  <ul><%=@bean.user_id%></ul>
+  <ul><strong>Roastery:</strong>
+    <%= link_to @bean.roastery.name, roastery_path(@bean.roastery), class: "text-blue-500 hover:underline" %>
+  </ul>
 
 </li>

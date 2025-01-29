@@ -25,6 +25,11 @@ class RoasteriesController < ApplicationController
     end
   end
 
+  def search
+    @roasteries = Roastery.where("name ILIKE ?", "%#{params[:query]}%")
+    render json: @roasteries.map { |r| { id: r.id, name: r.name } }
+  end
+
   private
 
   def roastery_params

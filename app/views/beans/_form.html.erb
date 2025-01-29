@@ -1,0 +1,50 @@
+<%= simple_form_for @bean do |f| %>
+  <div class="grid grid-cols-2 gap-6">
+    <div>
+      <%= f.input :name, required: true, label: "Bean Name", input_html: { class: "form-input" } %>
+    </div>
+    <div>
+      <%= f.input :description, as: :text, required: true, label: "Description", input_html: { class: "form-textarea" } %>
+    </div>
+    <div>
+      <%= f.input :roast_level, collection: ["Light", "Medium", "Dark"], label: "Roast Level",
+        prompt: "Select Roast Level", input_html: { class: "form-input" } %>
+    </div>
+    <div>
+      <%= f.input :brewing_method, collection: ["Espresso", "Pour Over", "French Press", "Aeropress"],
+        label: "Brewing Method", prompt: "Select Brewing Method", input_html: { class: "form-input" } %>
+    </div>
+  </div>
+
+  <h2 class="text-xl font-bold mt-6">Associate a Roastery</h2>
+
+  <div class="form-group">
+    <label for="roastery-search">Search for a Roastery</label>
+    <input
+      type="text"
+      id="roastery-search"
+      class="form-input"
+      placeholder="Start typing to search for a roastery"
+      autocomplete="off"
+      required
+    />
+    <select
+      id="roastery-dropdown"
+      name="bean[roastery_id]"
+      class="form-input mt-2"
+      size="5"
+      required
+    >
+      <!-- Dropdown options will be populated dynamically -->
+    </select>
+  </div>
+
+  <p class="mt-2">
+    Can’t find the roastery you’re looking for?
+    <%= link_to "Create a New Roastery", new_roastery_path, class: "text-blue-500 underline" %>
+  </p>
+
+  <div class="mt-6 text-center">
+    <%= f.submit "Create Bean", class: "submit-btn" %>
+  </div>
+<% end %>
