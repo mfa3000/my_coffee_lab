@@ -1,0 +1,5 @@
+<turbo-stream action="append" target="bean_<%= @bean_comment.bean_id %>_comments">
+  <template>
+    <%= render "bean_comments/bean_comment", bean_comment: @bean_comment %>
+  </template>
+</turbo-stream>

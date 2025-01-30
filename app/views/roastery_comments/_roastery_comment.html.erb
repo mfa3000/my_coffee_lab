@@ -1,3 +1,7 @@
-<div id="roastery_comment_<%= roastery_comment.id %>" class="comment">
-  <p><strong><%= roastery_comment.user.user_name %>:</strong> <%= roastery_comment.comment %></p>
+<div id="roastery-comment-<%= roastery_comment.id %>">
+  <small>
+    <strong><%= roastery_comment.user.user_name %></strong>
+    <i><%= roastery_comment.created_at.strftime("%a %b %e at %l:%M %p") %></i>
+  </small>
+  <p><%= roastery_comment.comment %></p>
 </div>

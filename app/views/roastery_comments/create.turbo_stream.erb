@@ -1,5 +1,5 @@
-<turbo-stream action="append" target="roastery_<%= @roastery.id %>_comments">
+<turbo-stream action="append" target="roastery_<%= @roastery_comment.roastery_id %>_comments">
   <template>
-    <%= render @roastery_comment %>
+    <%= render "roastery_comments/roastery_comment", roastery_comment: @roastery_comment %>
   </template>
 </turbo-stream>
