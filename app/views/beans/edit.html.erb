@@ -4,4 +4,7 @@
   <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
     <%= render 'beans/form', bean: @bean %>
   </div>
+  <%if user_authorized_to_delete?(@bean)%>
+  <%= link_to "Delete", bean_path(@bean), data: {turbo_method: :delete, turbo_confirm: "Are you sure you want to permanently delete this bean?"}, class: "btn btn-danger" %>
+  <%end%>
 </div>

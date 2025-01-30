@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :roasteries, only: [:index, :show, :new, :create, :edit, :update] do
+  resources :roasteries, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
     collection do
       get 'search'
     end
@@ -29,7 +29,7 @@ Rails.application.routes.draw do
     resource :favourite_roastery, only: [:create, :destroy], controller: 'favourite_roasteries'
   end
 
-  resources :beans, only: [:index, :new, :create, :show, :edit, :update] do
+  resources :beans, only: [:index, :new, :create, :show, :edit, :update, :destroy] do
     resources :recipes, only: [:new, :create, :edit, :update, :destroy]
     resources :bean_reviews, only: [:create]
     resources :bean_comments, only: [:create, :destroy]
