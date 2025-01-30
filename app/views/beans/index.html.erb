@@ -3,25 +3,20 @@
 
 <!-- Filters  -->
 <%= form_with(url: beans_path, method: :get, local: true) do |form| %>
-
-
   <div>
     <%= form.label :brewing_method, 'Filter by Brewing Method' %>
     <%= form.select :brewing_method, options_for_select(['Espresso', 'French Press', 'Pour Over', 'AeroPress'], params[:brewing_method]), include_blank: 'All Methods' %>
   </div>
-
 
   <div>
     <%= form.label :roast_level, 'Filter by Roast Level' %>
     <%= form.select :roast_level, options_for_select(['Light', 'Medium', 'Dark'], params[:roast_level]), include_blank: 'All Roasts' %>
   </div>
 
-
   <div>
     <%= form.label :origin, 'Filter by Origin' %>
     <%= form.select :origin, options_for_select(['Ethiopia', 'Colombia', 'Brazil', 'Vietnam'], params[:origin]), include_blank: 'All Origins' %>
   </div>
-
 
   <div>
     <%= form.label :flavour, 'Filter by Flavour' %>
@@ -35,7 +30,7 @@
   <div>
     <%= link_to 'Reset Filters', beans_path, class: 'btn btn-secondary', id: 'reset-filters' %>
   </div>
-  
+
 <% end %>
 
 
@@ -54,7 +49,7 @@
               <li><strong>Brewing Method:</strong> <%= bean.brewing_method %></li>
               <li><strong>Flavour:</strong> <%= bean.flavour %></li>
             </ul>
-            <a href="#" class="btn btn-primary">See More</a>
+            <a href="<%= bean_path(bean) %>" class="btn btn-primary">See More</a>
           </div>
         </div>
       </div>
