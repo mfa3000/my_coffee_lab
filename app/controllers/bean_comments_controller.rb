@@ -1,5 +1,6 @@
 class BeanCommentsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_bean_comment, only: [:destroy]
 
   def create
     @bean = Bean.find(params[:bean_id])
@@ -29,7 +30,7 @@ class BeanCommentsController < ApplicationController
     @bean_comment.destroy
 
     respond_to do |format|
-      format.turbo_stream 
+      format.turbo_stream
       format.html { redirect_to @bean_comment.bean, notice: "Comment deleted!" }
     end
   end
@@ -38,5 +39,10 @@ class BeanCommentsController < ApplicationController
 
   def comment_params
     params.require(:bean_comment).permit(:comment)
+  end
+
+  def set_bean_comment
+    @bean_comment = BeanComment.find(params[:id])
+    redirect_to @bean_comment.bean, alert: "Not authorized!" unless @bean_comment.user == current_user
   end
 end
