@@ -12,4 +12,22 @@
                 data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
                 class: "text-red-500 hover:underline text-sm ml-2" %>
   <% end %>
+
+  <% if bean_comment.bean_comment_votes.exists?(user: current_user) %>
+    <%= button_to bean_comment_vote_path(bean_comment.bean_comment_votes.find_by(user: current_user)),
+                  method: :delete,
+                  remote: true,
+                  data: { turbo_stream: true },
+                  class: "text-red-500 hover:underline text-sm ml-2" do %>
+      ❤️ Unlike
+    <% end %>
+  <% else %>
+    <%= button_to bean_comment_votes_path(bean_comment_id: bean_comment.id),
+                  method: :post,
+                  remote: true,
+                  data: { turbo_stream: true },
+                  class: "text-blue-500 hover:underline text-sm ml-2" do %>
+      🤍 Like
+    <% end %>
+  <% end %>
 </div>
