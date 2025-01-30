@@ -3,7 +3,7 @@ class BeanCommentController < ApplicationController
 
   def create
     @bean = Bean.find(params[:bean_id])
-    @bean_comment = @bean.bean_comments.build(comment_params)
+    @bean_comment = @bean.bean_comment.build(comment_params)
     @bean_comment.user = current_user
 
     if @bean_comment.save

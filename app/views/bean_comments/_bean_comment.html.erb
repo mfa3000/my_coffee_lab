@@ -1,6 +1,6 @@
 <div id="bean-comment-<%= bean_comment.id %>">
   <small>
-    <strong><%= bean_comment.user.nickname %></strong>
+    <strong><%= bean_comment.user.user_name %></strong>
     <i><%= bean_comment.created_at.strftime("%a %b %e at %l:%M %p") %></i>
   </small>
   <p><%= bean_comment.comment %></p>

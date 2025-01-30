@@ -62,20 +62,17 @@
   <%= link_to "Edit Bean", edit_bean_path(@bean), class: "btn" %>
 </div>
 
-<h3>Comments</h3>
+  <h4>All comments</h4>
 
-<div id="bean_<%= @bean.id %>_comments">
-  <% @bean.bean_comments.each do |comment| %>
-    <%= render "bean_comments/bean_comment", bean_comment: comment %>
-  <% end %>
-</div>
+  <div id="bean_<%= @bean.id %>_comments">
+    <%= render @bean.bean_comments %>
+  </div>
 
-<%= turbo_stream_from "bean_#{@bean.id}_comments" %>
+  <%= turbo_stream_from "bean_#{@bean.id}_comments" %>
 
 <%= simple_form_for [@bean, BeanComment.new],
   html: { data: { controller: "reset-form", action: "turbo:submit-end->reset-form#reset" } } do |f| %>
 
   <%= f.text_area :comment, placeholder: "Write a comment..." %>
   <%= f.submit "Post" %>
-</div>
 <% end %>
