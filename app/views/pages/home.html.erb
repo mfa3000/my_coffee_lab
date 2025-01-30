@@ -11,14 +11,14 @@
 <!-- beans carousel -->
 <h2>Discover beans </h2>
 
-<div id="beansCarousel" class="carousel slide mt-4" data-bs-ride="false">  <!-- Désactive le défilement automatique -->
+<div id="beansCarousel" class="carousel slide mt-4" data-bs-ride="false">
   <div class="carousel-inner">
     <% @beans.each_slice(3).with_index do |beans_slice, index| %>
       <div class="carousel-item <%= 'active' if index == 0 %>">
-        <div class="row g-0 justify-content-center">  <!-- Ajoute justify-content-center pour centrer les cartes -->
+        <div class="row g-0 justify-content-center">
           <% beans_slice.each do |bean| %>
-            <div class="col-4">  <!-- Chaque carte occupe 1/3 de la ligne -->
-              <div class="card" style="max-width: 300px; width: 100%; border: none;">  <!-- Limite la largeur à 300px -->
+            <div class="col-4">
+              <div class="card" style="max-width: 300px; width: 100%; border: none;">  
                 <img src="<%= bean.image %>" class="card-img-top" alt="<%= bean.name %>">
                 <div class="card-body">
                   <h5 class="card-title"><%= bean.name %></h5>
