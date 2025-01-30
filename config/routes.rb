@@ -32,4 +32,6 @@ Rails.application.routes.draw do
   end
 
   get 'beans', to: 'beans#index'
+
+  resources :bean_comments, only: [:create]
 end

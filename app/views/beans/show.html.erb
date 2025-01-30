@@ -36,6 +36,23 @@
   <%= link_to "Add Recipe", new_bean_recipe_path(@bean), class: "btn btn-submit mt-4" %>
   <div class="mt-4">
   <%= link_to "Edit Bean", edit_bean_path(@bean), class: "btn" %>
-  </div>
+</div>
 
+<h3>Comments</h3>
+
+<div id="bean_<%= @bean.id %>_comments">
+  <% @bean.bean_comments.each do |comment| %>
+    <%= render "bean_comments/bean_comment", bean_comment: comment %>
+  <% end %>
+</div>
+
+<%= turbo_stream_from "bean_#{@bean.id}_comments" %>
+
+<%= simple_form_for [@bean, BeanComment.new],
+  html: { data: { controller: "reset-form", action: "turbo:submit-end->reset-form#reset" } } do |f| %>
+
+  <%= f.text_area :comment, placeholder: "Write a comment..." %>
+  <%= f.submit "Post" %>
+</div>
+<% end %>
 
