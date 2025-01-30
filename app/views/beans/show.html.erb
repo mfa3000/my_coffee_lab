@@ -35,7 +35,7 @@
     <p class="mt-4 text-sm text-gray-600">Sign in to leave a rating.</p>
   <% end %>
 
-  <% if user_signed_in? %>
+<% if user_signed_in? %>
   <div data-controller="favourite" data-bean-id="<%= @bean.id %>">
     <% if current_user.favourite_beans.exists?(bean: @bean) %>
       <%= link_to "Unfavourite", bean_favourite_bean_path(@bean),
@@ -48,6 +48,7 @@
     <% end %>
   </div>
 <% end %>
+
 
   <h2 class="font-bold mt-6">Recipes</h2>
 
