@@ -31,6 +31,21 @@
   <p class="mt-4 text-sm text-gray-600">Sign in to leave a rating.</p>
 <% end %>
 
+<% if user_signed_in? %>
+  <div data-controller="favourite" data-roastery-id="<%= @roastery.id %>">
+    <% if current_user.favourite_roasteries.exists?(roastery: @roastery) %>
+      <%= link_to "Unfavourite", roastery_favourite_roastery_path(@roastery),
+        method: :delete, remote: true, class: "btn btn-danger",
+        data: { action: "click->favourite#toggle", turbo_method: "delete", turbo_action: "replace" } %>
+    <% else %>
+      <%= link_to "Favourite", roastery_favourite_roastery_path(@roastery),
+        method: :post, remote: true, class: "btn btn-primary",
+        data: { action: "click->favourite#toggle", turbo_method: "post", turbo_action: "replace" } %>
+    <% end %>
+  </div>
+<% end %>
+
+
   <h4>Locations:</h4>
   <ul>
     <% @roastery.locations.each do |location| %>
@@ -57,4 +72,6 @@
   <%= f.submit "Post" %>
 <% end %>
 </div>
+
+<p>Roastery ID: <%= @roastery.id %></p>
 

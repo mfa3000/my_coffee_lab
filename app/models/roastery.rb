@@ -2,7 +2,7 @@ class Roastery < ApplicationRecord
   belongs_to :user
   has_many :roastery_comments
   has_many :roastery_reviews, dependent: :destroy
-  has_many :favourite_roasteries
+  has_many :favourite_roasteries, dependent: :destroy
   has_many :beans
   has_many :locations, dependent: :destroy
   accepts_nested_attributes_for :locations, allow_destroy: true
@@ -13,5 +13,9 @@ class Roastery < ApplicationRecord
   def average_rating
     return 0 if roastery_reviews.empty?
     roastery_reviews.average(:rating).round(1)
+  end
+
+  def favorited_by?(user)
+    favourite_roasteries.exists?(user: user)
   end
 end
