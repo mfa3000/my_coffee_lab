@@ -24,14 +24,14 @@ Rails.application.routes.draw do
     end
 
     resources :roastery_comments, only: [:create]
-    resources :roastery_reviews, only: [:create, :update]
+    resources :roastery_reviews, only: [:create]
   end
 
   resources :beans, only: [:index, :new, :create, :show, :edit, :update] do
     resources :recipes, only: [:new, :create, :edit, :update, :destroy]
+    resources :bean_reviews, only: [:create]
+    resources :bean_comments, only: [:create]
   end
 
   get 'beans', to: 'beans#index'
-
-  resources :bean_comments, only: [:create]
 end
