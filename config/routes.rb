@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     end
 
     resources :roastery_comments, only: [:create]
+    resources :roastery_reviews, only: [:create, :update]
   end
 
   resources :beans, only: [:index, :new, :create, :show, :edit, :update] do
