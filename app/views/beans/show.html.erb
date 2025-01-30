@@ -11,6 +11,30 @@
     </ul>
   </li>
 
+<h4 class="mt-6 text-lg font-bold">Average Rating: <span id="average-rating-<%= @bean.id %>"><%= @bean.average_rating || "No ratings yet" %></span> ⭐</h4>
+
+<% if user_signed_in? %>
+  <h4>Your Rating:</h4>
+  <div data-controller="rating"
+      data-rating-type="bean"
+      data-rating-id="<%= @bean.id %>"
+      data-rating-user-rating="<%= @bean.bean_reviews.find_by(user: current_user)&.rating || 0 %>">
+
+    <div class="stars">
+      <% (1..5).each do |star| %>
+        <span class="star cursor-pointer"
+              data-action="click->rating#submitRating"
+              data-rating-value="<%= star %>">
+          ⭐
+        </span>
+      <% end %>
+    </div>
+    <p class="rating-message hidden text-green-600"></p>
+  </div>
+<% else %>
+  <p class="mt-4 text-sm text-gray-600">Sign in to leave a rating.</p>
+<% end %>
+
   <h2 class="font-bold mt-6">Recipes</h2>
 
   <% if @bean.recipes.any? %>
@@ -55,4 +79,3 @@
   <%= f.submit "Post" %>
 </div>
 <% end %>
-
