@@ -12,7 +12,13 @@
 @import "pages/index";
 @import "roasteries/form";
 @import "beans/form";
+@import "recipes/form";
+@import "roasteries/rating";
 
 body {
   background-color: white !important;
+}
+
+.hidden {
+  display: none;
 }
