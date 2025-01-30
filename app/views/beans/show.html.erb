@@ -36,35 +36,20 @@
   <%= link_to "Add Recipe", new_bean_recipe_path(@bean), class: "btn btn-submit mt-4" %>
   <div class="mt-4">
   <%= link_to "Edit Bean", edit_bean_path(@bean), class: "btn" %>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 78c8d8ddad39dde2dd7fff387e7b0c401b0316eb
 </div>
 
-<h3>Comments</h3>
+  <h4>Comments</h4>
 
-<div id="bean_<%= @bean.id %>_comments">
-  <% @bean.bean_comments.each do |comment| %>
-    <%= render "bean_comments/bean_comment", bean_comment: comment %>
-  <% end %>
-</div>
+  <div id="bean_<%= @bean.id %>_comments">
+    <%= render @bean.bean_comments %>
+  </div>
 
-<%= turbo_stream_from "bean_#{@bean.id}_comments" %>
+  <%= turbo_stream_from "bean_#{@bean.id}_comments" %>
 
 <%= simple_form_for [@bean, BeanComment.new],
   html: { data: { controller: "reset-form", action: "turbo:submit-end->reset-form#reset" } } do |f| %>
 
   <%= f.text_area :comment, placeholder: "Write a comment..." %>
   <%= f.submit "Post" %>
-</div>
 <% end %>
-<<<<<<< HEAD
-=======
-  </div>
-
-
->>>>>>> 251a492c9e166cecafd0ca71599ff7ca61cf48d5
-=======
-
->>>>>>> 78c8d8ddad39dde2dd7fff387e7b0c401b0316eb
+</div>

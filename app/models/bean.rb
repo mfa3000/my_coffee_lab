@@ -8,4 +8,6 @@ class Bean < ApplicationRecord
 
   validates :name, :description, presence: true
   validates :roastery_id, presence: true
+
+  after_create_commit -> { broadcast_append_to "bean_#{bean.id}_comments" }
 end
