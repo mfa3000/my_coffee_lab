@@ -17,7 +17,7 @@
   <%= link_to "Edit Roastery", edit_roastery_path(@roastery), class: "btn mt-4" %>
 </ul>
 
-<h3>Comments</h3>
+<h3>All comments</h3>
 
 <div id="roastery_<%= @roastery.id %>_comments">
   <% @roastery.roastery_comments.each do |comment| %>
