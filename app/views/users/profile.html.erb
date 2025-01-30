@@ -7,6 +7,7 @@
           <img src="https://via.placeholder.com/150" alt="User Avatar" class="rounded-circle mb-3">
           <h4><%= @user.user_name %></h4>
           <p><%= @user.email %></p>
+          
         </div>
       </div>
     </div>
@@ -18,13 +19,42 @@
         </div>
         <div class="card-body">
 
-          <h6>Favorites</h6>
+          <h6>Your favorite beans</h6>
+            <ul>
+              <% @user.favourite_beans.each do |favourite|%>
+              <li>
+                <%= link_to favourite.bean.name, bean_path(favourite.bean) %>
+              </li>
+              <%end%>
+            </ul>
 
-          <h6 class="mt-4">Your Beans</h6>
+          <h6>Your favorite places</h6>
+            <ul>
+              <% @user.favourite_roasteries.each do |favourite|%>
+              <li>
+                <%= link_to favourite.roastery.name, roastery_path(favourite.roastery) %>
+              </li>
+              <%end%>
+            </ul>
 
+          <h6 class="mt-4">Beans created by you</h6>
+            <ul>
+              <%@user_beans.each do |bean|%>
+              <li>
+                <%= link_to bean.name, bean_path(bean) %> <%= link_to "editIcon", edit_bean_path(bean)%>
 
-          <h6 class="mt-4">Your Places</h6>
+              </li>
+              <%end%>
+            </ul>
 
+          <h6 class="mt-4">Places created by you</h6>
+          <ul>
+            <%@user_places.each do |place|%>
+            <li>
+              <%= link_to place.name, roastery_path(place) %> <%= link_to "editIcon", edit_roastery_path(place)%>
+            </li>
+            <%end%>
+          </ul>
         </div>
       </div>
     </div>
