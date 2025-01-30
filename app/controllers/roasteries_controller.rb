@@ -1,6 +1,7 @@
 class RoasteriesController < ApplicationController
-  before_action :authenticate_user! , only: [:new, :create]
+  before_action :authenticate_user!
   before_action :set_roastery, only: [:show]
+  skip_before_action :authenticate_user!, only: [:index, :show]
 
   def show
   end
