@@ -5,6 +5,9 @@ import "@popperjs/core"
 import "bootstrap"
 
 import { application } from "./controllers/application"
+import FavouriteController from "controllers/favourite_controller";
+
+application.register("favourite", FavouriteController);
 
 document.addEventListener("turbo:load", function () {
   initializeLocationFunctionality();
