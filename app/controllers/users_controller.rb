@@ -7,6 +7,7 @@ class UsersController < ApplicationController
     }
     @user_beans = @user.beans
     @user_places = @user.roasteries
-    
+
   end
+ 
 end
