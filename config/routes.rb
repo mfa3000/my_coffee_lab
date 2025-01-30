@@ -32,8 +32,7 @@ Rails.application.routes.draw do
   resources :beans, only: [:index, :new, :create, :show, :edit, :update] do
     resources :recipes, only: [:new, :create, :edit, :update, :destroy]
     resources :bean_reviews, only: [:create]
-    resources :bean_comments, only: [:create]
-
+    resources :bean_comments, only: [:create, :destroy]
     resource :favourite_bean, only: [:create, :destroy], controller: 'favourite_beans'
   end
 
