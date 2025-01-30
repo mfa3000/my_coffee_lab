@@ -30,7 +30,9 @@ Rails.application.routes.draw do
   resources :beans, only: [:index, :new, :create, :show, :edit, :update] do
     resources :recipes, only: [:new, :create, :edit, :update, :destroy]
     resources :bean_reviews, only: [:create]
-    resources :bean_comments, only: [:create, :destroy]
+    resources :bean_comments, only: [:create, :destroy] do
+      resource :vote, controller: 'bean_comment_votes', only: [:create, :destroy]
+    end
   end
 
   get 'beans', to: 'beans#index'

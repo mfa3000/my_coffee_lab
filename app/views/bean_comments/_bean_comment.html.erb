@@ -4,7 +4,8 @@
     <i><%= bean_comment.created_at.strftime("%a %b %e at %l:%M %p") %></i>
   </small>
   <p><%= bean_comment.comment %></p>
-    <% if bean_comment.user == current_user %>
+
+<% if bean_comment.user == current_user %>
     <%= link_to "Delete",
                 [bean_comment.bean, bean_comment],
                 method: :delete,
