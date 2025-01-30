@@ -4,4 +4,7 @@
   <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
     <%= render 'roasteries/form', roastery: @roastery %>
   </div>
+  <%if user_authorized_to_delete?(@roastery)%>
+  <%= link_to "Delete", roastery_path(@roastery), data: {turbo_method: :delete, turbo_confirm: "Are you sure you want to permanently delete this roastery?"}, class: "btn btn-danger" %>
+  <%end%>
 </div>
