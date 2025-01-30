@@ -1,31 +1,56 @@
-<h1><%=@roastery.name%></h1>
-<img src="<%=@roastery.image%>">
+<div class="container">
+  <h1><%=@roastery.name%></h1>
+  <img src="<%=@roastery.image%>">
 
-<ul>
-  <li>Description: <%=@roastery.description%></li>
-  <li>Roastery URL: <%=@roastery.roastery_url%></li>
-</ul>
+  <ul>
+    <li>Description: <%=@roastery.description%></li>
+    <li>Roastery URL: <%=@roastery.roastery_url%></li>
+  </ul>
 
-<h3>Locations:</h3>
-<ul>
-  <% @roastery.locations.each do |location| %>
-    <ul>
-      <strong>Type:</strong> <%= location.location_type %><br>
-      <strong>Address:</strong> <%= location.address %>
-    </ul>
+  <h4 class="mt-6 text-lg font-bold">Average Rating: <span id="average-rating"><%= @roastery.average_rating || "No ratings yet" %></span> ⭐</h4>
+
+  <% if user_signed_in? %>
+    <h4>Your Rating:</h4>
+    <div data-controller="rating"
+        data-rating-roastery-id="<%= @roastery.id %>"
+        data-rating-user-rating="<%= @roastery.roastery_reviews.find_by(user: current_user)&.rating || 0 %>">
+
+      <div class="stars">
+        <% (1..5).each do |star| %>
+          <span class="star"
+                data-action="click->rating#submitRating"
+                data-rating-value="<%= star %>">
+            ⭐
+          </span>
+        <% end %>
+      </div>
+      <p id="rating-message" class="hidden text-green-600"></p>
+    </div>
+  <% else %>
+    <p class="mt-4 text-sm text-gray-600">Sign in to leave a rating.</p>
   <% end %>
-  <%= link_to "Edit Roastery", edit_roastery_path(@roastery), class: "btn mt-4" %>
-</ul>
 
-<h3>Comments</h3>
+  <h4>Locations:</h4>
+  <ul>
+    <% @roastery.locations.each do |location| %>
+      <ul>
+        <strong>Type:</strong> <%= location.location_type %><br>
+        <strong>Address:</strong> <%= location.address %>
+      </ul>
+    <% end %>
+    <%= link_to "Edit Roastery", edit_roastery_path(@roastery), class: "btn mt-4" %>
+  </ul>
 
-<div id="roastery_<%= @roastery.id %>_comments">
-  <%= render @roastery.roastery_comments %>
+  <h4>Comments</h4>
+
+  <div id="roastery_<%= @roastery.id %>_comments">
+    <%= render @roastery.roastery_comments %>
+  </div>
+
+  <%= turbo_stream_from "roastery_#{@roastery.id}_comments" %>
+
+  <%= simple_form_for [@roastery, RoasteryComment.new], remote: true, html: { id: "new_roastery_comment" } do |f| %>
+    <%= f.input :comment, as: :text, placeholder: "Write a comment..." %>
+    <%= f.submit "Post", class: "btn btn-primary" %>
+  <% end %>
 </div>
-
-<%= turbo_stream_from "roastery_#{@roastery.id}_comments" %>
-
-<%= simple_form_for [@roastery, RoasteryComment.new], remote: true, html: { id: "new_roastery_comment" } do |f| %>
-  <%= f.input :comment, as: :text, placeholder: "Write a comment..." %>
-  <%= f.submit "Post", class: "btn btn-primary" %>
-<% end %>
