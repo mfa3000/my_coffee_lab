@@ -26,7 +26,9 @@ Rails.application.routes.draw do
     resources :roastery_comments, only: [:create]
   end
 
-  resources :beans, only: [:index, :new, :create, :show, :edit, :update]
+  resources :beans, only: [:index, :new, :create, :show, :edit, :update] do
+    resources :recipes, only: [:new, :create, :edit, :update, :destroy]
+  end
 
   get 'beans', to: 'beans#index'
 
