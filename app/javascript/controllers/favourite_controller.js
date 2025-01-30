@@ -5,14 +5,16 @@ export default class extends Controller {
     event.preventDefault();
 
     let button = event.currentTarget;
-    let roasteryId = this.element.dataset.roasteryId;
-    let url = button.getAttribute("href");
-    let method = button.dataset.turboMethod || button.getAttribute("data-method");
 
-    if (!roasteryId) {
-      console.error("❌ Roastery ID is missing! Check show.html.erb.");
+    let elementId = this.element.dataset.beanId || this.element.dataset.roasteryId;
+
+    if (!elementId) {
+      console.error("❌ Element ID is missing! Check show.html.erb for bean_id or roastery_id.");
       return;
     }
+
+    let url = button.getAttribute("href");
+    let method = button.dataset.turboMethod || button.getAttribute("data-method");
 
     fetch(url, {
       method: method.toUpperCase(),
