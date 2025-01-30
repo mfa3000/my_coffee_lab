@@ -25,6 +25,15 @@ class BeanCommentsController < ApplicationController
     end
   end
 
+  def destroy
+    @bean_comment.destroy
+
+    respond_to do |format|
+      format.turbo_stream 
+      format.html { redirect_to @bean_comment.bean, notice: "Comment deleted!" }
+    end
+  end
+
   private
 
   def comment_params
