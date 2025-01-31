@@ -146,7 +146,6 @@ puts "fake roastery comment votes created"
 
 puts "creating fake data for bean reviews"
 
-<<<<<<< HEAD
 200.times do
   bean = beans.sample
   user = users.sample
@@ -158,14 +157,6 @@ puts "creating fake data for bean reviews"
       user: user,
     )
   end
-=======
-10.times do
-  BeanReview.create!(
-    rating: rand(1..5),
-    bean: beans.sample,
-    user: users.sample,
-  )
->>>>>>> 87fb9d6935cb06a6213aed45f8a7fb2c84db250b
 end
 
 puts "fake bean reviews created"
