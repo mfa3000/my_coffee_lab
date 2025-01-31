@@ -1,6 +1,6 @@
 class Roastery < ApplicationRecord
   belongs_to :user
-  has_many :roastery_comments
+  has_many :roastery_comments, dependent: :destroy
   has_many :roastery_reviews, dependent: :destroy
   has_many :favourite_roasteries, dependent: :destroy
   has_many :beans
@@ -12,7 +12,6 @@ class Roastery < ApplicationRecord
 
   geocoded_by :address
   after_validation :geocode, if: :will_save_change_to_address?
-
 
   def average_rating
     return 0 if roastery_reviews.empty?
