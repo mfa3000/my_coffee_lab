@@ -81,7 +81,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_31_134204) do
   create_table "locations", force: :cascade do |t|
     t.string "address"
     t.string "location_type"
-    t.string "type"
     t.bigint "roastery_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
