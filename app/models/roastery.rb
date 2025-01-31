@@ -1,6 +1,6 @@
 class Roastery < ApplicationRecord
   belongs_to :user
-  has_many :roastery_comments
+  has_many :roastery_comments, dependent: :destroy
   has_many :roastery_reviews, dependent: :destroy
   has_many :favourite_roasteries, dependent: :destroy
   has_many :beans
