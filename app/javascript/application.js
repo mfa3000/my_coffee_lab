@@ -4,6 +4,7 @@ import "controllers"
 import "@popperjs/core"
 import "bootstrap"
 
+
 import { application } from "./controllers/application"
 
 document.addEventListener("turbo:load", function () {
