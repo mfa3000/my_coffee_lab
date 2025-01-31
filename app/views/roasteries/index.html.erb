@@ -12,6 +12,8 @@
   <%= link_to "Add New Roastery", new_roastery_path %>
 </div>
 
+
+
 <div>
   <% @roasteries.each do |roastery| %>
     <div>
@@ -20,13 +22,12 @@
       <div>
         <strong>Locations:</strong>
         <% roastery.locations.each do |location| %>
-          <p><%= location.address %> (<%= location.location_type %>)</p>
+          <p><%= location.address %> (<%#= location.location_type %>)</p>
         <% end %>
       </div>
     </div>
   <% end %>
 </div>
-
 
 <!-- Mapbox -->
 <div
