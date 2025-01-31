@@ -6,10 +6,12 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= stylesheet_link_tag 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css' %>
 
     <%= javascript_importmap_tags %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+
+
   </head>
 
   <body>
@@ -17,8 +19,6 @@
     <%= render "shared/flashes" %>
 
     <%= yield %>
-
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
   </body>
 </html>

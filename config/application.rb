@@ -13,6 +13,18 @@ module MyCoffeeLab
       generate.assets false
       generate.helper false
       generate.test_framework :test_unit, fixture: false
+
+      config.time_zone = "Paris"
+
+      config.before_configuration do
+        env_file = File.join(Rails.root, '.env')
+        if File.exist?(env_file)
+          File.foreach(env_file) do |line|
+            key, value = line.strip.split('=', 2)
+            ENV[key] = value if key && value
+          end
+        end
+      end
     end
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.1
