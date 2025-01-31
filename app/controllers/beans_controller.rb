@@ -1,8 +1,8 @@
 class BeansController < ApplicationController
 
+  before_action :set_bean, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_user, only: [:destroy]
 
-  before_action :authenticate_user!
-  before_action :set_bean, only: [:show, :edit, :update]
 
 
   def show
@@ -59,6 +59,15 @@ class BeansController < ApplicationController
     end
   end
 
+  def destroy
+    if @bean.destroy
+      redirect_to request.referer&.include?(profile_path) ? profile_path : beans_path,
+                  notice: "Bean successfully deleted."
+    else
+      redirect_to roasteries_path, alert: "Failed to delete the Bean."
+    end
+  end
+
   private
 
   def bean_params
@@ -68,4 +77,11 @@ class BeansController < ApplicationController
   def set_bean
     @bean = Bean.find(params[:id])
   end
+
+  def authorize_user
+    unless user_authorized_to_delete?(@bean)
+      redirect_to bean_path, alert: "You are not authorized to delete this Bean."
+    end
+  end
+
 end

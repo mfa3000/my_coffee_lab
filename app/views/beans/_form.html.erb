@@ -16,36 +16,38 @@
     </div>
   </div>
 
-  <h2 class="text-xl font-bold mt-6">Associate a Roastery</h2>
+<h2 class="text-xl font-bold mt-6">Associate a Roastery</h2>
 
-  <div class="form-group">
-    <label for="roastery-search">Search for a Roastery</label>
-    <input
-      type="text"
-      id="roastery-search"
-      class="form-input"
-      placeholder="Start typing to search for a roastery"
-      autocomplete="off"
-      value="<%= @bean.roastery&.name if @bean.roastery.present? %>"
-      required
-    />
-    <select
-      id="roastery-dropdown"
-      name="bean[roastery_id]"
-      class="form-input mt-2"
-      size="5"
-      required
-    >
+<div class="form-group" data-controller="roastery-search">
+  <label for="roastery-search">Search for a Roastery</label>
+  <input
+    type="text"
+    id="roastery-search"
+    class="form-input"
+    placeholder="Start typing to search for a roastery"
+    autocomplete="off"
+    value="<%= @bean.roastery&.name if @bean.roastery.present? %>"
+    required
+  />
+
+  <select
+    id="roastery-dropdown"
+    name="bean[roastery_id]"
+    class="form-input mt-2"
+    size="5"
+    required
+  >
     <% if @bean.roastery.present? %>
-        <option value="<%= @bean.roastery.id %>" selected><%= @bean.roastery.name %></option>
+      <option value="<%= @bean.roastery.id %>" selected><%= @bean.roastery.name %></option>
     <% end %>
-    </select>
-  </div>
+  </select>
+</div>
 
-  <p class="mt-2">
-    Can’t find the roastery you’re looking for?
-    <%= link_to "Create a New Roastery", new_roastery_path, class: "text-blue-500 underline" %>
-  </p>
+<p class="mt-2">
+  Can’t find the roastery you’re looking for?
+  <%= link_to "Create a New Roastery", new_roastery_path, class: "text-blue-500 underline" %>
+</p>
+
 
   <div class="mt-6 text-center">
     <%= f.submit @bean.new_record? ? "Create Bean" : "Update Bean", class: "submit-btn" %>

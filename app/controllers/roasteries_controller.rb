@@ -1,6 +1,7 @@
 class RoasteriesController < ApplicationController
-  before_action :authenticate_user! , only: [:new, :create]
-  before_action :set_roastery, only: [:show]
+  before_action :set_roastery, only: [:show, :destroy]
+  before_action :authorize_user, only: [:destroy]
+
 
   def show
   end
@@ -54,6 +55,16 @@ class RoasteriesController < ApplicationController
     end
   end
 
+  def destroy
+    if @roastery.destroy
+      redirect_to request.referer&.include?(profile_path) ? profile_path : roasteries_path,
+                  notice: "Roastery successfully deleted."
+    else
+      redirect_to roasteries_path, alert: "Failed to delete the Roastery."
+    end
+  end
+
+
   private
 
   def roastery_params
@@ -66,4 +77,11 @@ class RoasteriesController < ApplicationController
   def set_roastery
     @roastery = Roastery.find(params[:id])
   end
+
+  def authorize_user
+    unless user_authorized_to_delete?(@roastery)
+      redirect_to roastery_path, alert: "You are not authorized to delete this Roastery."
+    end
+  end
+
 end

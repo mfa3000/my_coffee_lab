@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  # before_action :authenticate_admin!, only: [:destroy]
+
   def profile
     @user = current_user
     @favourites = {
@@ -7,5 +9,7 @@ class UsersController < ApplicationController
     }
     @user_beans = @user.beans
     @user_places = @user.roasteries
+
   end
+
 end
