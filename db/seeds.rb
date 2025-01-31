@@ -72,7 +72,7 @@ beans = []
     image: "https://picsum.photos/id/#{100+picture_id}/320/240",
     brewing_method: brewing_method.sample,
     roast_level: roast_level.sample,
-    origin: origins.sample,         
+    origin: origins.sample,
     flavour: flavours.sample,
     roastery: roasteries.sample,
     user: users.sample,
@@ -147,11 +147,16 @@ puts "fake roastery comment votes created"
 puts "creating fake data for bean reviews"
 
 200.times do
-  BeanReview.create!(
-    rating: rand(1..5),
-    bean: beans.sample,
-    user: users.sample,
-  )
+  bean = beans.sample
+  user = users.sample
+
+  unless BeanReview.exists?(bean: bean, user: user)
+    BeanReview.create!(
+      rating: rand(1..5),
+      bean: bean,
+      user: user,
+    )
+  end
 end
 
 puts "fake bean reviews created"
@@ -159,11 +164,17 @@ puts "fake bean reviews created"
 puts "creating fake data for roastery reviews"
 
 200.times do
-  RoasteryReview.create!(
-    rating: rand(1..5),
-    roastery: roasteries.sample,
-    user: users.sample,
-  )
+  roastery = roasteries.sample
+  user = users.sample
+
+  # Check if the user already reviewed this bean
+  unless RoasteryReview.exists?(roastery: roastery, user: user)
+    RoasteryReview.create!(
+      rating: rand(1..5),
+      roastery: roastery,
+      user: user,
+    )
+  end
 end
 
 puts "fake roastery reviews created"
@@ -171,10 +182,15 @@ puts "fake roastery reviews created"
 puts "creating fake data for favourite beans"
 
 50.times do
+  bean = beans.sample
+  user = users.sample
+
+  unless FavouriteBean.exists?(bean: bean, user: user)
   FavouriteBean.create!(
-    bean: beans.sample,
-    user: users.sample,
+    bean: bean,
+    user: user,
   )
+  end
 end
 
 puts "fake favourite beans created"
@@ -182,10 +198,15 @@ puts "fake favourite beans created"
 puts "creating fake data for favourite roasteries"
 
 50.times do
+  roastery = roasteries.sample
+  user = users.sample
+
+  unless FavouriteRoastery.exists?(roastery: roastery, user: user)
   FavouriteRoastery.create!(
-    roastery: roasteries.sample,
-    user: users.sample,
+    roastery: roastery,
+    user: user
   )
+  end
 end
 
 puts "fake favourite roasteries created"
