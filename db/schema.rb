@@ -84,6 +84,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_30_135421) do
     t.bigint "roastery_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "latitude"
+    t.float "longitude"
     t.index ["roastery_id"], name: "index_locations_on_roastery_id"
   end
 
