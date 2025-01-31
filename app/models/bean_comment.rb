@@ -3,8 +3,8 @@ class BeanComment < ApplicationRecord
   belongs_to :bean
   has_many :bean_comment_votes, dependent: :destroy
 
-  def likes_count
-    bean_comment_votes.count
+  def votes_count
+    bean_comment_votes.where(vote: true).count
   end
 
 end

@@ -1,6 +1,6 @@
-<div id="bean-comment-<%= bean_comment.id %>" data-controller="like" data-like-id-value="
-<%= bean_comment.id %>" data-like-bean-id-value="<%= bean_comment.bean.id %>" data-like-liked-value="
-<%= user_liked?(bean_comment) %>">
+<div id="bean-comment-<%= bean_comment.id %>" data-controller="vote" data-vote-id-value="
+<%= bean_comment.id %>" data-vote-bean-id-value="<%= bean_comment.bean.id %>" data-vote-voted-value="
+<%= user_voted?(bean_comment) %>">
   <small>
     <strong><%= bean_comment.user.user_name %></strong>
     <i><%= bean_comment.created_at.strftime("%a %b %e at %l:%M %p") %></i>
@@ -15,8 +15,22 @@
             class: "text-red-500 hover:underline text-sm ml-2" %>
     <% end %>
 
-  <button data-action="click->like#toggle">
-    <span data-like-target="icon"><%= user_liked?(bean_comment) ? "❤️" : "🤍" %></span>
+  <button data-action="click->vote#toggle">
+    <span data-vote-target="icon"><%= user_voted?(bean_comment) ? "❤️" : "🤍" %></span>
   </button>
-  <span data-like-target="count"><%= bean_comment.likes_count %></span>
+  <span data-vote-target="count"><%= bean_comment.votes_count %></span>
 </div>
+
+<% if user_signed_in? %>
+  <div data-controller="vote" data-bean-comment-id="<%= bean_comment.id %>">
+    <% if bean_comment.bean_comment_votes.exists?(user: current_user) %>
+      <%= link_to "Unvote", bean_bean_comment_votes_path(@bean),
+        method: :delete, remote: true, class: "btn btn-danger",
+        data: { action: "click->vote#toggle", turbo_method: "delete", turbo_action: "replace" } %>
+    <% else %>
+      <%= link_to "Vote", bean_bean_comment_votes_path(@bean, bean_comment),
+        method: :post, remote: true, class: "btn btn-primary",
+        data: { action: "click->vote#toggle", turbo_method: "post", turbo_action: "replace" } %>
+    <% end %>
+  </div>
+<% end %>
