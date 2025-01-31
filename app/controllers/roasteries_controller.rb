@@ -8,6 +8,21 @@ class RoasteriesController < ApplicationController
 
   def index
     @roasteries = Roastery.includes(:locations).all
+
+    if params[:location].present?
+      @roasteries = Roastery.near(params[:location], 10)
+    end
+    @markers = []
+    @roasteries.each do |roastery|
+      roastery.locations.each do |location|
+      coordinates = {
+        lat: location.latitude,
+        lng: location.longitude
+      }
+      @markers << coordinates
+      end
+    end
+
   end
 
   def new

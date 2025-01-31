@@ -1,8 +1,18 @@
+<%= form_with(url: roasteries_path, method: "get", local: true) do %>
+  <div>
+    <%= label_tag :location, "Search by Location" %>
+    <%= text_field_tag :location, params[:location], placeholder: "Enter a location" %>
+    <%= submit_tag "Search" %>
+  </div>
+<% end %>
+
 <h1>All Roasteries</h1>
 
 <div>
   <%= link_to "Add New Roastery", new_roastery_path %>
 </div>
+
+
 
 <div>
   <% @roasteries.each do |roastery| %>
@@ -12,9 +22,18 @@
       <div>
         <strong>Locations:</strong>
         <% roastery.locations.each do |location| %>
-          <p><%= location.address %> (<%= location.location_type %>)</p>
+          <p><%= location.address %> (<%#= location.location_type %>)</p>
         <% end %>
       </div>
     </div>
   <% end %>
+</div>
+
+<!-- Mapbox -->
+<div
+  id="map"
+  data-controller="map"
+  data-map-api-key-value="<%= ENV['MAPBOX_ACCESS_TOKEN'] %>"
+  data-map-markers-value="<%= @markers.to_json %>"
+  style="height: 500px;">
 </div>
