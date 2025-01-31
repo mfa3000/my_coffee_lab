@@ -11,9 +11,14 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update, keys: [:user_name])
   end
 
+  helper_method :user_voted?
+
+  def user_voted?(bean_comment)
+    current_user.bean_comment_votes.exists?(bean_comment_id: bean_comment.id)
+  end
+
   def user_authorized_to_delete?(element)
     element.user == current_user || current_user.admin?
   end
-
 
 end
