@@ -1,33 +1,22 @@
-<div id="bean-comment-<%= bean_comment.id %>">
+<div id="bean-comment-<%= bean_comment.id %>" data-controller="like" data-like-id-value="
+<%= bean_comment.id %>" data-like-bean-id-value="<%= bean_comment.bean.id %>" data-like-liked-value="
+<%= user_liked?(bean_comment) %>">
   <small>
     <strong><%= bean_comment.user.user_name %></strong>
     <i><%= bean_comment.created_at.strftime("%a %b %e at %l:%M %p") %></i>
   </small>
   <p><%= bean_comment.comment %></p>
 
-<% if bean_comment.user == current_user %>
-    <%= link_to "Delete",
-                [bean_comment.bean, bean_comment],
-                method: :delete,
-                data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
-                class: "text-red-500 hover:underline text-sm ml-2" %>
-  <% end %>
+    <% if bean_comment.user == current_user %>
+      <%= link_to "Delete",
+            [bean_comment.bean, bean_comment],
+            method: :delete,
+            data: { turbo_method: :delete, confirm: "Are you sure?" },
+            class: "text-red-500 hover:underline text-sm ml-2" %>
+    <% end %>
 
-  <% if bean_comment.bean_comment_votes.exists?(user: current_user) %>
-    <%= button_to bean_comment_vote_path(bean_comment.bean_comment_votes.find_by(user: current_user)),
-                  method: :delete,
-                  remote: true,
-                  data: { turbo_stream: true },
-                  class: "text-red-500 hover:underline text-sm ml-2" do %>
-      ❤️ Unlike
-    <% end %>
-  <% else %>
-    <%= button_to bean_comment_votes_path(bean_comment_id: bean_comment.id),
-                  method: :post,
-                  remote: true,
-                  data: { turbo_stream: true },
-                  class: "text-blue-500 hover:underline text-sm ml-2" do %>
-      🤍 Like
-    <% end %>
-  <% end %>
+  <button data-action="click->like#toggle">
+    <span data-like-target="icon"><%= user_liked?(bean_comment) ? "❤️" : "🤍" %></span>
+  </button>
+  <span data-like-target="count"><%= bean_comment.likes_count %></span>
 </div>
