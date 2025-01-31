@@ -6,8 +6,6 @@ pin "@hotwired/stimulus", to: "stimulus.min.js"
 pin "@hotwired/stimulus-loading", to: "stimulus-loading.js"
 pin_all_from "app/javascript/controllers", under: "controllers"
 pin "@popperjs/core", to: "popper.js", preload: true
-
-pin "mapbox-gl" # @3.1.2
-pin "process" # @2.1.0
-
-
+pin "bootstrap", to: "bootstrap.min.js", preload: true
+pin "mapbox-gl", to: "https://ga.jspm.io/npm:mapbox-gl@3.1.2/dist/mapbox-gl.js"
+pin "process", to: "https://ga.jspm.io/npm:@jspm/core@2.1.0/nodelibs/browser/process-production.js"

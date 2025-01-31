@@ -12,12 +12,17 @@ class RoasteriesController < ApplicationController
     if params[:location].present?
       @roasteries = Roastery.near(params[:location], 10)
     end
-    @markers = @roasteries.map do |roastery|
-      {
-        lat: roastery.latitude,
-        lng: roastery.longitude
+    @markers = []
+    @roasteries.each do |roastery|
+      roastery.locations.each do |location|
+      coordinates = {
+        lat: location.latitude,
+        lng: location.longitude
       }
+      @markers << coordinates
+      end
     end
+
   end
 
   def new
