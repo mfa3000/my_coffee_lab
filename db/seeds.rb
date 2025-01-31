@@ -72,7 +72,7 @@ beans = []
     image: "https://picsum.photos/id/#{100+picture_id}/320/240",
     brewing_method: brewing_method.sample,
     roast_level: roast_level.sample,
-    origin: origins.sample,         
+    origin: origins.sample,
     flavour: flavours.sample,
     roastery: roasteries.sample,
     user: users.sample,
@@ -89,7 +89,7 @@ location_type = ["Cafe", "Roastery and Cafe", "Warehouse"]
 16.times do
   Location.create!(
     address: Faker::Address.full_address,
-    location_type: location_type.sample,
+    # location_type: location_type.sample,
     roastery: roasteries.sample,
   )
 end
@@ -146,7 +146,7 @@ puts "fake roastery comment votes created"
 
 puts "creating fake data for bean reviews"
 
-200.times do
+10.times do
   BeanReview.create!(
     rating: rand(1..5),
     bean: beans.sample,
@@ -158,7 +158,7 @@ puts "fake bean reviews created"
 
 puts "creating fake data for roastery reviews"
 
-200.times do
+10.times do
   RoasteryReview.create!(
     rating: rand(1..5),
     roastery: roasteries.sample,
