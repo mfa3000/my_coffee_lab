@@ -33,21 +33,21 @@
       <%= location_fields.hidden_field :_destroy, class: "location-destroy" %>
 
       <div class="flex items-center">
-        <button type="button" class="remove-location-btn bg-red-500 text-white px-3 py-1 rounded">
+        <button type="button" class="remove-location-btn text-white px-3 py-1 rounded" data-action="click->location#removeLocation">
           Remove
         </button>
       </div>
     </div>
   <% end %>
-</div>
 
-<div class="mt-4">
-  <button type="button" id="add-location-btn" data-action="click->location#addLocation">
-  Add Another Location
-  </button>
+  <div class="mt-4">
+    <button type="button" id="add-location-btn" data-action="click->location#addLocation">
+    Add Another Location
+    </button>
+  </div>
 </div>
 
   <div class="mt-6 text-center">
-    <%= f.submit "Save Roastery", class: "submit-btn" %>
+    <%= f.submit "Save Roastery", class: "btn btn-primary" %>
   </div>
 <% end %>

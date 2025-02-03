@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     resources :roastery_reviews, only: [:create]
 
     resource :favourite_roastery, only: [:create, :destroy], controller: 'favourite_roasteries'
+    resources :roastery_photos, only: [:create]
   end
 
   resources :beans, only: [:index, :new, :create, :show, :edit, :update, :destroy] do
@@ -35,6 +36,7 @@ Rails.application.routes.draw do
     resources :bean_comments, only: [:create, :destroy]
     resource :bean_comment_votes, only: [:create, :destroy]
     resource :favourite_bean, only: [:create, :destroy], controller: 'favourite_beans'
+    resources :bean_photos, only: [:create]
   end
 
   get 'beans', to: 'beans#index'
