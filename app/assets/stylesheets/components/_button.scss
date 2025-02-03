@@ -1,0 +1,35 @@
+
+.btn-primary {
+  background-color: $brown;
+  color: white;
+  border: none;
+
+  &:hover {
+    background-color: $dark-brown;
+  }
+}
+
+.btn-secondary {
+  background-color: $dark-green;
+  color: white;
+  border: none;
+
+  &:hover {
+    background-color: $darkest-green;
+  }
+}
+
+.btn-tertiary {
+  background-color: white;
+  color: $dark-green;
+  border: 1px solid $dark-green;
+
+  &:hover {
+    background-color: $dark-green-005;
+    border: 1px solid $dark-green;
+    color: $dark-green;
+  }
+
+}
+
+

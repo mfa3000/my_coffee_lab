@@ -49,6 +49,20 @@
   </div>
 <% end %>
 
+  <h3>Photos</h3>
+  <div>
+    <% @bean.photos.each do |photo| %>
+      <%= image_tag photo, width: 300, height: 200 %>
+    <% end %>
+  </div>
+
+  <h4>Add Photos</h4>
+
+  <%= form_with model: @bean, url: bean_bean_photos_path(@bean), method: :post, local: true, multipart: true do |form| %>
+    <%= form.file_field :photos, multiple: true, accept: "image/*" %>
+    <%= form.submit "Upload" %>
+  <% end %>
+
 
   <h2 class="font-bold mt-6">Recipes</h2>
 
