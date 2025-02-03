@@ -41,17 +41,29 @@ end
 puts "fake users created"
 
 puts "creating fake data for roasteries"
+roastery_image_urls = [
+  "https://res.cloudinary.com/dtqchggeh/image/upload/v1738598119/Screenshot_2025-02-03_at_16.54.13_qkcsoi.png",
+  "https://res.cloudinary.com/dtqchggeh/image/upload/v1738598118/Screenshot_2025-02-03_at_16.54.22_qbc5im.png",
+  "https://res.cloudinary.com/dtqchggeh/image/upload/v1738598117/Screenshot_2025-02-03_at_16.54.35_udpwxd.png",
+  "https://res.cloudinary.com/dtqchggeh/image/upload/v1738598117/Screenshot_2025-02-03_at_16.54.42_su7ixd.png",
+  "https://res.cloudinary.com/dtqchggeh/image/upload/v1738598116/Screenshot_2025-02-03_at_16.54.54_uvk535.png"
+]
 roasteries = []
 picture_id = 0
 16.times do
+  image_url = roastery_image_urls.sample
 
-  roasteries << Roastery.create!(
+  roastery = Roastery.create!(
     name: "#{Faker::Restaurant.name} Roastery",
     description: Faker::Restaurant.description,
     image: "https://picsum.photos/id/#{200+picture_id}/320/240",
     roastery_url: "https://www.lewagon.com/",
     user: users.sample,
   )
+  file = URI.open(image_url)
+  roastery.main_photo.attach(io: file, filename: "roastery_photo_#{picture_id}.png", content_type: "image/png")
+
+  roasteries << roastery
   picture_id += 1
 end
 puts "fake roasteries created"
@@ -65,8 +77,18 @@ flavours = ["Fruity", "Nutty", "Chocolatey", "Floral", "Spicy"]
 picture_id = 0
 beans = []
 
+bean_image_urls = [
+  "https://res.cloudinary.com/dtqchggeh/image/upload/v1738596076/Screenshot_2025-02-03_at_16.19.35_ke4yjx.png",
+  "https://res.cloudinary.com/dtqchggeh/image/upload/v1738596074/Screenshot_2025-02-03_at_16.20.37_fyhizd.png",
+  "https://res.cloudinary.com/dtqchggeh/image/upload/v1738596073/Screenshot_2025-02-03_at_16.19.49_qpcllo.png",
+  "https://res.cloudinary.com/dtqchggeh/image/upload/v1738596073/Screenshot_2025-02-03_at_16.20.13_bdlz82.png",
+  "https://res.cloudinary.com/dtqchggeh/image/upload/v1738596072/Screenshot_2025-02-03_at_16.20.54_zawhld.png",
+]
+
 16.times do
-  beans << Bean.create!(
+  image_url = bean_image_urls.sample
+
+  bean = Bean.create!(
     name: Faker::Coffee.blend_name,
     description: Faker::Coffee.notes,
     image: "https://picsum.photos/id/#{100+picture_id}/320/240",
@@ -77,7 +99,11 @@ beans = []
     roastery: roasteries.sample,
     user: users.sample,
   )
-  picture_id += 1
+
+  file = URI.open(image_url)
+  bean.main_photo.attach(io: file, filename: "bean#{picture_id}.png", content_type: "image/png")
+
+  beans << bean
 end
 
 puts "fake beans created"
@@ -89,7 +115,7 @@ location_type = ["Cafe", "Roastery and Cafe", "Warehouse"]
 16.times do
   Location.create!(
     address: Faker::Address.full_address,
-    # location_type: location_type.sample,
+    location_type: location_type.sample,
     roastery: roasteries.sample,
   )
 end
