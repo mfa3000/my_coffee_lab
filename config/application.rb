@@ -6,6 +6,8 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+require 'dotenv/load' if Rails.env.development?
+
 module MyCoffeeLab
   class Application < Rails::Application
     config.action_controller.raise_on_missing_callback_actions = false if Rails.version >= "7.1.0"
