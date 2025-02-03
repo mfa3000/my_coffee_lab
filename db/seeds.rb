@@ -123,11 +123,16 @@ puts "fake roastery comments created"
 puts "creating fake data for bean comment votes"
 
 200.times do
+  user = users.sample
+  bean_comment = bean_comments.sample
+
+  unless BeanCommentVote.exists?(user: user, bean_comment: bean_comment)
   BeanCommentVote.create!(
     vote: [true, false].sample,
-    bean_comment: bean_comments.sample,
-    user: users.sample,
+    bean_comment: bean_comment,
+    user: user,
   )
+  end
 end
 
 puts "fake bean comment votes created"
@@ -135,11 +140,16 @@ puts "fake bean comment votes created"
 puts "creating fake data for roastery comment votes"
 
 200.times do
+  user = users.sample
+  roastery_comment = roastery_comments.sample
+
+  unless RoasteryCommentVote.exists?(user: user, roastery_comment: roastery_comment)
   RoasteryCommentVote.create!(
     vote: [true, false].sample,
-    roastery_comment: roastery_comments.sample,
-    user: users.sample,
+    roastery_comment: roastery_comment,
+    user: user,
   )
+  end
 end
 
 puts "fake roastery comment votes created"
