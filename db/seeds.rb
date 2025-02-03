@@ -102,6 +102,8 @@ bean_image_urls = [
 
   file = URI.open(image_url)
   bean.main_photo.attach(io: file, filename: "bean#{picture_id}.png", content_type: "image/png")
+
+  beans << bean
 end
 
 puts "fake beans created"
