@@ -23,10 +23,12 @@
 .username {
   font-size: 1.5rem;
   color: $dark-green;
+  font-family: $headers-font
 }
 
 .email {
   color: $brown;
+  font-family: $headers-font;
 }
 
 .edit-link {
@@ -48,6 +50,7 @@
   border-bottom: 2px solid $light-brown;
   padding-bottom: 0.5rem;
   margin-bottom: 1rem;
+  font-family: $headers-font;
 }
 
 .item-list {
@@ -64,6 +67,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-family: $headers-font;
 }
 
 .item a {
