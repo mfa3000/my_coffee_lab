@@ -10,7 +10,12 @@
       <%= f.input :roastery_url, as: :url, label: "Roastery Website", input_html: { class: "form-input" } %>
     </div>
     <div class="col-span-2">
-      <%= f.input :image, as: :file, label: "Upload Roastery Image", input_html: { class: "form-file-input" } %>
+      <%= f.input :main_photo, as: :file, label: "Upload Roastery Image", input_html: { class: "form-file-input", accept: "image/*" } %>
+
+      <% if @roastery.main_photo.attached? %>
+        <p>Current Image:</p>
+        <%= image_tag @roastery.main_photo, width: 200, class: "mt-2 rounded shadow" %>
+      <% end %>
     </div>
   </div>
 
@@ -48,6 +53,6 @@
 </div>
 
   <div class="mt-6 text-center">
-    <%= f.submit "Save Roastery", class: "submit-btn" %>
+    <%= f.submit "Save Roastery", class: "btn btn-primary" %>
   </div>
 <% end %>

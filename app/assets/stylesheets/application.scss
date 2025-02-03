@@ -10,11 +10,10 @@
 
 // Your CSS partials
 @import "components/index";
+@import "components/form";
 @import "pages/index";
-@import "roasteries/form";
-@import "beans/form";
-@import "recipes/form";
 @import "roasteries/rating";
+@import 'pages/profile';
 
 
 body {

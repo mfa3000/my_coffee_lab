@@ -1,4 +1,19 @@
+<<<<<<< HEAD
 .navbar-lewagon {
   justify-content: space-between;
   background: white
 }
+=======
+navbar-lewagon {
+  justify-content: space-between;
+  background: white;
+}
+
+.navbar-lewagon .navbar-collapse {
+  flex-grow: 0;
+}
+.navbar-lewagon .navbar-brand img {
+  width: 40px;
+}
+
+>>>>>>> 1b12812018aae69db52ab9e029376343e608e1f3

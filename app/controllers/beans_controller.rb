@@ -3,8 +3,6 @@ class BeansController < ApplicationController
   before_action :set_bean, only: [:show, :edit, :update, :destroy]
   before_action :authorize_user, only: [:destroy]
 
-
-
   def show
   end
 
@@ -33,7 +31,6 @@ class BeansController < ApplicationController
 
   def edit
   end
-
 
   def create
     @bean = current_user.beans.build(bean_params)
@@ -71,7 +68,7 @@ class BeansController < ApplicationController
   private
 
   def bean_params
-    params.require(:bean).permit(:name, :description, :image, :roast_level, :origin, :flavour, :brewing_method, :roastery_id)
+    params.require(:bean).permit(:name, :description, :roast_level, :origin, :flavour, :brewing_method, :roastery_id, :main_photo, photos:[])
   end
 
   def set_bean
