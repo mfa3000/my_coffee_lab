@@ -1,14 +1,12 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon shadow-sm">
   <div class="container-fluid">
     <% if current_page?(root_path) %>
-      <!-- Sur la page d'accueil : Logo centré et Avatar à droite -->
       <div class="navbar-brand ">
         <%= link_to root_path do %>
           <%= image_tag "logo.png", alt: "Logo", class: "homepage-logo" %>
         <% end %>
       </div>
 
-      <!-- Avatar aligné à droite sur la page d'accueil -->
       <div class="ms-auto">
         <%= link_to destroy_user_session_path, method: :delete, class: "nav-link" do %>
           <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar rounded-circle", alt: "dropdown menu" %>
@@ -16,7 +14,6 @@
       </div>
 
     <% else %>
-      <!-- Sur les autres pages : Logo à gauche, Beans et Roasteries au centre -->
       <%= link_to root_path, class: "navbar-brand me-auto" do %>
         <%= image_tag "logo.png", alt: "Logo", class: "homepage-logo" %>
       <% end %>
@@ -30,7 +27,6 @@
         </li>
       </ul>
 
-      <!-- Avatar aligné à droite sur les autres pages -->
       <div class="ms-auto">
         <%= link_to destroy_user_session_path, method: :delete, class: "nav-link" do %>
           <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar rounded-circle", alt: "dropdown menu" %>
