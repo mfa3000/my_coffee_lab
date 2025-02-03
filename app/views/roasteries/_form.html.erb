@@ -21,7 +21,7 @@
 
 <h2 class="text-xl font-bold mt-6">Locations</h2>
 
-<div id="locations-container" data-controller="location">
+<div id="locations-container" data-controller="location" data-location-target="locationsContainer">
   <%= f.fields_for :locations do |location_fields| %>
     <div class="location-fields grid grid-cols-2 gap-4 mt-4">
       <div>
