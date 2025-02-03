@@ -132,7 +132,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_03_101659) do
     t.string "name"
     t.text "description"
     t.string "image"
-    t.string "address"
     t.string "roastery_url"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
