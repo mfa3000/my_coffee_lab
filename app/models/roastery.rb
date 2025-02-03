@@ -6,6 +6,7 @@ class Roastery < ApplicationRecord
   has_many :beans
   has_many :locations, dependent: :destroy
   accepts_nested_attributes_for :locations, allow_destroy: true
+  has_many_attached :photos
 
   validates :name, presence: true
   validates :description, presence: true

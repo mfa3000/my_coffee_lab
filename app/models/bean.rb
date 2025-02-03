@@ -5,6 +5,7 @@ class Bean < ApplicationRecord
   has_many :favourite_beans, dependent: :destroy
   has_many :bean_comments, dependent: :destroy
   has_many :recipes, dependent: :destroy
+  has_many_attached :photos
 
   validates :name, :description, presence: true
   validates :roastery_id, presence: true
