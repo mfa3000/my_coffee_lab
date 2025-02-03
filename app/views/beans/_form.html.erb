@@ -14,6 +14,18 @@
       <%= f.input :brewing_method, collection: ["Espresso", "Pour Over", "French Press", "Aeropress"],
         label: "Brewing Method", prompt: "Select Brewing Method", input_html: { class: "form-input" } %>
     </div>
+    <div>
+      <%= f.input :origin, required: true, label: "Origin", input_html: { class: "form-input" } %>
+    </div>
+    <div class="col-span-2">
+      <%= f.input :main_photo, as: :file, label: "Upload Bean Image", input_html: { class: "form-file-input", accept: "image/*" } %>
+
+      <% if @bean.main_photo.attached? %>
+        <p>Current Main Image:</p>
+        <%= image_tag @bean.main_photo, width: 200, class: "mt-2 rounded shadow" %>
+      <% end %>
+    </div>
+
   </div>
 
 <h2 class="text-xl font-bold mt-6">Associate a Roastery</h2>

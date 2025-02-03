@@ -65,8 +65,18 @@ flavours = ["Fruity", "Nutty", "Chocolatey", "Floral", "Spicy"]
 picture_id = 0
 beans = []
 
+image_urls = [
+  "https://res.cloudinary.com/dtqchggeh/image/upload/v1738596076/Screenshot_2025-02-03_at_16.19.35_ke4yjx.png",
+  "https://res.cloudinary.com/dtqchggeh/image/upload/v1738596074/Screenshot_2025-02-03_at_16.20.37_fyhizd.png",
+  "https://res.cloudinary.com/dtqchggeh/image/upload/v1738596073/Screenshot_2025-02-03_at_16.19.49_qpcllo.png",
+  "https://res.cloudinary.com/dtqchggeh/image/upload/v1738596073/Screenshot_2025-02-03_at_16.20.13_bdlz82.png",
+  "https://res.cloudinary.com/dtqchggeh/image/upload/v1738596072/Screenshot_2025-02-03_at_16.20.54_zawhld.png",
+]
+
 16.times do
-  beans << Bean.create!(
+  image_url = image_urls.sample
+
+  bean = Bean.create!(
     name: Faker::Coffee.blend_name,
     description: Faker::Coffee.notes,
     image: "https://picsum.photos/id/#{100+picture_id}/320/240",
@@ -77,7 +87,9 @@ beans = []
     roastery: roasteries.sample,
     user: users.sample,
   )
-  picture_id += 1
+
+  file = URI.open(image_url)
+  bean.main_photo.attach(io: file, filename: "bean#{picture_id}.png", content_type: "image/png")
 end
 
 puts "fake beans created"
