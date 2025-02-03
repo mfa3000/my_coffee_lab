@@ -1,8 +1,12 @@
 <div class="container">
   <h1><%=@bean.name%></h1>
   <li>
+    <% if @bean.main_photo.attached? %>
+      <ul>
+        <%= image_tag @bean.main_photo, width: 300 %>
+      </ul>
+    <% end %>
     <ul><%=@bean.description%></ul>
-    <ul><%=@bean.image%></ul>
     <ul><strong>Roast:</strong><%=@bean.roast_level%></ul>
     <ul><%=@bean.brewing_method%></ul>
     <ul>User ID: <%=@bean.user_id%></ul>
