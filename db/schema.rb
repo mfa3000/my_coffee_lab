@@ -109,6 +109,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_03_101659) do
   create_table "locations", force: :cascade do |t|
     t.string "address"
     t.string "location_type"
+    t.string "type"
     t.bigint "roastery_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -132,6 +133,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_03_101659) do
     t.string "name"
     t.text "description"
     t.string "image"
+    t.string "address"
     t.string "roastery_url"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
