@@ -1,0 +1,159 @@
+.profile-container {
+  padding: 1rem;
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.avatar-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 3px solid $green;
+  object-fit: cover;
+}
+
+.username {
+  font-size: 1.5rem;
+  color: $dark-green;
+}
+
+.email {
+  color: $brown;
+}
+
+.edit-link {
+  color: $orange;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.edit-link:hover {
+  color: $brown;
+}
+
+.profile-content .section {
+  margin-bottom: 1.5rem;
+}
+
+.section h5 {
+  color: $darkest-green;
+  border-bottom: 2px solid $light-brown;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.item-list {
+  list-style: none;
+  padding: 0;
+}
+
+.item {
+  background-color: $light-gray;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item a {
+  color: $dark-green;
+  text-decoration: none;
+}
+
+.item a:hover {
+  color: $brown;
+}
+
+.edit-icon {
+  margin-left: 0.5rem;
+  color: $orange;
+  font-size: 0.9rem;
+  margin-left: auto;
+}
+.edit-icon:hover {
+  color: $brown;
+}
+
+.empty-state {
+  text-align: left;
+  color: $brown;
+  font-style: italic;
+  margin-top: 0.5rem;
+}
+
+.category-icon {
+  color: $brown;
+  margin-left: 0.6rem;
+  font-size: 1.2rem;
+}
+
+.favourite-icon {
+  color: rgb(193, 52, 9);
+  margin-left: 0.6rem;
+  font-size: 1.2rem;
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 5px;
+  justify-content: center;
+}
+
+.image-item {
+  text-align: center;
+  position: relative;
+}
+
+.bean-image, .roastery-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 2px solid $green;
+  display: block;
+  margin: 0 auto;
+}
+
+.item-name {
+  font-size: 0.9rem;
+  color: $dark-green;
+  margin-top: 5px;
+  text-decoration: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+@media (max-width: 768px) {
+  .profile-container {
+    padding: 0.5rem;
+  }
+
+  .avatar {
+    width: 80px;
+    height: 80px;
+  }
+
+  .username {
+    font-size: 1.3rem;
+  }
+
+  .item {
+    padding: 0.5rem;
+  }
+}
