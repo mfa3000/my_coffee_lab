@@ -23,7 +23,7 @@
                 <div class="card-body">
                   <h5 class="card-title"><%= bean.name %></h5>
                   <p class="card-text"><%= bean.description %></p>
-                  <%= link_to "View Details", bean_path(bean), class: "btn btn-primary" %>
+                  <%= link_to "View Details", bean_path(bean), class: "btn btn-tertiary" %>
                 </div>
               </div>
             </div>
@@ -58,12 +58,12 @@
         <div class="row g-0 justify-content-center">
           <% roasteries_slice.each do |roastery| %>
             <div class="col-4">
-              <div class="card" style="max-width: 300px; width: 100%; border: none;">  
+              <div class="card" style="max-width: 300px; width: 100%; border: none;">
                 <img src="<%= roastery.image %>" class="card-img-top" alt="<%= roastery.name %>">
                 <div class="card-body">
                   <h5 class="card-title"><%= roastery.name %></h5>
                   <p class="card-text"><%= roastery.description %></p>
-                  <%= link_to "View Details", roastery_path(roastery), class: "btn btn-primary" %>
+                  <%= link_to "View Details", roastery_path(roastery), class: "btn btn-tertiary" %>
                 </div>
               </div>
             </div>
