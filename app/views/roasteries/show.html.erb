@@ -54,7 +54,7 @@
 
   <h4>Add Photos</h4>
 
-  <%= form_with model: @roastery, url: roastery_photos_path(@roastery), method: :post, local: true, multipart: true do |form| %>
+  <%= form_with model: @roastery, url: roastery_roastery_photos_path(@roastery), method: :post, local: true, multipart: true do |form| %>
     <%= form.file_field :photos, multiple: true, accept: "image/*" %>
     <%= form.submit "Upload" %>
   <% end %>
