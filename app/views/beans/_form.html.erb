@@ -18,11 +18,11 @@
       <%= f.input :origin, required: true, label: "Origin", input_html: { class: "form-input" } %>
     </div>
     <div class="col-span-2">
-      <%= f.input :main_photo, as: :file, label: "Upload Bean Image", input_html: { class: "form-file-input", accept: "image/*" } %>
+      <%= f.input :main_photo, as: :file, label: "Upload Roastery Image", input_html: { class: "form-file-input", accept: "image/*" } %>
 
-      <% if @bean.main_photo.attached? %>
-        <p>Current Main Image:</p>
-        <%= image_tag @bean.main_photo, width: 200, class: "mt-2 rounded shadow" %>
+      <% if @roastery.main_photo.attached? %>
+        <p>Current Image:</p>
+        <%= image_tag @roastery.main_photo, width: 200, class: "mt-2 rounded shadow" %>
       <% end %>
     </div>
 
