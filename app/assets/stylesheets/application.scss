@@ -18,10 +18,34 @@
 
 
 
+
+
 body {
   background-color: white !important;
 }
 
 .hidden {
   display: none;
+}
+
+
+footer {
+  background-color: $beige;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+footer .footer-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+footer .footer-content a {
+  color: white;
+  text-decoration: none;
+}
+
+footer .footer-content .social-media a {
+  margin: 0 10px;
 }
