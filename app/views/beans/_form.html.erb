@@ -20,9 +20,9 @@
     <div class="col-span-2">
       <%= f.input :main_photo, as: :file, label: "Upload Roastery Image", input_html: { class: "form-file-input", accept: "image/*" } %>
 
-      <% if @roastery.main_photo.attached? %>
+      <% if @bean.main_photo.attached? %>
         <p>Current Image:</p>
-        <%= image_tag @roastery.main_photo, width: 200, class: "mt-2 rounded shadow" %>
+        <%= image_tag @bean.main_photo, width: 200, class: "mt-2 rounded shadow" %>
       <% end %>
     </div>
 
