@@ -2,6 +2,8 @@
 import { application } from "controllers/application";
 import { eagerLoadControllersFrom } from "@hotwired/stimulus-loading";
 
+// filters + search
+
 document.addEventListener("DOMContentLoaded", function() {
   const toggleButton = document.getElementById("toggle-filters");
   const filterOptions = document.getElementById("filter-options");
@@ -9,14 +11,12 @@ document.addEventListener("DOMContentLoaded", function() {
   const filterFields = document.querySelectorAll('.filter-options select');
   const searchInput = document.querySelector(".search-input");
 
-  //
   if (toggleButton && filterOptions) {
     toggleButton.addEventListener("click", function() {
       filterOptions.style.display = filterOptions.style.display === "block" ? "none" : "block";
     });
   }
 
-  //
   filterFields.forEach(function(field) {
     field.addEventListener("change", function() {
       resetFiltersLink.style.display = 'inline-block';
@@ -39,7 +39,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   }
 
-
   if (searchInput) {
     searchInput.addEventListener('input', function() {
       if (searchInput.value === '') {
@@ -53,3 +52,5 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   }
 });
+
+// cards
