@@ -1,0 +1,30 @@
+.responsive-image {
+  max-width: 100%;
+  height: auto;
+  display: block;
+
+}
+
+.image-container {
+  max-width: 100%; /* Ensure the container does not exceed its parent's width */
+  overflow: hidden; /* Hide any overflow content */
+  padding: 2rem;
+}
+
+.description {
+
+  padding: 2rem;
+}
+
+.container-details {
+  background-color: $lightest-green-050;
+}
+
+.description-list {
+  list-style: none;
+  padding: 0;
+}
+
+.description-list > * {
+  margin-top: 1rem;
+}

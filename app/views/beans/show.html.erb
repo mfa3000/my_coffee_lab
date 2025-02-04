@@ -1,21 +1,117 @@
-<div class="container">
-  <h1><%=@bean.name%></h1>
-  <li>
-    <% if @bean.main_photo.attached? %>
-      <ul>
-        <%= image_tag @bean.main_photo, width: 300 %>
+<div class=" container container-details">
+  <div class="row ">
+    <div class="col-lg-5 image-container">
+      <% if @bean.main_photo.attached? %>
+      <%= image_tag @bean.main_photo, class: "responsive-image" %>
+      <% end %>
+    </div>
+    <div class="col-lg-7 description">
+      <%= link_to @bean.roastery.name, roastery_path(@bean.roastery) %>
+      <h1><%=@bean.name%></h1>
+      <%=@bean.description%>
+      <ul class="description-list">
+        <li>
+          <strong>Origin: </strong><%=@bean.origin%>
+        </li>
+        <li>
+          <strong>Roast level: </strong><%=@bean.roast_level%>
+        </li>
+        <li>
+          <strong>Brewing Method: </strong><%=@bean.brewing_method%>
+        </li>
       </ul>
-    <% end %>
-    <ul><%=@bean.description%></ul>
-    <ul><strong>Roast:</strong><%=@bean.roast_level%></ul>
-    <ul><%=@bean.brewing_method%></ul>
-    <ul>User ID: <%=@bean.user_id%></ul>
-    <ul><strong>Roastery:</strong>
-      <%= link_to @bean.roastery.name, roastery_path(@bean.roastery), class: "hover:underline" %>
-    </ul>
-  </li>
+    </div>
 
-<h4 class="mt-6 text-lg font-bold">Average Rating: <span id="average-rating-<%= @bean.id %>"><%= @bean.average_rating || "No ratings yet" %></span> ⭐</h4>
+    <!-- Recipes -->
+    <div>
+      <h2>Community Recipes</h2>
+
+        <% if @bean.recipes.any? %>
+          <% @bean.recipes.each do |recipe| %>
+            <div class="card" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title"><%= recipe.name %></h5>
+            <p class="card-text"><%= recipe.instructions %></p>
+            <% if recipe.user == current_user %>
+              <%= link_to "Edit", edit_bean_recipe_path(@bean, recipe), class: "underline" %>
+              <%= link_to "Delete", bean_recipe_path(@bean, recipe),
+                  method: :delete,
+                  data: { turbo_method: :delete, confirm: "Are you sure?" },
+                  class: "underline ml-2" %>
+            <% end %>
+          <% end %>
+        <% else %>
+          <p>No recipes yet.</p>
+        <% end %>
+              </div>
+            </div>
+        <%= link_to "Add Recipe", new_bean_recipe_path(@bean), class: "btn btn-submit mt-4" %>
+
+
+
+            <%
+=begin%>
+ <%= link_to edit_roastery_path(place), class: "edit-icon" do %>
+                  <i class="fas fa-edit"></i>
+                <% end %>
+<%
+=end%>
+
+
+
+
+        <%
+=begin%>
+ <ul class="list-disc pl-6">
+        <% @bean.recipes.each do |recipe| %>
+          <li class="">
+            <strong><%= recipe.name %></strong>
+            <p><%= recipe.instructions %></p>
+            <% if recipe.user == current_user %>
+              <%= link_to "Edit", edit_bean_recipe_path(@bean, recipe), class: "underline" %>
+              <%= link_to "Delete", bean_recipe_path(@bean, recipe),
+                  method: :delete,
+                  data: { turbo_method: :delete, confirm: "Are you sure?" },
+                  class: "underline ml-2" %>
+            <% end %>
+          </li>
+        <% end %>
+        </ul>
+        </div>
+         <% else %>
+          <p>No recipes yet.</p>
+        <% end %>
+        <%= link_to "Add Recipe", new_bean_recipe_path(@bean), class: "btn btn-submit mt-4" %>
+
+    </div>
+  </div>
+<%
+=end%>
+
+
+
+<%
+=begin%>
+ t.string "name"
+    t.text "description"
+    t.string "image"
+    t.string "roast_level"
+    t.string "brewing_method"
+    t.bigint "user_id", null: false
+    t.bigint "roastery_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "origin"
+    t.string "flavour"
+    t.index ["roastery_id"], name: "index_beans_on_roastery_id"
+    t.index ["user_id"], name: "index_beans_on_user_id"
+<%
+=end%>
+
+
+
+
+<h4 style="margin-top: 300px"class="mt-6 text-lg font-bold">Average Rating: <span id="average-rating-<%= @bean.id %>"><%= @bean.average_rating || "No ratings yet" %></span> ⭐</h4>
 
   <% if user_signed_in? %>
     <h4>Your Rating:</h4>
@@ -70,27 +166,9 @@
 
   <h2 class="font-bold mt-6">Recipes</h2>
 
-  <% if @bean.recipes.any? %>
-    <ul class="list-disc pl-6">
-      <% @bean.recipes.each do |recipe| %>
-        <li class="mb-2">
-          <strong><%= recipe.name %></strong>
-          <p><%= recipe.instructions %></p>
-          <% if recipe.user == current_user %>
-            <%= link_to "Edit", edit_bean_recipe_path(@bean, recipe), class: "underline" %>
-            <%= link_to "Delete", bean_recipe_path(@bean, recipe),
-                method: :delete,
-                data: { turbo_method: :delete, confirm: "Are you sure?" },
-                class: "underline ml-2" %>
-          <% end %>
-        </li>
-      <% end %>
-    </ul>
-  <% else %>
-    <p>No recipes yet.</p>
-  <% end %>
 
-  <%= link_to "Add Recipe", new_bean_recipe_path(@bean), class: "btn btn-submit mt-4" %>
+
+
   <div class="mt-4">
   <%= link_to "Edit Bean", edit_bean_path(@bean), class: "btn" %>
 </div>
