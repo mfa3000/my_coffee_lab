@@ -14,14 +14,15 @@
 <!-- beans carousel -->
 <h2>Discover beans </h2>
 
+
 <div id="beansCarousel" class="carousel slide mt-4" data-bs-ride="false">
   <div class="carousel-inner">
     <% @beans.each_slice(3).with_index do |beans_slice, index| %>
-      <div class="carousel-item <%= 'active' if index == 0 %>">
-        <div class="row g-0 justify-content-center">
+      <div class="carousel-item <%= index.zero? ? 'active' : '' %>">
+        <div class="d-flex justify-content-center">
           <% beans_slice.each do |bean| %>
-            <div class="col-4">
-              <div class="card" style="max-width: 300px; width: 100%; border: none;">
+            <div class="col-4 col-md-6 d-flex align-items-stretch">
+              <div class="card">
                 <img src="<%= bean.main_photo.attached? ? url_for(bean.main_photo) : 'https://res.cloudinary.com/dtqchggeh/image/upload/v1738669535/AdobeStock_297520243_compressed_vsea7t.png' %>"
                      class="card-img-top" alt="<%= bean.name %>">
                 <div class="card-body">
@@ -38,16 +39,16 @@
   </div>
 
   <!-- arrow left -->
-  <a class="carousel-control-prev" href="#beansCarousel" role="button" data-bs-slide="prev">
+  <button class="carousel-control-prev" type="button" data-bs-target="#beansCarousel" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
+    <span class="visually-hidden">Previous</span>
+  </button>
 
-  <!-- arrow roght -->
-  <a class="carousel-control-next" href="#beansCarousel" role="button" data-bs-slide="next">
+  <!-- arrow right -->
+  <button class="carousel-control-next" type="button" data-bs-target="#beansCarousel" data-bs-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
+    <span class="visually-hidden">Next</span>
+  </button>
 </div>
 
 
@@ -58,11 +59,11 @@
 <div id="roasteriesCarousel" class="carousel slide mt-4" data-bs-ride="false">
   <div class="carousel-inner">
     <% @roasteries.each_slice(3).with_index do |roasteries_slice, index| %>
-      <div class="carousel-item <%= 'active' if index == 0 %>">
-        <div class="row g-0 justify-content-center">
+      <div class="carousel-item <%= index.zero? ? 'active' : '' %>">
+        <div class="d-flex justify-content-center">
           <% roasteries_slice.each do |roastery| %>
-            <div class="col-4">
-              <div class="card" style="max-width: 300px; width: 100%; border: none;">
+            <div class="col-4 col-md-6 d-flex align-items-stretch">
+              <div class="card">
                 <img src="<%= roastery.main_photo.attached? ? url_for(roastery.main_photo) : 'https://res.cloudinary.com/dtqchggeh/image/upload/v1738670181/AdobeStock_108622833_Preview_ppobqc.png' %>"
                      class="card-img-top" alt="<%= roastery.name %>">
                 <div class="card-body">
@@ -78,15 +79,15 @@
     <% end %>
   </div>
 
-  <!-- arrow left  -->
-  <a class="carousel-control-prev" href="#roasteriesCarousel" role="button" data-bs-slide="prev">
+  <!-- arrow left -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#roasteriesCarousel" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Previous</span>
-  </a>
+  </button>
 
-  <!-- arrow right  -->
-  <a class="carousel-control-next" href="#roasteriesCarousel" role="button" data-bs-slide="next">
+  <!-- arrow right -->
+  <button class="carousel-control-next" type="button" data-bs-target="#roasteriesCarousel" data-bs-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
-  </a>
+  </button>
 </div>
