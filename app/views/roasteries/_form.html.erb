@@ -1,4 +1,4 @@
-<%= simple_form_for @roastery, html: { multipart: true } do |f| %>
+<%= simple_form_for @roastery, html: { class: "form-container" } do |f| %>
   <div class="grid grid-cols-2 gap-6">
     <div>
       <%= f.input :name, required: true, label: "Roastery Name", input_html: { class: "form-input" } %>
@@ -9,21 +9,26 @@
     <div>
       <%= f.input :roastery_url, as: :url, label: "Roastery Website", input_html: { class: "form-input" } %>
     </div>
-    <div class="col-span-2">
-      <%= f.input :main_photo, as: :file, label: "Upload Roastery Image", input_html: { class: "form-file-input", accept: "image/*" } %>
+    <div class="upload-container" data-controller="file-upload">
+      <label class="block text-sm font-medium text-dark-green mb-1">Upload Roastery Image</label>
 
-      <% if @roastery.main_photo.attached? %>
-        <p>Current Image:</p>
-        <%= image_tag @roastery.main_photo, width: 200, class: "mt-2 rounded shadow" %>
-      <% end %>
+    <div class="upload-inline" data-controller="file-upload">
+      <label class="upload-label">
+        <i class="fas fa-upload upload-icon"></i>
+        <span>Upload Photo</span>
+        <input type="file" name="bean[main_photo]" data-file-upload-target="input" accept="image/*" hidden>
+        </label>
+        <span class="file-name" data-file-upload-target="fileName">No file chosen</span>
     </div>
-  </div>
+
+    <div class="preview-container" data-file-upload-target="preview"></div>
+
 
 <h2 class="text-xl font-bold mt-6">Locations</h2>
 
 <div id="locations-container" data-controller="location" data-location-target="locationsContainer">
   <%= f.fields_for :locations do |location_fields| %>
-    <div class="location-fields grid grid-cols-2 gap-4 mt-4">
+    <div class="location-fields grid grid-cols-2 gap-4 mt-4 border p-4 rounded bg-light-gray shadow-sm">
       <div>
         <%= location_fields.input :location_type, collection: ["Cafe", "Roastery and Cafe", "Warehouse"],
           label: "Location Type", prompt: "Select a Type", required: true,
@@ -37,17 +42,17 @@
 
       <%= location_fields.hidden_field :_destroy, class: "location-destroy" %>
 
-      <div class="flex items-center">
-        <button type="button" class="remove-location-btn text-white px-3 py-1 rounded" data-action="click->location#removeLocation">
-          Remove
+      <div class="col-span-2 flex justify-end mt-2">
+        <button type="button" class="btn btn-secondary" data-action="click->location#removeLocation">
+          Remove Location
         </button>
       </div>
     </div>
   <% end %>
 
-  <div class="mt-4">
-    <button type="button" id="add-location-btn" data-action="click->location#addLocation">
-    Add Another Location
+  <div class="mt-4 text-center">
+    <button type="button" class="btn btn-secondary" data-action="click->location#addLocation">
+      Add Another Location
     </button>
   </div>
 </div>
