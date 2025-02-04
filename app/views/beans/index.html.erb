@@ -1,44 +1,55 @@
 
 <div class="banner beans-banner">
-    <h1 class="banner-title">Find the perfect bean for your next brew</h1>
-    <%# <p class="banner-text">Find and share the beans that make you love every sip</p> %>
+
+    <h1 class="banner-title">Browse and compare coffee beans</h1>
+    <p class="banner-text">Find the perfect bean for your next brew.</p>
+      <div class="add-bean-btn">
+        <%= link_to "Add New Bean", new_bean_path, class:'btn btn-tertiary' %>
+      </div>
 </div>
 
-<!-- Filters  -->
-<%= form_with(url: beans_path, method: :get, local: true) do |form| %>
-  <div>
-    <%= form.label :brewing_method, 'Filter by Brewing Method' %>
-    <%= form.select :brewing_method, options_for_select(['Espresso', 'French Press', 'Pour Over', 'AeroPress'], params[:brewing_method]), include_blank: 'All Methods' %>
+<div class="filters-container">
+  <%= form_with(url: beans_path, method: :get, local: true, class: "filter-form") do |form| %>
+
+<!-- Container button search  -->
+<div class="search-container">
+  <!-- Search -->
+  <div class="search-bar">
+    <%= form.label :query, 'Search Beans ', class: "sr-only" %>
+    <%= form.text_field :query, value: params[:query], placeholder: "Search beans ...", class: "search-input" %>
   </div>
 
-  <div>
-    <%= form.label :roast_level, 'Filter by Roast Level' %>
-    <%= form.select :roast_level, options_for_select(['Light', 'Medium', 'Dark'], params[:roast_level]), include_blank: 'All Roasts' %>
+  <!-- Search button -->
+  <div class="search-btn">
+    <%= form.submit 'Search', class: 'btn btn-secondary' %>
   </div>
+</div>
 
-  <div>
-    <%= form.label :origin, 'Filter by Origin' %>
-    <%= form.select :origin, options_for_select(['Ethiopia', 'Colombia', 'Brazil', 'Vietnam'], params[:origin]), include_blank: 'All Origins' %>
-  </div>
+<div class="search-divider"></div>
 
-  <div>
-    <%= form.label :flavour, 'Filter by Flavour' %>
-    <%= form.select :flavour, options_for_select(['Fruity', 'Nutty', 'Chocolatey', 'Floral', 'Spicy'], params[:flavour]), include_blank: 'All Flavours' %>
-  </div>
+<!-- Filter  -->
+<div class="filters-controls m8">
+  <button type="button" class="filter-icon" id="toggle-filters">
+    <i class="fa fa-filter"></i>
+  </button>
 
-  <div>
-    <%= form.submit 'Filter' %>
-  </div>
+  <a href="<%= beans_path(query: params[:query]) %>"
+     id="reset-filters"
+     class="reset-filters-link"
+     style="display: none;">
+    Reset
+  </a>
+</div>
 
-  <div>
-    <%= link_to 'Reset Filters', beans_path, class: 'btn btn-secondary', id: 'reset-filters' %>
-  </div>
+<!-- Filters -->
+<div class="filter-options" id="filter-options" style="display: none;">
+  <%= form.select :brewing_method, options_for_select(['Espresso', 'French Press', 'Pour Over', 'AeroPress'], params[:brewing_method]), include_blank: 'Method' %>
+  <%= form.select :roast_level, options_for_select(['Light', 'Medium', 'Dark'], params[:roast_level]), include_blank: 'Roast Level' %>
+  <%= form.select :origin, options_for_select(['Ethiopia', 'Colombia', 'Brazil', 'Vietnam'], params[:origin]), include_blank: 'Origin' %>
+  <%= form.select :flavour, options_for_select(['Fruity', 'Nutty', 'Chocolatey', 'Floral', 'Spicy'], params[:flavour]), include_blank: 'Flavour' %>
+</div>
 
 <% end %>
-
-<div>
-  <%= link_to "Add New Bean", new_bean_path %>
-</div>
 
 <!-- cards -->
 
