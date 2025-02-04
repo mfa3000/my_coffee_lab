@@ -1,3 +1,120 @@
 // Import page-specific CSS files here.
 @import "home";
 
+.beans-banner {
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 0 auto;
+  max-width: 600px;
+  width: 100%;
+  margin-bottom: 15px;
+}
+.search-divider {
+  width: 100%;
+  height: 1px;
+  margin-top: 20px;
+  margin-bottom: 15px;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1));  /* Dégradé léger de noir */
+}
+
+.filters-controls {
+  display: flex;
+  justify-content: flex-start;
+  gap: 20px;
+  margin-bottom: 15px;
+}
+
+.search-bar {
+  min-width: 200px;
+  margin-right: 15px;
+
+}
+
+.search-input {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 300px;
+}
+
+.search-btn {
+  margin-right: 15px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-grow: 1;
+}
+
+.filter-icon {
+  background-color: $brown ;
+  color: white;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+  margin-left: 115px;
+}
+
+.filter-icon:hover {
+  background-color: $brown ;
+}
+
+
+.filter-options {
+  margin-top: 10px;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  width: 100%;
+
+}
+
+.filter-options select {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.reset-filters-link {
+  text-decoration: underline;
+  color: $brown;
+  margin-left: 10px;
+}
+
+@media (max-width: 768px) {
+  .filters-container {
+    flex-direction: column;
+  }
+
+  .filter-form {
+    flex-direction: column;
+  }
+}
+.add-bean-btn {
+  margin-left: auto;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+}

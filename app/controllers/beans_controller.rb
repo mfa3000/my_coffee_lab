@@ -11,6 +11,10 @@ class BeansController < ApplicationController
 
     puts @beans.inspect
 
+    if params[:query].present?
+      @beans = @beans.where("LOWER(name) LIKE LOWER(?)", "%#{params[:query].downcase}%")
+    end
+
     if params[:brewing_method].present?
       @beans = @beans.where(brewing_method: params[:brewing_method])
     end
