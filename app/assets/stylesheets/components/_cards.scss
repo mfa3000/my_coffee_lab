@@ -37,23 +37,7 @@
 
   .card-text {
     font-size: 0.9rem;
-    color: #555;
     flex-grow: 1;
-  }
-
-  .btn-tertiary {
-    display: inline-block;
-    margin-top: auto;
-    background-color: #6c757d;
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: background 0.3s ease-in-out;
-
-    &:hover {
-      background-color: #5a6268;
-    }
   }
 }
 

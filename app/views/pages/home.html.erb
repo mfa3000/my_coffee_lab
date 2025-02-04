@@ -3,11 +3,18 @@
   <p class="banner-text">Explore beans and roasteries, share your recipes, and connect with the coffee community.</p>
 </div>
 <div class="home-page">
-  <p>Choose what you’d like to explore:</p>
+<div class="options d-flex justify-content-center gap-3">
+    <%= link_to beans_path, class: "btn btn-primary d-flex align-items-center gap-2 px-4 py-2 text-center button-width" do %>
+      <%= image_tag "https://res.cloudinary.com/dtqchggeh/image/upload/v1738683636/coffee-beans_ujet4f.png",
+            alt: "Beans", class: "icon-white" %>
+      Explore Beans
+    <% end %>
 
-  <div class="options">
-    <%= link_to "Explore Beans", beans_path, class: "btn btn-primary" %>
-    <%= link_to "Explore Roasteries", roasteries_path, class: "btn btn-secondary" %>
+    <%= link_to roasteries_path, class: "btn btn-secondary d-flex align-items-center gap-2 px-4 py-2 text-center button-width" do %>
+      <%= image_tag "https://res.cloudinary.com/dtqchggeh/image/upload/v1738683635/roast_dqunzi.png",
+            alt: "Roasteries", class: "icon-white" %>
+      Explore Roasteries
+    <% end %>
   </div>
 </div>
 
@@ -66,10 +73,10 @@
               <div class="card">
                 <img src="<%= roastery.main_photo.attached? ? url_for(roastery.main_photo) : 'https://res.cloudinary.com/dtqchggeh/image/upload/v1738670181/AdobeStock_108622833_Preview_ppobqc.png' %>"
                      class="card-img-top" alt="<%= roastery.name %>">
-                <div class="card-body">
+                <div class="card-body d-flex flex-column">
                   <h5 class="card-title"><%= roastery.name %></h5>
-                  <p class="card-text"><%= roastery.description %></p>
-                  <%= link_to "View Details", roastery_path(roastery), class: "btn btn-tertiary" %>
+                  <p class="card-text flex-grow-1"><%= roastery.description %></p>
+                  <%= link_to "View Details", roastery_path(roastery), class: "btn btn-tertiary mt-auto" %>
                 </div>
               </div>
             </div>
