@@ -1,104 +1,122 @@
 <div class="container profile-container">
-  <div class="profile-header">
-    <div class="avatar-container">
-      <% if @user.avatar.attached? %>
-        <img src="<%= url_for(@user.avatar) %>" alt="User Avatar" class="avatar">
-      <% else %>
-        <img src="https://via.placeholder.com/150" alt="User Avatar" class="avatar">
-      <% end %>
-    </div>
-    <h4 class="username"><%= @user.user_name %></h4>
-    <p class="email"><%= @user.email %></p>
-    <%= link_to edit_user_registration_path, class: "edit-link" do %>
-      <i class="fas fa-edit"></i>
-    <% end %>
-  </div>
-
-  <div class="profile-content">
-    <div class="section">
-      <h5 class=$body-font>
-        Your Favorite Beans <i class="fas fa-heart category-icon"></i>
-      </h5>
-      <% if @user.favourite_beans.any? %>
-        <div class="image-grid">
-          <% @user.favourite_beans.each do |favourite| %>
-            <div class="image-item">
-              <%= link_to bean_path(favourite.bean) do %>
-                <img src="<%= favourite.bean.image.present? ? favourite.bean.image : 'https://via.placeholder.com/150' %>" alt="<%= favourite.bean.name %>" class="bean-image">
-                <p class="item-name"><%= favourite.bean.name %></p>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
-      <% else %>
-        <p class="empty-state">You haven't added any favorite beans yet.</p>
+    <div class="profile-header">
+      <div class="avatar-container">
+        <% if @user.avatar.attached? %>
+          <img src="<%= url_for(@user.avatar) %>" alt="User Avatar" class="avatar">
+        <% else %>
+          <img src="https://via.placeholder.com/150" alt="User Avatar" class="avatar">
+        <% end %>
+      </div>
+      <h4 class="username"><%= @user.user_name %></h4>
+      <p class="email"><%= @user.email %></p>
+      <%= link_to edit_user_registration_path, class: "edit-link" do %>
+        <i class="fas fa-edit"></i>
       <% end %>
     </div>
 
-    <div class="section">
-      <h5>
-        Your Favorite Roasteries <i class="fas fa-heart category-icon"></i>
-      </h5>
-      <% if @user.favourite_roasteries.any? %>
-        <div class="image-grid">
-          <% @user.favourite_roasteries.each do |favourite| %>
-            <div class="image-item">
-              <%= link_to roastery_path(favourite.roastery) do %>
-                <img src="<%= favourite.roastery.image.present? ? favourite.roastery.image : 'https://via.placeholder.com/150' %>" alt="<%= favourite.roastery.name %>" class="roastery-image">
-                <p class="item-name"><%= favourite.roastery.name %></p>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
-      <% else %>
-        <p class="empty-state">You haven't added any favorite roasteries yet.</p>
-      <% end %>
-    </div>
+    <div class="profile-content">
+      <div class="section">
+        <h5 class=$body-font>
+          Your Favorite Beans <i class="fas fa-heart category-icon"></i>
+        </h5>
+        <% if @user.favourite_beans.any? %>
+          <div class="image-grid">
+            <% @user.favourite_beans.each do |favourite| %>
+              <div class="image-item">
+                <%= link_to bean_path(favourite.bean) do %>
+                  <img src="<%= favourite.bean.image.present? ? favourite.bean.image : 'https://via.placeholder.com/150' %>" alt="<%= favourite.bean.name %>" class="bean-image">
+                  <p class="item-name"><%= favourite.bean.name %></p>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <p class="empty-state">You haven't added any favorite beans yet.</p>
+        <% end %>
+      </div>
 
-    <div class="section">
-      <h5>
-        Beans Created by You <i class="fas fa-coffee-bean category-icon"></i>
-      </h5>
-      <% if @user_beans.any? %>
-        <div class="image-grid">
-          <% @user_beans.each do |bean| %>
-            <div class="image-item">
-              <%= link_to bean_path(bean) do %>
-                <img src="<%= bean.image.present? ? bean.image : 'https://via.placeholder.com/150' %>" alt="<%= bean.name %>" class="bean-image">
-                <p class="item-name"><%= bean.name %></p>
-              <% end %>
-              <%= link_to edit_bean_path(bean), class: "edit-icon" do %>
-                <i class="fas fa-edit"></i>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
-      <% else %>
-        <p class="empty-state">You haven't created any beans yet.</p>
-      <% end %>
-    </div>
+      <div class="section">
+        <h5>
+          Your Favorite Roasteries <i class="fas fa-heart category-icon"></i>
+        </h5>
+        <% if @user.favourite_roasteries.any? %>
+          <div class="image-grid">
+            <% @user.favourite_roasteries.each do |favourite| %>
+              <div class="image-item">
+                <%= link_to roastery_path(favourite.roastery) do %>
+                  <img src="<%= favourite.roastery.image.present? ? favourite.roastery.image : 'https://via.placeholder.com/150' %>" alt="<%= favourite.roastery.name %>" class="roastery-image">
+                  <p class="item-name"><%= favourite.roastery.name %></p>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <p class="empty-state">You haven't added any favorite roasteries yet.</p>
+        <% end %>
+      </div>
 
-    <div class="section">
-      <h5>
-        Places Created by You <i class="fas fa-coffee category-icon"></i>
-      </h5>
-      <% if @user_places.any? %>
-        <div class="image-grid">
-          <% @user_places.each do |place| %>
-            <div class="image-item">
-              <%= link_to roastery_path(place) do %>
-                <img src="<%= place.image.present? ? place.image : 'https://via.placeholder.com/150' %>" alt="<%= place.name %>" class="roastery-image">
-                <p class="item-name"><%= place.name %></p>
+      <div class="section">
+        <h5>
+          Beans Created by You <i class="fas fa-coffee-bean category-icon"></i>
+        </h5>
+        <% if @user_beans.any? %>
+          <div class="image-grid">
+            <% @user_beans.each do |bean| %>
+              <div class="image-item">
+                <%= link_to bean_path(bean) do %>
+                  <img src="<%= bean.image.present? ? bean.image : 'https://via.placeholder.com/150' %>" alt="<%= bean.name %>" class="bean-image">
+                  <p class="item-name"><%= bean.name %></p>
+                <% end %>
+                <%= link_to edit_bean_path(bean), class: "edit-icon" do %>
+                  <i class="fas fa-edit"></i>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <p class="empty-state">You haven't created any beans yet.</p>
+        <% end %>
+      </div>
+
+      <div class="section">
+        <h5>
+          Places Created by You <i class="fas fa-coffee category-icon"></i>
+        </h5>
+        <% if @user_places.any? %>
+          <div class="image-grid">
+            <% @user_places.each do |place| %>
+              <div class="image-item">
+                <%= link_to roastery_path(place) do %>
+                  <img src="<%= place.image.present? ? place.image : 'https://via.placeholder.com/150' %>" alt="<%= place.name %>" class="roastery-image">
+                  <p class="item-name"><%= place.name %></p>
+                <% end %>
+                <%= link_to edit_roastery_path(place), class: "edit-icon" do %>
+                  <i class="fas fa-edit"></i>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <p class="empty-state">You haven't created any places yet.</p>
+        <% end %>
+
+      <div class="section">
+        <h5>
+          Recipes created by you <i class="fa-solid fa-list-check category-icon"></i>
+        </h5>
+          <% if @user.recipes.any? %>
+            <ul>
+              <% @user.recipes.each do |recipe| %>
+                <li>
+                  <%= link_to recipe.name, recipe_path(recipe) %>
+                  <%= link_to "editIcon", edit_recipe_path(recipe), class: "edit-icon" %>
+                </li>
               <% end %>
-              <%= link_to edit_roastery_path(place), class: "edit-icon" do %>
-                <i class="fas fa-edit"></i>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
-      <% else %>
-        <p class="empty-state">You haven't created any places yet.</p>
-      <% end %>
+            </ul>
+          <% else %>
+            <p class="empty-state">You haven't created any recipes yet.</p>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
