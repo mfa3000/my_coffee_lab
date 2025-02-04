@@ -1,5 +1,5 @@
-<%= simple_form_for @bean do |f| %>
-  <div class="grid grid-cols-2 gap-6">
+<%= simple_form_for @bean, html: { class: "form-container" } do |f| %>
+  <div class="grid">
     <div>
       <%= f.input :name, required: true, label: "Bean Name", input_html: { class: "form-input" } %>
     </div>
@@ -18,19 +18,16 @@
       <%= f.input :origin, required: true, label: "Origin", input_html: { class: "form-input" } %>
     </div>
     <div class="col-span-2">
-      <%= f.input :main_photo, as: :file, label: "Upload Roastery Image", input_html: { class: "form-file-input", accept: "image/*" } %>
+      <%= f.input :main_photo, as: :file, label: "Upload Bean Image", input_html: { class: "form-file-input", accept: "image/*" } %>
 
       <% if @bean.main_photo.attached? %>
         <p>Current Image:</p>
         <%= image_tag @bean.main_photo, width: 200, class: "mt-2 rounded shadow" %>
       <% end %>
     </div>
-
   </div>
 
-<h2 class="text-xl font-bold mt-6">Associate a Roastery</h2>
-
-<div class="form-group" data-controller="roastery-search">
+  <div class="form-group" data-controller="roastery-search">
   <label for="roastery-search">Search for a Roastery</label>
   <input
     type="text"
@@ -46,7 +43,7 @@
     id="roastery-dropdown"
     name="bean[roastery_id]"
     class="form-input mt-2"
-    size="5"
+    size="3"
     required
   >
     <% if @bean.roastery.present? %>
@@ -55,11 +52,10 @@
   </select>
 </div>
 
-<p class="mt-2">
-  Can’t find the roastery you’re looking for?
-  <%= link_to "Create a New Roastery", new_roastery_path, class: "text-blue-500 underline" %>
-</p>
-
+  <p class="roastery-cta">
+    Can’t find the roastery you’re looking for?
+    <%= link_to "Create a New Roastery",  new_roastery_path, class: "create-roastery-link" %>
+  </p>
 
   <div class="mt-6 text-center">
     <%= f.submit @bean.new_record? ? "Create Bean" : "Update Bean", class: "btn btn-primary" %>

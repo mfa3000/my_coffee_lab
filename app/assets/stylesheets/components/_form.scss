@@ -1,13 +1,63 @@
-// 🔹 Global Form Styles (Shared Across Beans, Recipes, Roasteries)
+// 🔹 Global Form Styles
 .form-input,
 .form-textarea,
 .form-file-input {
   width: 100%;
   padding: 12px;
-  border: 1px solid $dark-green-020;
-  font-size: 16px;
+  border: 1px solid $dark-green;
   margin-bottom: 15px;
-  background-color: white !important;
+  border-radius: 8px;
+  transition: all 0.2s ease-in-out;
+  font-family: $body-font;
+  font-size: 14px;
+  border: 1px solid $dark-green-020;
+  background-color: $lightest-green;
+  color: $dark-green;
+  border-radius: 8px;
+
+  &:focus {
+    border-color: $brown;
+    box-shadow: 0 0 8px rgba(127, 79, 36, 0.5);
+    outline: none;
+  }
+}
+
+.form-textarea {
+  background-color: $light-gray;
+  border: 1px solid $dark-green-020;
+}
+
+select.form-input {
+  background-color: $lightest-green;
+  color: $dark-green;
+  &:focus {
+    background-color: white;
+    border-color: $brown;
+  }
+}
+
+label {
+  font-family: $headers-font;
+  font-size: 16px;
+  font-weight: 700;
+  color: $brown;
+  margin-bottom: 5px;
+  display: block;
+}
+
+h1 {
+  font-family: $headers-font;
+  font-weight: bold;
+  font-size: 28px;
+  color: $dark-brown;
+  margin-top: 20px;
+}
+
+h2 {
+  font-family: $headers-font;
+  font-size: 20px;
+  color: $dark-brown;
+  margin-top: 20px;
 }
 
 .form-textarea {
@@ -17,36 +67,100 @@
 
 .form-file-input {
   cursor: pointer;
+  padding: 10px;
+  background-color: $light-gray;
+  border-radius: 8px;
 }
 
-// 🔹 Recipes Form Styling
-.recipe-form-container {
-  max-width: 600px;
+.form-section {
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid $dark-green-020;
+}
+
+// Styling for the call-to-action text
+.roastery-cta {
+  font-family: $body-font;
+  font-size: 14px;
+  color: $dark-green;
+  background-color: $lightest-green;
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 15px;
+  text-align: center;
+  border: 1px dashed $brown;
+
+  // Adding subtle shadow to lift the section
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+// Styling for the link to create a new roastery
+.create-roastery-link {
+  font-family: $headers-font;
+  font-weight: bold;
+  color: $brown;
+  text-decoration: none;
+  margin-left: 5px;
+
+  &:hover {
+    color: $dark-brown;
+    text-decoration: underline;
+  }
+}
+
+// 🔹 Form Container Styling
+.form-container {
+  max-width: 800px;
   margin: auto;
   background-color: #fff;
   padding: 2rem;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
 }
 
-// 🔹 Roasteries Form Styling
-.form-container {
-  max-width: 800px;
+// 🔹 Responsive Grid for Fields
+.grid {
+  display: grid;
+  grid-template-columns: 1fr; // Default for mobile (1 column)
+  gap: 16px;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr; // Two columns on larger screens
+  }
+}
+
+// 🔹 Improve Buttons
+.btn {
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  transition: background 0.3s ease;
+}
+
+// 🔹 Roastery Search Styling
+.form-group[data-controller="roastery-search"] {
+  max-width: 400px;
   margin: auto;
-  background-color: #f6f2f2;
-  padding: 2rem;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-}
+  padding: 10px;
+  background-color: $light-gray;
+  border: 1px solid $dark-green-020;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 
-// 🔹 Locations Section (Roasteries)
-#locations-container {
-  margin-top: 1rem;
-
-  .location-fields {
-    padding: 10px;
-    border-radius: $border-radius;
-    border: 1px solid $dark-green-020;
-    background-color: #fff;
+  .form-input {
+    font-size: 14px;
+    padding: 8px;
+    border-radius: 6px;
     margin-bottom: 10px;
-    font-size: 16px;
+  }
+
+  select#roastery-dropdown {
+    font-size: 14px;
+    padding: 8px;
+    border-radius: 6px;
+    height: auto;
+    background-color: $light-gray;
   }
 }
