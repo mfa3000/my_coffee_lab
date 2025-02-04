@@ -1,3 +1,7 @@
+ // Import and register all your controllers from the importmap via controllers/**/*_controller
+import { application } from "controllers/application";
+import { eagerLoadControllersFrom } from "@hotwired/stimulus-loading";
+
 document.addEventListener("DOMContentLoaded", function() {
   const toggleButton = document.getElementById("toggle-filters");
   const filterOptions = document.getElementById("filter-options");
@@ -27,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function() {
         field.value = '';
       });
 
-      
+
       resetFiltersLink.style.display = 'none';
 
 
