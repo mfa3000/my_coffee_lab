@@ -21,8 +21,8 @@
   }
 
   .banner-title, .banner-text {
-    position: relative; /* Ensures text is above overlay */
-    z-index: 2; /* Keeps text visible */
+    position: relative;
+    z-index: 2;
   }
 
   .banner-title {
