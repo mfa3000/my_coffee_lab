@@ -23,7 +23,7 @@
 
 <div id="locations-container" data-controller="location" data-location-target="locationsContainer">
   <%= f.fields_for :locations do |location_fields| %>
-    <div class="location-fields grid grid-cols-2 gap-4 mt-4">
+    <div class="location-fields grid grid-cols-2 gap-4 mt-4 border p-4 rounded bg-light-gray shadow-sm">
       <div>
         <%= location_fields.input :location_type, collection: ["Cafe", "Roastery and Cafe", "Warehouse"],
           label: "Location Type", prompt: "Select a Type", required: true,
@@ -37,17 +37,17 @@
 
       <%= location_fields.hidden_field :_destroy, class: "location-destroy" %>
 
-      <div class="flex items-center">
-        <button type="button" class="remove-location-btn text-white px-3 py-1 rounded" data-action="click->location#removeLocation">
-          Remove
+      <div class="col-span-2 flex justify-end mt-2">
+        <button type="button" class="btn btn-secondary" data-action="click->location#removeLocation">
+          Remove Location
         </button>
       </div>
     </div>
   <% end %>
 
-  <div class="mt-4">
+  <div class="mt-4 text-center">
     <button type="button" id="add-location-btn" data-action="click->location#addLocation">
-    Add Another Location
+      Add Another Location
     </button>
   </div>
 </div>

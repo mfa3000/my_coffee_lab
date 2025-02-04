@@ -10,10 +10,8 @@
   transition: all 0.2s ease-in-out;
   font-family: $body-font;
   font-size: 14px;
-  border: 1px solid $dark-green-020;
   background-color: $lightest-green;
   color: $dark-green;
-  border-radius: 8px;
 
   &:focus {
     border-color: $brown;
@@ -61,24 +59,22 @@ h2 {
 }
 
 .form-textarea {
-  height: 120px;
+  height: 100px;
   resize: vertical;
 }
 
-.form-file-input {
-  cursor: pointer;
-  padding: 10px;
-  background-color: $light-gray;
-  border-radius: 8px;
-}
-
 .form-section {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   padding-bottom: 20px;
   border-bottom: 1px solid $dark-green-020;
 }
 
-// Styling for the call-to-action text
+.roastery-cta-container {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 15px;
+}
+
 .roastery-cta {
   font-family: $body-font;
   font-size: 14px;
@@ -88,13 +84,12 @@ h2 {
   border-radius: 8px;
   margin-top: 15px;
   text-align: center;
+  max-width: 400px;
   border: 1px dashed $brown;
 
-  // Adding subtle shadow to lift the section
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-// Styling for the link to create a new roastery
 .create-roastery-link {
   font-family: $headers-font;
   font-weight: bold;
@@ -118,14 +113,13 @@ h2 {
   border-radius: 12px;
 }
 
-// 🔹 Responsive Grid for Fields
 .grid {
   display: grid;
-  grid-template-columns: 1fr; // Default for mobile (1 column)
+  grid-template-columns: 1fr;
   gap: 16px;
 
   @media (min-width: 768px) {
-    grid-template-columns: 1fr 1fr; // Two columns on larger screens
+    grid-template-columns: 1fr 1fr;
   }
 }
 
@@ -141,13 +135,14 @@ h2 {
 
 // 🔹 Roastery Search Styling
 .form-group[data-controller="roastery-search"] {
-  max-width: 400px;
+  max-width: 350px;
   margin: auto;
   padding: 10px;
   background-color: $light-gray;
   border: 1px solid $dark-green-020;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-top: 15px;
 
   .form-input {
     font-size: 14px;
@@ -162,5 +157,77 @@ h2 {
     border-radius: 6px;
     height: auto;
     background-color: $light-gray;
+  }
+}
+
+// 🔹 File upload styling
+
+.upload-inline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border: 1px solid $dark-green-020;
+  border-radius: 6px;
+  background-color: $light-gray;
+  width: 100%;
+  max-width: 400px;
+  cursor: pointer;
+
+  .upload-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: $body-font;
+    font-size: 14px;
+    color: $dark-green;
+    cursor: pointer;
+
+    .upload-icon {
+      font-size: 16px;
+      color: $dark-green;
+    }
+  }
+
+  .file-name {
+    font-family: $body-font;
+    font-size: 14px;
+    color: $gray;
+  }
+}
+
+.preview-container {
+  margin-top: 10px;
+
+  .preview-image {
+    width: 100%;
+    max-width: 150px;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+}
+
+// Location Section Container
+#locations-container {
+  background-color: $light-gray;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 1rem;
+}
+
+// Add Location Button
+#add-location-btn {
+  background-color: $dark-green;
+  color: white;
+  margin-top: 10px;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  font-family: $body-font;
+  font-weight: 700;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: $darkest-green;
   }
 }
