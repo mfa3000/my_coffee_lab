@@ -1,13 +1,17 @@
 .banner {
-  background-color: $green;
-  color: white;
-  text-align: center;
-  padding: 15px;
-  width: 100%;
+  position: relative;
+  background: url("https://res.cloudinary.com/dtqchggeh/image/upload/v1738662032/compressed_image_pljkig.png") center/cover no-repeat;
+  height: 40vh;
+  max-height: 250px;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  color: white;
+  text-align: center;
+  padding: 20px;
+
 
   &::before {
     content: "";
@@ -16,13 +20,13 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Dark overlay (adjust opacity as needed) */
+    background: rgba(0, 0, 0, 0.5);
     z-index: 1;
   }
 
   .banner-title, .banner-text {
-    position: relative; /* Ensures text is above overlay */
-    z-index: 2; /* Keeps text visible */
+    position: relative;
+    z-index: 2;
   }
 
   .banner-title {
@@ -30,7 +34,15 @@
   }
 
   .banner-text {
-      max-width: 80%;
+      max-width: 60%;
       margin: 0 auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .banner {
+      height: 30vh;
+      max-height: 200px;
+      padding: 15px;
   }
 }
