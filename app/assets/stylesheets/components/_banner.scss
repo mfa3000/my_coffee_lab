@@ -1,0 +1,37 @@
+.banner {
+  background-color: $green;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .banner-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 5px;
+  }
+
+  .banner-text {
+      font-size: 1rem;
+      max-width: 80%;
+      margin: 0 auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .banner {
+      padding: 10px;
+  }
+
+  .banner-title {
+      font-size: 1.3rem;
+  }
+
+  .banner-text {
+      font-size: 0.9rem;
+  }
+}
