@@ -22,7 +22,8 @@
           <% beans_slice.each do |bean| %>
             <div class="col-4">
               <div class="card" style="max-width: 300px; width: 100%; border: none;">
-                <img src="<%= bean.image %>" class="card-img-top" alt="<%= bean.name %>">
+                <img src="<%= bean.main_photo.attached? ? url_for(bean.main_photo) : 'https://res.cloudinary.com/dtqchggeh/image/upload/v1738669535/AdobeStock_297520243_compressed_vsea7t.png' %>"
+                     class="card-img-top" alt="<%= bean.name %>">
                 <div class="card-body">
                   <h5 class="card-title"><%= bean.name %></h5>
                   <p class="card-text"><%= bean.description %></p>
@@ -62,7 +63,8 @@
           <% roasteries_slice.each do |roastery| %>
             <div class="col-4">
               <div class="card" style="max-width: 300px; width: 100%; border: none;">
-                <img src="<%= roastery.image %>" class="card-img-top" alt="<%= roastery.name %>">
+                <img src="<%= roastery.main_photo.attached? ? url_for(roastery.main_photo) : 'https://res.cloudinary.com/dtqchggeh/image/upload/v1738670181/AdobeStock_108622833_Preview_ppobqc.png' %>"
+                     class="card-img-top" alt="<%= roastery.name %>">
                 <div class="card-body">
                   <h5 class="card-title"><%= roastery.name %></h5>
                   <p class="card-text"><%= roastery.description %></p>
