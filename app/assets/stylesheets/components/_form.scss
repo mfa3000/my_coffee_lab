@@ -214,20 +214,5 @@ h2 {
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-top: 1rem;
-}
-
-// Add Location Button
-#add-location-btn {
-  background-color: $dark-green;
-  color: white;
-  margin-top: 10px;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  font-family: $body-font;
-  font-weight: 700;
-  transition: background-color 0.3s;
-
-  &:hover {
-    background-color: $darkest-green;
-  }
+  margin-bottom: 2rem;
 }
