@@ -88,7 +88,7 @@
                       class="card-img-top" alt="<%= roastery.name %>">
                   <div class="card-body d-flex flex-column">
                     <h5 class="card-title"><%= roastery.name %></h5>
-                    <p class="card-text flex-grow-1"><%= roastery.description %></p>
+                    <p class="card-text flex-grow-1"><%= truncate(roastery.description, length: 120, separator: ' ', omission: '...') %></p>
                     <%= link_to "View Details", roastery_path(roastery), class: "btn btn-tertiary mt-auto" %>
                   </div>
                 </div>

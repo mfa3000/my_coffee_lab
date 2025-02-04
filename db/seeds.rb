@@ -56,7 +56,7 @@ picture_id = 0
 
   roastery = Roastery.create!(
     name: "#{Faker::Restaurant.name} Roastery",
-    description: Faker::Restaurant.description.truncate(120),
+    description: Faker::Restaurant.description,
     image: "https://picsum.photos/id/#{200+picture_id}/320/240",
     roastery_url: "https://www.lewagon.com/",
     user: users.sample,
