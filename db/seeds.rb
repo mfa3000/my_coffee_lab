@@ -43,10 +43,11 @@ puts "fake users created"
 puts "creating fake data for roasteries"
 roastery_image_urls = [
   "https://res.cloudinary.com/dtqchggeh/image/upload/v1738598119/Screenshot_2025-02-03_at_16.54.13_qkcsoi.png",
-  "https://res.cloudinary.com/dtqchggeh/image/upload/v1738598118/Screenshot_2025-02-03_at_16.54.22_qbc5im.png",
   "https://res.cloudinary.com/dtqchggeh/image/upload/v1738598117/Screenshot_2025-02-03_at_16.54.35_udpwxd.png",
   "https://res.cloudinary.com/dtqchggeh/image/upload/v1738598117/Screenshot_2025-02-03_at_16.54.42_su7ixd.png",
-  "https://res.cloudinary.com/dtqchggeh/image/upload/v1738598116/Screenshot_2025-02-03_at_16.54.54_uvk535.png"
+  "https://res.cloudinary.com/dtqchggeh/image/upload/v1738598116/Screenshot_2025-02-03_at_16.54.54_uvk535.png",
+  "https://res.cloudinary.com/dtqchggeh/image/upload/v1738709169/pexels-shkrabaanthony-7175987_b6ot87.png",
+  "https://res.cloudinary.com/dtqchggeh/image/upload/v1738709166/pexels-shkrabaanthony-7176000_azxpso.png"
 ]
 roasteries = []
 picture_id = 0
@@ -55,7 +56,7 @@ picture_id = 0
 
   roastery = Roastery.create!(
     name: "#{Faker::Restaurant.name} Roastery",
-    description: Faker::Restaurant.description,
+    description: Faker::Restaurant.description.truncate(120),
     image: "https://picsum.photos/id/#{200+picture_id}/320/240",
     roastery_url: "https://www.lewagon.com/",
     user: users.sample,
