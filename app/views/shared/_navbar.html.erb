@@ -10,9 +10,8 @@
       </div>
 
       <div class="ms-auto">
-        <%= link_to destroy_user_session_path, method: :delete, class: "nav-link" do %>
+       <%= link_to "Log out", "#", class: "dropdown-item", data: {turbo_method: :delete} %>
           <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar rounded-circle", alt: "dropdown menu" %>
-        <% end %>
       </div>
 
     <% else %>
@@ -33,9 +32,7 @@
 
 
       <div class="ms-auto">
-        <%= link_to destroy_user_session_path, method: :delete, class: "nav-link" do %>
           <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar rounded-circle", alt: "dropdown menu" %>
-        <% end %>
       </div>
     <% end %>
   </div>

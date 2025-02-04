@@ -5,7 +5,7 @@ export default class extends Controller {
 
   connect() {
     console.log("LocationController connected!");
-  }
+}
 
   addLocation(event) {
     event.preventDefault();
