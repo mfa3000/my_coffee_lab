@@ -1,6 +1,8 @@
 <div class="container">
   <h1><%=@roastery.name%></h1>
-  <img src="<%=@roastery.image%>">
+  <% if @roastery.main_photo.attached? %>
+    <img src="<%= url_for(@roastery.main_photo) %>" alt="Roastery Photo" class="rounded shadow-lg w-full h-auto">
+  <% end %>
 
   <ul>
     <li>Description: <%=@roastery.description%></li>
@@ -45,6 +47,19 @@
   </div>
 <% end %>
 
+  <h3>Photos</h3>
+  <div>
+    <% @roastery.photos.each do |photo| %>
+      <%= image_tag photo, width: 300, height: 200 %>
+    <% end %>
+  </div>
+
+  <h4>Add Photos</h4>
+
+  <%= form_with model: @roastery, url: roastery_roastery_photos_path(@roastery), method: :post, local: true, multipart: true do |form| %>
+    <%= form.file_field :photos, multiple: true, accept: "image/*" %>
+    <%= form.submit "Upload" %>
+  <% end %>
 
   <h4>Locations:</h4>
   <ul>
@@ -74,4 +89,3 @@
 </div>
 
 <p>Roastery ID: <%= @roastery.id %></p>
-

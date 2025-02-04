@@ -10,11 +10,11 @@
 
 // Your CSS partials
 @import "components/index";
+@import "components/form";
 @import "pages/index";
-@import "roasteries/form";
-@import "beans/form";
-@import "recipes/form";
-@import "roasteries/rating";
+@import "components/rating";
+@import 'pages/profile';
+@import 'components/banner';
 
 
 
@@ -24,4 +24,26 @@ body {
 
 .hidden {
   display: none;
+}
+
+
+footer {
+  background-color: $beige;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+footer .footer-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+footer .footer-content a {
+  color: white;
+  text-decoration: none;
+}
+
+footer .footer-content .social-media a {
+  margin: 0 10px;
 }

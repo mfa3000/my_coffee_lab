@@ -10,13 +10,18 @@
       <%= f.input :roastery_url, as: :url, label: "Roastery Website", input_html: { class: "form-input" } %>
     </div>
     <div class="col-span-2">
-      <%= f.input :image, as: :file, label: "Upload Roastery Image", input_html: { class: "form-file-input" } %>
+      <%= f.input :main_photo, as: :file, label: "Upload Roastery Image", input_html: { class: "form-file-input", accept: "image/*" } %>
+
+      <% if @roastery.main_photo.attached? %>
+        <p>Current Image:</p>
+        <%= image_tag @roastery.main_photo, width: 200, class: "mt-2 rounded shadow" %>
+      <% end %>
     </div>
   </div>
 
 <h2 class="text-xl font-bold mt-6">Locations</h2>
 
-<div id="locations-container" data-controller="location">
+<div id="locations-container" data-controller="location" data-location-target="locationsContainer">
   <%= f.fields_for :locations do |location_fields| %>
     <div class="location-fields grid grid-cols-2 gap-4 mt-4">
       <div>
@@ -33,21 +38,21 @@
       <%= location_fields.hidden_field :_destroy, class: "location-destroy" %>
 
       <div class="flex items-center">
-        <button type="button" class="remove-location-btn bg-red-500 text-white px-3 py-1 rounded">
+        <button type="button" class="remove-location-btn text-white px-3 py-1 rounded" data-action="click->location#removeLocation">
           Remove
         </button>
       </div>
     </div>
   <% end %>
-</div>
 
-<div class="mt-4">
-  <button type="button" id="add-location-btn" data-action="click->location#addLocation">
-  Add Another Location
-  </button>
+  <div class="mt-4">
+    <button type="button" id="add-location-btn" data-action="click->location#addLocation">
+    Add Another Location
+    </button>
+  </div>
 </div>
 
   <div class="mt-6 text-center">
-    <%= f.submit "Save Roastery", class: "submit-btn" %>
+    <%= f.submit "Save Roastery", class: "btn btn-primary" %>
   </div>
 <% end %>

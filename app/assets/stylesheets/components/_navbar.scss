@@ -1,12 +1,52 @@
 .navbar-lewagon {
-  justify-content: space-between;
-  background: white;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(5px);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 12px 20px;
+  transition: all 0.3s ease-in-out;
 }
 
-.navbar-lewagon .navbar-collapse {
-  flex-grow: 0;
+.navbar-lewagon.sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
 }
 
-.navbar-lewagon .navbar-brand img {
-  width: 40px;
+
+.navbar-lewagon .nav-link {
+  color: $dark-brown ;
+  font-weight: 500;
+  transition: color 0.3s ease-in-out;
+}
+
+.navbar-lewagon .nav-link:hover {
+  color: $brown ;
+}
+
+.avatar-img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.avatar-img:hover {
+  transform: scale(1.1);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.navbar .nav-item .nav-link {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-toggler {
+  border: none;
 }
