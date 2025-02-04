@@ -1,0 +1,22 @@
+.icon-white {
+  width: 20px;
+  height: 20px;
+  filter: invert(1);
+}
+
+.button-width {
+  width: 50%; /* Default for larger screens */
+  max-width: 450px; /* Prevents it from being too wide */
+}
+
+@media (max-width: 768px) { /* Medium screens */
+  .button-width {
+    width: 75%;
+  }
+}
+
+@media (max-width: 576px) { /* Small screens */
+  .button-width {
+    width: 100%;
+  }
+}
