@@ -6,8 +6,7 @@ class FavouriteBeansController < ApplicationController
     current_user.favourite_beans.create(bean: @bean)
 
     respond_to do |format|
-      format.json { render json: { favorited: true } }
-      format.html { redirect_to @bean }
+      format.json { render json: { favorited: true, favourites_count: @bean.favourite_beans.count } }
     end
   end
 
@@ -16,8 +15,8 @@ class FavouriteBeansController < ApplicationController
     current_user.favourite_beans.find_by(bean: @bean)&.destroy
 
     respond_to do |format|
-      format.json { render json: { favorited: false } }
-      format.html { redirect_to @bean }
+      format.json { render json: { favorited: false, favourites_count: @bean.favourite_beans.count } }
     end
   end
+
 end

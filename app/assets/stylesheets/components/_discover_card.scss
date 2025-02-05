@@ -1,31 +1,84 @@
-.discover-card-link {
-  text-decoration: none;
-}
-
-.discover-card {
-  width: 300px;
-  height: 200px;
-  background-size: cover;
-  background-position: center;
-  border-radius: 8px;
+.options {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease-in-out;
-  position: relative;
-  overflow: hidden;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 15px;
+  flex-wrap: wrap; // Ensures wrapping when necessary
 
-  &:hover {
-    transform: translateY(-5px);
+  .discover-card-link {
+    flex: 1; // Allow flexibility
+    max-width: calc(1.5 * 300px); // Large: 1.5x carousel card width (450px)
+  }
+
+  .discover-card {
+    width: 100%; // Let parent determine width
+    max-width: 450px;
+    height: 350px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    position: relative;
+    overflow: hidden;
+
+    &:hover {
+      transform: translateY(-5px);
+      filter: brightness(80%);
+    }
+  }
+
+  .discover-card-text {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+    position: absolute;
   }
 }
 
-.discover-card-text {
-  color: white;
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
-  position: absolute;
+// **Responsive Behavior**
+@media (max-width: 992px) {
+  // Tablets
+  .options {
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .discover-card-link {
+    max-width: 300px;
+  }
+
+  .discover-card {
+    height: 300px;
+  }
+}
+
+@media (max-width: 576px) {
+  // Mobile
+  .options {
+    justify-content: center;
+    gap: 5px;
+    padding: 0;
+  }
+
+  .discover-card-link {
+    max-width: 110px; // Shrink container
+    flex: 0 0 auto; // Prevent stretching
+  }
+
+  .discover-card {
+    width: 100%; // Follow parent width
+    height: 110px; // Keep square shape
+  }
+
+  .discover-card-text {
+    font-size: 0.7rem; // Adjust text size for smaller cards
+  }
 }
