@@ -11,6 +11,10 @@ class BeansController < ApplicationController
 
     puts @beans.inspect
 
+    if params[:query].present?
+      @beans = @beans.where("LOWER(name) LIKE LOWER(?)", "%#{params[:query].downcase}%")
+    end
+
     if params[:brewing_method].present?
       @beans = @beans.where(brewing_method: params[:brewing_method])
     end
@@ -34,6 +38,11 @@ class BeansController < ApplicationController
 
   def create
     @bean = current_user.beans.build(bean_params)
+
+    unless params[:bean][:main_photo].present?
+      file = URI.open("https://res.cloudinary.com/dtqchggeh/image/upload/v1738669535/AdobeStock_297520243_compressed_vsea7t.png")
+      @bean.main_photo.attach(io: file, filename: "default_bean.png", content_type: "image/png")
+    end
 
     if @bean.save
       redirect_to bean_path(@bean), notice: "Bean successfully created!"

@@ -1,52 +1,226 @@
-// 🔹 Global Form Styles (Shared Across Beans, Recipes, Roasteries)
+// 🔹 Global Form Styles
 .form-input,
 .form-textarea,
 .form-file-input {
   width: 100%;
   padding: 12px;
-  border: 1px solid $dark-green-020;
-  font-size: 16px;
+  border: 1px solid $dark-green;
   margin-bottom: 15px;
-  background-color: white !important;
+  border-radius: 8px;
+  transition: all 0.2s ease-in-out;
+  font-family: $body-font;
+  font-size: 14px;
+  background-color: $lightest-green-050;
+  color: $dark-green;
+
+  &:focus {
+    border-color: $brown;
+    box-shadow: 0 0 8px rgba(127, 79, 36, 0.5);
+    outline: none;
+  }
 }
 
 .form-textarea {
-  height: 120px;
+  background-color: $light-gray;
+  border: 1px solid $dark-green-020;
+}
+
+select.form-input {
+  background-color: $lightest-green-050;
+  color: $dark-green;
+  &:focus {
+    background-color: white;
+    border-color: $brown;
+  }
+}
+
+label {
+  font-family: $headers-font;
+  font-size: 16px;
+  font-weight: 700;
+  color: $brown;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.form-h1 {
+  font-family: $headers-font;
+  font-weight: bold;
+  font-size: 28px;
+  color: $dark-brown;
+  margin-top: 20px;
+}
+
+.form-h2 {
+  font-family: $headers-font;
+  font-size: 20px;
+  color: $dark-brown;
+  margin-top: 20px;
+}
+
+.form-textarea {
+  height: 100px;
   resize: vertical;
 }
 
-.form-file-input {
-  cursor: pointer;
+.form-section {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid $dark-green-020;
 }
 
-// 🔹 Recipes Form Styling
-.recipe-form-container {
-  max-width: 600px;
+.roastery-cta-container {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 15px;
+}
+
+.roastery-cta {
+  font-family: $body-font;
+  font-size: 14px;
+  color: $dark-green;
+  background-color: $lightest-green-050;
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 15px;
+  text-align: center;
+  max-width: 400px;
+  border: 1px dashed $brown;
+
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.create-roastery-link {
+  font-family: $headers-font;
+  font-weight: bold;
+  color: $brown;
+  text-decoration: none;
+  margin-left: 5px;
+
+  &:hover {
+    color: $dark-brown;
+    text-decoration: underline;
+  }
+}
+
+// 🔹 Form Container Styling
+.form-container {
+  max-width: 800px;
   margin: auto;
   background-color: #fff;
   padding: 2rem;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
 }
 
-// 🔹 Roasteries Form Styling
-.form-container {
-  max-width: 800px;
-  margin: auto;
-  background-color: #f6f2f2;
-  padding: 2rem;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-}
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
 
-// 🔹 Locations Section (Roasteries)
-#locations-container {
-  margin-top: 1rem;
-
-  .location-fields {
-    padding: 10px;
-    border-radius: $border-radius;
-    border: 1px solid $dark-green-020;
-    background-color: #fff;
-    margin-bottom: 10px;
-    font-size: 16px;
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
   }
+}
+
+// 🔹 Improve Buttons
+.form-btn {
+  padding: 4px 16px;
+  background-color: #fff;
+  color: $dark-green;
+  border-radius: 8px;
+  font-size: 14px;
+  text-align: center;
+  transition: background 0.3s ease;
+}
+
+// 🔹 Roastery Search Styling
+.form-group[data-controller="roastery-search"] {
+  max-width: 350px;
+  margin: auto;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: $light-gray;
+  border: 1px solid $dark-green-020;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-top: 15px;
+
+  .form-input {
+    font-size: 14px;
+    padding: 8px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+  }
+
+  select#roastery-dropdown {
+    font-size: 14px;
+    padding: 8px;
+    border-radius: 6px;
+    height: auto;
+    background-color: $light-gray;
+  }
+}
+
+// 🔹 File upload styling
+
+.upload-container {
+  width: 100%;
+  max-width: 400px;
+}
+
+.upload-inline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border: 1px solid $dark-green-020;
+  border-radius: 6px;
+  background-color: $light-gray;
+  width: 100%;
+  max-width: 400px;
+  cursor: pointer;
+
+  .upload-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: $body-font;
+    font-size: 14px;
+    color: $dark-green;
+    cursor: pointer;
+
+    .upload-icon {
+      font-size: 16px;
+      color: $dark-green;
+    }
+  }
+
+  .file-name {
+    font-family: $body-font;
+    font-size: 14px;
+    color: $gray;
+  }
+}
+
+.preview-container {
+  margin-top: 10px;
+
+  .preview-image {
+    width: 100%;
+    max-width: 150px;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+}
+
+// Location Section Container
+#locations-container {
+  background-color: $light-gray;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  width: 100%;
 }

@@ -1,8 +1,6 @@
-<%= simple_form_for @bean do |f| %>
-  <div class="grid grid-cols-2 gap-6">
-    <div>
+<%= simple_form_for @bean, html: { class: "form-container" } do |f| %>
+  <div class="grid">
       <%= f.input :name, required: true, label: "Bean Name", input_html: { class: "form-input" } %>
-    </div>
     <div>
       <%= f.input :description, as: :text, required: true, label: "Description", input_html: { class: "form-textarea" } %>
     </div>
@@ -17,51 +15,53 @@
     <div>
       <%= f.input :origin, required: true, label: "Origin", input_html: { class: "form-input" } %>
     </div>
-    <div class="col-span-2">
-      <%= f.input :main_photo, as: :file, label: "Upload Roastery Image", input_html: { class: "form-file-input", accept: "image/*" } %>
+    <div class="upload-container" data-controller="file-upload">
+      <label class="block text-sm font-medium text-dark-green mb-1">Upload Bean Image</label>
 
-      <% if @bean.main_photo.attached? %>
-        <p>Current Image:</p>
-        <%= image_tag @bean.main_photo, width: 200, class: "mt-2 rounded shadow" %>
-      <% end %>
+    <div class="upload-inline" data-controller="file-upload">
+      <label class="upload-label">
+        <i class="fas fa-upload upload-icon"></i>
+        <span>Upload Photo</span>
+        <input type="file" name="bean[main_photo]" data-file-upload-target="input" accept="image/*" hidden>
+        </label>
+        <span class="file-name" data-file-upload-target="fileName">No file chosen</span>
     </div>
 
+    <div class="preview-container" data-file-upload-target="preview"></div>
+
+  <div class="form-group roastery-search" data-controller="roastery-search">
+    <label for="roastery-search">Link a roastery</label>
+    <input
+      type="text"
+      id="roastery-search"
+      class="form-input"
+      placeholder="Start typing to search for a roastery"
+      autocomplete="off"
+      value="<%= @bean.roastery&.name if @bean.roastery.present? %>"
+      required
+    />
+
+    <select
+      id="roastery-dropdown"
+      name="bean[roastery_id]"
+      class="form-input mt-2"
+      size="3"
+      required
+    >
+      <% if @bean.roastery.present? %>
+        <option value="<%= @bean.roastery.id %>" selected><%= @bean.roastery.name %></option>
+      <% end %>
+    </select>
+
+    <p class="roastery-cta">
+      Can’t find the roastery you’re looking for?
+      <%= link_to "Create a New Roastery", new_roastery_path, class: "create-roastery-link" %>
+    </p>
   </div>
 
-<h2 class="text-xl font-bold mt-6">Associate a Roastery</h2>
-
-<div class="form-group" data-controller="roastery-search">
-  <label for="roastery-search">Search for a Roastery</label>
-  <input
-    type="text"
-    id="roastery-search"
-    class="form-input"
-    placeholder="Start typing to search for a roastery"
-    autocomplete="off"
-    value="<%= @bean.roastery&.name if @bean.roastery.present? %>"
-    required
-  />
-
-  <select
-    id="roastery-dropdown"
-    name="bean[roastery_id]"
-    class="form-input mt-2"
-    size="5"
-    required
-  >
-    <% if @bean.roastery.present? %>
-      <option value="<%= @bean.roastery.id %>" selected><%= @bean.roastery.name %></option>
-    <% end %>
-  </select>
-</div>
-
-<p class="mt-2">
-  Can’t find the roastery you’re looking for?
-  <%= link_to "Create a New Roastery", new_roastery_path, class: "text-blue-500 underline" %>
-</p>
-
-
-  <div class="mt-6 text-center">
-    <%= f.submit @bean.new_record? ? "Create Bean" : "Update Bean", class: "btn btn-primary" %>
+    <div class="mt-6 text-center">
+      <%= f.submit @bean.new_record? ? "Create Bean" : "Update Bean", class: "btn btn-primary" %>
+    </div>
+   </div>
   </div>
 <% end %>

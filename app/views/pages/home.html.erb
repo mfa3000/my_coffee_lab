@@ -1,90 +1,114 @@
 <div class="banner">
   <h1 class="banner-title">MyCoffeeLab: a hub for coffee lovers!</h1>
-  <p class="banner-text">Explore top-rated beans and roasteries, share your recipes, and connect with the coffee community.</p>
+  <p class="banner-text">Explore beans and roasteries, share your recipes, and connect with the coffee community.</p>
 </div>
-<div class="home-page">
-  <p>Choose what you’d like to explore:</p>
+<div class="home-page container">
+  <!-- discover cards -->
+  <div class="options d-flex justify-content-center gap-3">
+    <%= link_to beans_path, class: "discover-card-link" do %>
+      <div class="discover-card" style="background-image: url('https://res.cloudinary.com/dtqchggeh/image/upload/v1738705081/AdobeStock_1006684240_Preview_qvclzb.png');">
+        <span class="discover-card-text">Explore Beans</span>
+      </div>
+    <% end %>
 
-  <div class="options">
-    <%= link_to "Explore Beans", beans_path, class: "btn btn-primary" %>
-    <%= link_to "Explore Roasteries", roasteries_path, class: "btn btn-secondary" %>
-  </div>
-</div>
-
-<!-- beans carousel -->
-<h2>Discover beans </h2>
-
-<div id="beansCarousel" class="carousel slide mt-4" data-bs-ride="false">
-  <div class="carousel-inner">
-    <% @beans.each_slice(3).with_index do |beans_slice, index| %>
-      <div class="carousel-item <%= 'active' if index == 0 %>">
-        <div class="row g-0 justify-content-center">
-          <% beans_slice.each do |bean| %>
-            <div class="col-4">
-              <div class="card" style="max-width: 300px; width: 100%; border: none;">
-                <img src="<%= bean.image %>" class="card-img-top" alt="<%= bean.name %>">
-                <div class="card-body">
-                  <h5 class="card-title"><%= bean.name %></h5>
-                  <p class="card-text"><%= bean.description %></p>
-                  <%= link_to "View Details", bean_path(bean), class: "btn btn-tertiary" %>
-                </div>
-              </div>
-            </div>
-          <% end %>
-        </div>
+    <%= link_to roasteries_path, class: "discover-card-link" do %>
+      <div class="discover-card" style="background-image: url('https://res.cloudinary.com/dtqchggeh/image/upload/v1738705081/AdobeStock_498566838_Preview_sgpaot.png');">
+        <span class="discover-card-text">Explore Roasteries</span>
       </div>
     <% end %>
   </div>
 
-  <!-- arrow left -->
-  <a class="carousel-control-prev" href="#beansCarousel" role="button" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
+  <!-- discover buttons -->
+  <!-- <div class="options d-flex justify-content-center gap-3">
+      <%= link_to beans_path, class: "btn btn-primary d-flex align-items-center gap-2 px-4 py-2 text-center button-width mt-1" do %>
+        <%= image_tag "https://res.cloudinary.com/dtqchggeh/image/upload/v1738683636/coffee-beans_ujet4f.png",
+              alt: "Beans", class: "icon-white" %>
+        Explore Beans
+      <% end %>
 
-  <!-- arrow roght -->
-  <a class="carousel-control-next" href="#beansCarousel" role="button" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
+      <%= link_to roasteries_path, class: "btn btn-secondary d-flex align-items-center gap-2 px-4 py-2 text-center button-width mt-1" do %>
+        <%= image_tag "https://res.cloudinary.com/dtqchggeh/image/upload/v1738683635/roast_dqunzi.png",
+              alt: "Roasteries", class: "icon-white" %>
+        Explore Roasteries
+      <% end %>
+    </div>
+  </div>  -->
 
+  <!-- beans carousel -->
 
-<h2>Discover Roasteries </h2>
-
-<!-- roasteries carousel -->
-
-<div id="roasteriesCarousel" class="carousel slide mt-4" data-bs-ride="false">
-  <div class="carousel-inner">
-    <% @roasteries.each_slice(3).with_index do |roasteries_slice, index| %>
-      <div class="carousel-item <%= 'active' if index == 0 %>">
-        <div class="row g-0 justify-content-center">
-          <% roasteries_slice.each do |roastery| %>
-            <div class="col-4">
-              <div class="card" style="max-width: 300px; width: 100%; border: none;">
-                <img src="<%= roastery.image %>" class="card-img-top" alt="<%= roastery.name %>">
-                <div class="card-body">
-                  <h5 class="card-title"><%= roastery.name %></h5>
-                  <p class="card-text"><%= roastery.description %></p>
-                  <%= link_to "View Details", roastery_path(roastery), class: "btn btn-tertiary" %>
+  <div id="beansCarousel" class="carousel slide mt-4" data-bs-ride="false">
+    <h5 class="carousel-headline">Beans you might like... </h5>
+    <div class="carousel-inner">
+      <% @beans.each_slice(3).with_index do |beans_slice, index| %>
+        <div class="carousel-item <%= index.zero? ? 'active' : '' %>">
+          <div class="d-flex justify-content-start">
+            <% beans_slice.each do |bean| %>
+              <div class="col-4 col-md-6 d-flex align-items-stretch">
+                <div class="card">
+                  <img src="<%= bean.main_photo.attached? ? url_for(bean.main_photo) : 'https://res.cloudinary.com/dtqchggeh/image/upload/v1738669535/AdobeStock_297520243_compressed_vsea7t.png' %>"
+                      class="card-img-top" alt="<%= bean.name %>">
+                  <div class="card-body">
+                    <h5 class="card-title"><%= bean.name %></h5>
+                    <p class="card-text"><%= bean.description %></p>
+                    <%= link_to "View Details", bean_path(bean), class: "btn btn-tertiary" %>
+                  </div>
                 </div>
               </div>
-            </div>
-          <% end %>
+            <% end %>
+          </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
+
+    <!-- arrow left -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#beansCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+
+    <!-- arrow right -->
+    <button class="carousel-control-next" type="button" data-bs-target="#beansCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
   </div>
 
-  <!-- arrow left  -->
-  <a class="carousel-control-prev" href="#roasteriesCarousel" role="button" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </a>
+  <!-- roasteries carousel -->
 
-  <!-- arrow right  -->
-  <a class="carousel-control-next" href="#roasteriesCarousel" role="button" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </a>
+  <div id="roasteriesCarousel" class="carousel slide mt-4" data-bs-ride="false">
+    <h5 class="carousel-headline">Your Next Favourite Roasteries... </h5>
+    <div class="carousel-inner">
+      <% @roasteries.each_slice(3).with_index do |roasteries_slice, index| %>
+        <div class="carousel-item <%= index.zero? ? 'active' : '' %>">
+          <div class="d-flex justify-content-start">
+            <% roasteries_slice.each do |roastery| %>
+              <div class="col-4 col-md-6 d-flex align-items-stretch">
+                <div class="card">
+                  <img src="<%= roastery.main_photo.attached? ? url_for(roastery.main_photo) : 'https://res.cloudinary.com/dtqchggeh/image/upload/v1738670181/AdobeStock_108622833_Preview_ppobqc.png' %>"
+                      class="card-img-top" alt="<%= roastery.name %>">
+                  <div class="card-body d-flex flex-column">
+                    <h5 class="card-title"><%= roastery.name %></h5>
+                    <p class="card-text flex-grow-1"><%= truncate(roastery.description, length: 120, separator: ' ', omission: '...') %></p>
+                    <%= link_to "View Details", roastery_path(roastery), class: "btn btn-tertiary mt-auto" %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- arrow left -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#roasteriesCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+
+    <!-- arrow right -->
+    <button class="carousel-control-next" type="button" data-bs-target="#roasteriesCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
 </div>

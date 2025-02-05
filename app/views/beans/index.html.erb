@@ -2,43 +2,56 @@
 <div class="banner beans-banner">
     <h1 class="banner-title">Browse and compare coffee beans</h1>
     <p class="banner-text">Find the perfect bean for your next brew.</p>
+
 </div>
 
-<!-- Filters  -->
-<%= form_with(url: beans_path, method: :get, local: true) do |form| %>
-  <div>
-    <%= form.label :brewing_method, 'Filter by Brewing Method' %>
-    <%= form.select :brewing_method, options_for_select(['Espresso', 'French Press', 'Pour Over', 'AeroPress'], params[:brewing_method]), include_blank: 'All Methods' %>
+<div class="filters-container">
+  <%= form_with(url: beans_path, method: :get, local: true, class: "filter-form") do |form| %>
+
+<!-- Container button search  -->
+<div class="search-container">
+  <!-- Search -->
+  <div class="search-bar">
+    <%= form.label :query, 'Search Beans ', class: "sr-only" %>
+    <%= form.text_field :query, value: params[:query], placeholder: "Search beans ...", class: "search-input" %>
   </div>
 
-  <div>
-    <%= form.label :roast_level, 'Filter by Roast Level' %>
-    <%= form.select :roast_level, options_for_select(['Light', 'Medium', 'Dark'], params[:roast_level]), include_blank: 'All Roasts' %>
+  <!-- Search button -->
+  <div class="search-btn">
+    <%= form.submit 'Search', class: 'btn btn-secondary' %>
   </div>
+</div>
 
-  <div>
-    <%= form.label :origin, 'Filter by Origin' %>
-    <%= form.select :origin, options_for_select(['Ethiopia', 'Colombia', 'Brazil', 'Vietnam'], params[:origin]), include_blank: 'All Origins' %>
-  </div>
+<div class="search-divider"></div>
 
-  <div>
-    <%= form.label :flavour, 'Filter by Flavour' %>
-    <%= form.select :flavour, options_for_select(['Fruity', 'Nutty', 'Chocolatey', 'Floral', 'Spicy'], params[:flavour]), include_blank: 'All Flavours' %>
-  </div>
+<!-- Filter  -->
+<div class="filters-controls m8">
+  <button type="button" class="filter-icon" id="toggle-filters">
+    <i class="fa fa-filter"></i>
+  </button>
 
-  <div>
-    <%= form.submit 'Filter' %>
-  </div>
+  <a href="<%= beans_path(query: params[:query]) %>"
+     id="reset-filters"
+     class="reset-filters-link"
+     style="display: none;">
+    Reset
+  </a>
 
-  <div>
-    <%= link_to 'Reset Filters', beans_path, class: 'btn btn-secondary', id: 'reset-filters' %>
-  </div>
+   <div class="add-bean-btn">
+        <%= link_to "Add New Bean", new_bean_path, class:'btn btn-tertiary' %>
+      </div>
+
+</div>
+
+<!-- Filters -->
+<div class="filter-options" id="filter-options" style="display: none;">
+  <%= form.select :brewing_method, options_for_select(['Espresso', 'French Press', 'Pour Over', 'AeroPress'], params[:brewing_method]), include_blank: 'Method' %>
+  <%= form.select :roast_level, options_for_select(['Light', 'Medium', 'Dark'], params[:roast_level]), include_blank: 'Roast Level' %>
+  <%= form.select :origin, options_for_select(['Ethiopia', 'Colombia', 'Brazil', 'Vietnam'], params[:origin]), include_blank: 'Origin' %>
+  <%= form.select :flavour, options_for_select(['Fruity', 'Nutty', 'Chocolatey', 'Floral', 'Spicy'], params[:flavour]), include_blank: 'Flavour' %>
+</div>
 
 <% end %>
-
-<div>
-  <%= link_to "Add New Bean", new_bean_path %>
-</div>
 
 <!-- cards -->
 
@@ -46,21 +59,43 @@
   <div class="row">
     <% @beans.each do |bean| %>
       <div class="col-md-4 mb-4">
-        <div class="card">
+        <div class="card h-100 shadow-sm position-relative">
+
+          <!-- Bouton Favori -->
+          <button class="btn btn-light position-absolute top-0 end-0 m-2 favorite-btn">
+            <i class="fa-solid fa-heart"></i>
+          </button>
+
           <img src="<%= bean.image %>" class="card-img-top" alt="<%= bean.name %>">
-          <div class="card-body">
-            <h5 class="card-title"><%= bean.name %></h5>
-            <p class="card-text"><%= bean.description %></p>
-            <ul class="list-unstyled">
-              <li><strong>Origin:</strong> <%= bean.origin %></li>
-              <li><strong>Roast:</strong> <%= bean.roast_level %></li>
-              <li><strong>Brewing Method:</strong> <%= bean.brewing_method %></li>
-              <li><strong>Flavour:</strong> <%= bean.flavour %></li>
-            </ul>
-            <a href="<%= bean_path(bean) %>" class="btn btn-tertiary">See More</a>
+
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title text-center"><%= bean.name %></h5>
+            <p class="text-muted text-center"><i class="fa-solid fa-map-marker-alt"></i> <%= bean.origin %></p>
+
+            <div class="mt-auto">
+              <ul class="list-inline text-center">
+                <li class="list-inline-item">
+                  <i class="fa-solid fa-coffee"></i> <%= bean.brewing_method %>
+                </li>
+                <li class="list-inline-item">
+                  <i class="fa-solid fa-seedling"></i> <%= bean.flavour %>
+                </li>
+                <li class="list-inline-item">
+                  <i class="fa-solid fa-mug-hot"></i> <%= bean.roast_level %>
+                </li>
+              </ul>
+
+              <div class="text-center my-3">
+                <a href="<%= bean_path(bean) %>" class="btn btn-tertiary">See More</a>
+              </div>
+            </div>
           </div>
+
         </div>
       </div>
     <% end %>
   </div>
 </div>
+
+<!-- Ajout de FontAwesome -->
+<script src="https://kit.fontawesome.com/YOUR_KIT_CODE.js" crossorigin="anonymous"></script>
