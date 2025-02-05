@@ -30,9 +30,15 @@ export default class extends Controller {
     })
     .then(data => {
       if (data.favorited) {
+        button.innerText = "Unfavourite";
+        button.classList.remove("btn-primary");
+        button.classList.add("btn-danger");
         icon.classList.add("text-danger");
         button.dataset.turboMethod = "delete";
       } else {
+        button.innerText = "Favourite";
+        button.classList.remove("btn-danger");
+        button.classList.add("btn-primary");
         icon.classList.remove("text-danger");
         button.dataset.turboMethod = "post";
       }
