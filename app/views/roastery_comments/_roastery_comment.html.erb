@@ -5,3 +5,26 @@
   </small>
   <p><%= roastery_comment.comment %></p>
 </div>
+
+  <% if roastery_comment.user == current_user %>
+    <%= link_to "Delete",
+          [roastery_comment.roastery, roastery_comment],
+          method: :delete,
+          data: { turbo_method: :delete, confirm: "Are you sure?" },
+          class: "text-red-500 hover:underline text-sm ml-2" %>
+  <% end %>
+
+  <% if user_signed_in? %>
+    <div data-controller="vote" data-roastery-comment-id="<%= roastery_comment.id %>">
+      <% if roastery_comment.roastery_comment_votes.exists?(user: current_user) %>
+        <%= link_to "❤️", roastery_roastery_comment_roastery_comment_votes_path(@roastery, roastery_comment, roastery_comment.roastery_comment_votes.find_by(user: current_user)),
+            data: { action: "click->vote#toggle", turbo_method: :delete }, class: "btn btn-danger" %>
+      <% else %>
+        <%= link_to "🤍", roastery_roastery_comment_roastery_comment_votes_path(@roastery, roastery_comment, RoasteryCommentVote.new),
+            data: { action: "click->vote#toggle", turbo_method: :post }, class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <span id="votes-count-<%= roastery_comment.id %>"><%= roastery_comment.votes_count %></span>
+</div>

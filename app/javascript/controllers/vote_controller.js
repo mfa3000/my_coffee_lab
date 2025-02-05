@@ -5,7 +5,7 @@ export default class extends Controller {
     event.preventDefault();
 
     let button = event.currentTarget;
-    let commentId = this.element.dataset.beanCommentId;
+    let commentId = this.element.dataset.beanCommentId || this.element.dataset.roasteryCommentId;
 
     if (!commentId) {
       console.error("❌ Comment ID is missing! Check your HTML data attributes.");
