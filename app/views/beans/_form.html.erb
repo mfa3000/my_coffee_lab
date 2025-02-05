@@ -1,8 +1,6 @@
 <%= simple_form_for @bean, html: { class: "form-container" } do |f| %>
   <div class="grid">
-    <div>
       <%= f.input :name, required: true, label: "Bean Name", input_html: { class: "form-input" } %>
-    </div>
     <div>
       <%= f.input :description, as: :text, required: true, label: "Description", input_html: { class: "form-textarea" } %>
     </div>
