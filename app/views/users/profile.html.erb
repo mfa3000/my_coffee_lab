@@ -1,11 +1,8 @@
 <div class="container profile-container">
     <div class="profile-header">
       <div class="avatar-container">
-        <% if @user.avatar.attached? %>
-          <img src="<%= url_for(@user.avatar) %>" alt="User Avatar" class="avatar">
-        <% else %>
-          <img src="https://via.placeholder.com/150" alt="User Avatar" class="avatar">
-        <% end %>
+        <img src="<%= @user.avatar.attached? ? url_for(@user.avatar) : 'https://via.placeholder.com/150' %>"
+            alt="User Avatar" class="avatar">
       </div>
       <h4 class="username"><%= @user.user_name %></h4>
       <p class="email"><%= @user.email %></p>
