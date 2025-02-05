@@ -6,9 +6,9 @@ export default class extends Controller {
 
     let button = event.currentTarget;
     let icon = button.querySelector("i.fa-heart");
+    let isHeart = icon !== null;
 
     let elementId = this.element.dataset.beanId || this.element.dataset.roasteryId;
-
     if (!elementId) {
       console.error("❌ Element ID is missing! Check show.html.erb for bean_id or roastery_id.");
       return;
@@ -29,25 +29,21 @@ export default class extends Controller {
       return response.json();
     })
     .then(data => {
-      if (data.favorited) {
-        button.innerText = "Unfavourite";
-        button.classList.remove("btn-primary");
-        button.classList.add("btn-danger");
-        icon.classList.add("text-danger");
-        button.dataset.turboMethod = "delete";
-      } else {
-        button.innerText = "Favourite";
-        button.classList.remove("btn-danger");
-        button.classList.add("btn-primary");
-        icon.classList.remove("text-danger");
-        button.dataset.turboMethod = "post";
+      let newMethod = data.favorited ? "delete" : "post";
+      button.dataset.turboMethod = newMethod;
+      button.setAttribute("data-turbo-method", newMethod);
+      button.setAttribute("href", `/beans/${elementId}/favourite_bean`);
+
+      if (isHeart) {
+        icon.classList.toggle("text-danger", data.favorited);
+        icon.classList.toggle("text-secondary", !data.favorited);
       }
+
       let countElement = document.querySelector(`#favourites-count-${elementId}`);
       if (countElement) {
         countElement.textContent = data.favourites_count;
       }
-
     })
-    .catch(error => console.error("❌ Erreur :", error))
+    .catch(error => console.error("❌ Error:", error));
   }
 }

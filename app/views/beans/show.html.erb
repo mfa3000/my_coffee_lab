@@ -1,26 +1,38 @@
-<div class=" container container-details">
-  <div class="row ">
-    <div class="col-lg-5 image-container">
+<div class="container container-details">
+  <div class="row">
+    <div class="col-lg-5 position-relative favorite-image-container" data-controller="favourite" data-bean-id="<%= @bean.id %>">
+
       <% if @bean.main_photo.attached? %>
-      <%= image_tag @bean.main_photo, class: "responsive-image" %>
+        <%= image_tag @bean.main_photo, class: "card-img-top responsive-image" %>
+      <% end %>
+
+      <!-- Heart Favorite Icon -->
+      <% if user_signed_in? %>
+        <div class="favorite-btn-container">
+          <%= link_to bean_favourite_bean_path(@bean),
+            method: (current_user.favourite_beans.exists?(bean: @bean) ? :delete : :post),
+            remote: true,
+            class: "btn btn-light position-relative m-2 favorite-btn",
+            data: { action: "click->favourite#toggle", turbo_method: (current_user.favourite_beans.exists?(bean: @bean) ? "delete" : "post"), turbo_action: "replace" } do %>
+            <i class="fa-solid fa-heart <%= 'text-danger' if current_user.favourite_beans.exists?(bean: @bean) %>"></i>
+            <span id="favourites-count-<%= @bean.id %>" class="ms-2"><%= @bean.favourite_beans.count %></span>
+          <% end %>
+        </div>
       <% end %>
     </div>
+
+    <!-- Bean Details -->
     <div class="col-lg-7 description">
       <%= link_to @bean.roastery.name, roastery_path(@bean.roastery) %>
-      <h1><%=@bean.name%></h1>
-      <%=@bean.description%>
+      <h1><%= @bean.name %></h1>
+      <p><%= @bean.description %></p>
       <ul class="description-list">
-        <li>
-          <strong>Origin: </strong><%=@bean.origin%>
-        </li>
-        <li>
-          <strong>Roast level: </strong><%=@bean.roast_level%>
-        </li>
-        <li>
-          <strong>Brewing Method: </strong><%=@bean.brewing_method%>
-        </li>
+        <li><strong>Origin: </strong><%= @bean.origin %></li>
+        <li><strong>Roast level: </strong><%= @bean.roast_level %></li>
+        <li><strong>Brewing Method: </strong><%= @bean.brewing_method %></li>
       </ul>
     </div>
+  </div>
 
     <!-- Recipes -->
     <div>
