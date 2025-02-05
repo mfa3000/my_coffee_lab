@@ -3,6 +3,7 @@ class BeansController < ApplicationController
   before_action :set_bean, only: [:show, :edit, :update, :destroy]
   before_action :authorize_user, only: [:destroy]
 
+
   def show
   end
 
