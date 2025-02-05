@@ -1,0 +1,28 @@
+.icon-white {
+  width: 20px;
+  height: 20px;
+  filter: invert(1);
+}
+
+.button-width {
+  width: 50%;
+  max-width: 450px;
+}
+
+.carousel-headline {
+  color: $green;
+  font-style: italic;
+  text-align: left;
+}
+
+@media (max-width: 768px) { /* Medium screens */
+  .button-width {
+    width: 75%;
+  }
+}
+
+@media (max-width: 576px) { /* Small screens */
+  .button-width {
+    width: 100%;
+  }
+}

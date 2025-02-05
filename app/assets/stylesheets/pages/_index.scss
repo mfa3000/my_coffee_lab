@@ -13,6 +13,7 @@
 
 .search-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 10px;
@@ -52,6 +53,13 @@
 
 .search-btn {
   margin-right: 15px;
+}
+
+@media (min-width: 576px) {
+  .search-container {
+    flex-direction: row;
+    align-items: center;
+  }
 }
 
 .actions {
@@ -170,4 +178,3 @@
 .favorite-btn:hover i {
   color: red;
 }
-

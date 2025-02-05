@@ -1,8 +1,8 @@
 
 <div class="banner beans-banner">
+
     <h1 class="banner-title">Browse and compare coffee beans</h1>
     <p class="banner-text">Find the perfect bean for your next brew.</p>
-
 </div>
 
 <div class="filters-container">
@@ -24,22 +24,25 @@
 
 <div class="search-divider"></div>
 
-<!-- Filter  -->
-<div class="filters-controls m8">
-  <button type="button" class="filter-icon" id="toggle-filters">
-    <i class="fa fa-filter"></i>
-  </button>
+<!-- Filter + Add Bean Container -->
 
-  <a href="<%= beans_path(query: params[:query]) %>"
-     id="reset-filters"
-     class="reset-filters-link"
-     style="display: none;">
-    Reset
-  </a>
+<div class="filters-container d-flex w-100 align-items-center flex-wrap">
+  <div class="filters-controls d-flex align-items-center">
+    <button type="button" class="filter-icon btn btn-light me-2" id="toggle-filters">
+      <i class="fa fa-filter"></i>
+    </button>
 
-   <div class="add-bean-btn">
-        <%= link_to "Add New Bean", new_bean_path, class:'btn btn-tertiary' %>
-      </div>
+    <a href="<%= beans_path(query: params[:query]) %>"
+       id="reset-filters"
+       class="reset-filters-link"
+       style="display: none;">
+      Reset
+    </a>
+  </div>
+
+  <div class="add-bean-btn ms-auto">
+    <%= link_to "Add New Bean", new_bean_path, class: 'btn btn-tertiary' %>
+  </div>
 
 </div>
 
@@ -56,46 +59,24 @@
 <!-- cards -->
 
 <div class="container mt-4">
-  <div class="row">
-    <% @beans.each do |bean| %>
-      <div class="col-md-4 mb-4">
-        <div class="card h-100 shadow-sm position-relative">
-
-          <!-- Bouton Favori -->
-          <button class="btn btn-light position-absolute top-0 end-0 m-2 favorite-btn">
-            <i class="fa-solid fa-heart"></i>
-          </button>
-
+<div class="row">
+  <% @beans.each do |bean| %>
+    <div class="col-12 col-sm-6 col-md-4 mb-4">
+        <div class="card">
           <img src="<%= bean.image %>" class="card-img-top" alt="<%= bean.name %>">
-
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title text-center"><%= bean.name %></h5>
-            <p class="text-muted text-center"><i class="fa-solid fa-map-marker-alt"></i> <%= bean.origin %></p>
-
-            <div class="mt-auto">
-              <ul class="list-inline text-center">
-                <li class="list-inline-item">
-                  <i class="fa-solid fa-coffee"></i> <%= bean.brewing_method %>
-                </li>
-                <li class="list-inline-item">
-                  <i class="fa-solid fa-seedling"></i> <%= bean.flavour %>
-                </li>
-                <li class="list-inline-item">
-                  <i class="fa-solid fa-mug-hot"></i> <%= bean.roast_level %>
-                </li>
-              </ul>
-
-              <div class="text-center my-3">
-                <a href="<%= bean_path(bean) %>" class="btn btn-tertiary">See More</a>
-              </div>
-            </div>
+          <div class="card-body">
+            <h5 class="card-title"><%= bean.name %></h5>
+            <p class="card-text"><%= bean.description %></p>
+            <ul class="list-unstyled">
+              <li><strong>Origin:</strong> <%= bean.origin %></li>
+              <li><strong>Roast:</strong> <%= bean.roast_level %></li>
+              <li><strong>Brewing Method:</strong> <%= bean.brewing_method %></li>
+              <li><strong>Flavour:</strong> <%= bean.flavour %></li>
+            </ul>
+            <a href="<%= bean_path(bean) %>" class="btn btn-tertiary">See More</a>
           </div>
-
         </div>
       </div>
     <% end %>
   </div>
 </div>
-
-<!-- Ajout de FontAwesome -->
-<script src="https://kit.fontawesome.com/YOUR_KIT_CODE.js" crossorigin="anonymous"></script>

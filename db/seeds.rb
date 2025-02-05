@@ -41,32 +41,61 @@ end
 puts "fake users created"
 
 puts "creating fake data for roasteries"
-roastery_image_urls = [
-  "https://res.cloudinary.com/dtqchggeh/image/upload/v1738598119/Screenshot_2025-02-03_at_16.54.13_qkcsoi.png",
-  "https://res.cloudinary.com/dtqchggeh/image/upload/v1738598118/Screenshot_2025-02-03_at_16.54.22_qbc5im.png",
-  "https://res.cloudinary.com/dtqchggeh/image/upload/v1738598117/Screenshot_2025-02-03_at_16.54.35_udpwxd.png",
-  "https://res.cloudinary.com/dtqchggeh/image/upload/v1738598117/Screenshot_2025-02-03_at_16.54.42_su7ixd.png",
-  "https://res.cloudinary.com/dtqchggeh/image/upload/v1738598116/Screenshot_2025-02-03_at_16.54.54_uvk535.png"
-]
-roasteries = []
-picture_id = 0
-16.times do
-  image_url = roastery_image_urls.sample
+roasteries_data = [
+  { name: "Kreuzberg Kaffeerösterei", address: "Skalitzer Str. 46, 10997 Berlin", description: "Nestled in the heart of Kreuzberg, this roastery specializes in bold, ethically sourced beans. Their small-batch roasting technique ensures rich flavors, from nutty Brazilian to bright Ethiopian blends.", image_url: "https://res.cloudinary.com/dtqchggeh/image/upload/v1738712506/9_wdnnkt.png" },
 
+  { name: "The Bean Collective", address: "Weserstr. 58, 12045 Berlin", description: "A community-driven roastery, The Bean Collective is all about sustainability and transparency. They work directly with farmers to bring out the best in each region’s beans.", image_url: "https://res.cloudinary.com/dtqchggeh/image/upload/v1738712509/4_asjf7n.png" },
+
+  { name: "Moabit Micro Roasters", address: "Alt-Moabit 78, 10555 Berlin", description: "This micro-roastery in Moabit is dedicated to slow roasting for maximum flavor.", image_url: "https://res.cloudinary.com/dtqchggeh/image/upload/v1738712509/12_yqpozc.png" },
+
+  { name: "Good Coffee", address: "Boxhagener Str. 20, 10245 Berlin", description: "A hub for coffee science lovers, Good Coffee experiments with different roast profiles to bring out unexpected flavors.", image_url: "https://res.cloudinary.com/dtqchggeh/image/upload/v1738712509/10_tu84pg.png" },
+
+  { name: "Espresso Works", address: "Rosenthaler Str. 63, 10119 Berlin", description: "Inspired by Italian espresso culture but with a modern twist, Espresso Works focuses on well-balanced, low-acidity espresso blends.", image_url: "https://res.cloudinary.com/dtqchggeh/image/upload/v1738712509/11_aq3und.png" },
+
+  { name: "Charlottenburg Craft Coffee", address: "Kantstr. 142, 10623 Berlin", description: "This boutique roastery in West Berlin handcrafts their coffee in small batches, bringing out sweet, nutty, and citrusy notes.", image_url: "https://res.cloudinary.com/dtqchggeh/image/upload/v1738712510/8_rfx0fh.png" },
+
+  { name: "Berg Roasters", address: "Schönhauser Allee 123, 10437 Berlin", description: "Known for their light roasts and Nordic-style coffee, (Prenzlauer) Berg Roasters bring out bright, fruity, and floral characteristics.", image_url: "https://res.cloudinary.com/dtqchggeh/image/upload/v1738712510/6_gmchjl.png" },
+
+  { name: "Heritage Coffee", address: "Manfred-von-Richthofen-Str. 17, 12101 Berlin", description: "Blending tradition with innovation, Heritage Coffee specializes in classic European-style blends with a modern edge.", image_url: "https://res.cloudinary.com/dtqchggeh/image/upload/v1738712512/2_gowk9a.png" },
+
+  { name: "The Coffee Syndicate", address: "Müllerstr. 151, 13353 Berlin", description: "This urban roastery thrives on collaboration, partnering with Berlin’s best cafés to create custom blends.", image_url: "https://res.cloudinary.com/dtqchggeh/image/upload/v1738712515/5_unx7b3.png" },
+
+  { name: "Slow Roasters", address: "Falkenseer Chaussee 23, 13581 Berlin", description: "Committed to the art of slow roasting, this family-run roastery in Spandau takes a meticulous approach to bringing out deep caramel, nut, and chocolate notes.", image_url: "https://res.cloudinary.com/dtqchggeh/image/upload/v1738712516/7_qyzvyn.png" },
+
+  { name: "Artisan Beans", address: "Elsenstr. 78, 12435 Berlin", description: "A hidden gem near the Spree, Artisan Beans sources organic, fair-trade beans and roasts them in small batches for optimal flavor.", image_url: "https://res.cloudinary.com/dtqchggeh/image/upload/v1738712516/3_dlhaml.png" },
+
+  { name: "Brew Masters", address: "Hauptstr. 94, 10827 Berlin", description: "Focusing on innovative roasting techniques, Brew Masters craft their beans to highlight sweetness and complexity.", image_url: "https://res.cloudinary.com/dtqchggeh/image/upload/v1738712512/1_svzpkd.png" }
+]
+
+roasteries = []
+roasteries_data.each_with_index do |data, index|
   roastery = Roastery.create!(
-    name: "#{Faker::Restaurant.name} Roastery",
-    description: Faker::Restaurant.description,
-    image: "https://picsum.photos/id/#{200+picture_id}/320/240",
-    roastery_url: "https://www.lewagon.com/",
-    user: users.sample,
+    name: data[:name],
+    description: data[:description],
+    image: data[:image_url],
+    roastery_url: "https://#{data[:name].parameterize}.com",
+    user: users.sample
   )
-  file = URI.open(image_url)
-  roastery.main_photo.attach(io: file, filename: "roastery_photo_#{picture_id}.png", content_type: "image/png")
+
+  file = URI.open(data[:image_url])
+  roastery.main_photo.attach(io: file, filename: "roastery_#{index + 1}.png", content_type: "image/png")
 
   roasteries << roastery
-  picture_id += 1
 end
-puts "fake roasteries created"
+
+puts "Fake roastery data created"
+
+puts "Creating fake locations"
+location_types = ["Cafe", "Roastery and Cafe", "Warehouse"]
+
+roasteries.each_with_index do |roastery, index|
+  Location.create!(
+    address: roasteries_data[index][:address],
+    location_type: location_types[index % location_types.length],
+    roastery: roastery
+  )
+end
+puts "Fake locations created"
 
 puts "creating fake data for beans"
 
@@ -107,20 +136,6 @@ bean_image_urls = [
 end
 
 puts "fake beans created"
-
-
-puts "creating fake data for locations"
-location_type = ["Cafe", "Roastery and Cafe", "Warehouse"]
-
-16.times do
-  Location.create!(
-    address: Faker::Address.full_address,
-    location_type: location_type.sample,
-    roastery: roasteries.sample,
-  )
-end
-
-puts "fake locations created"
 
 puts "creating fake data for bean comments"
 bean_comments = []

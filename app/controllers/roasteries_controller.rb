@@ -33,6 +33,10 @@ class RoasteriesController < ApplicationController
   def create
     @roastery = current_user.roasteries.build(roastery_params)
 
+    unless params[:roastery][:main_photo].present?
+      @roastery.main_photo.attach(io: URI.open("https://res.cloudinary.com/dtqchggeh/image/upload/v1738670181/AdobeStock_108622833_Preview_ppobqc.png"), filename: "default_roastery.png", content_type: "image/png")
+    end
+
     if @roastery.save
       redirect_to roastery_path(@roastery), notice: 'Roastery successfully created!'
     else
