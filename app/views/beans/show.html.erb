@@ -5,7 +5,7 @@
       <%= image_tag @bean.main_photo, class: "responsive-image" %>
       <% end %>
     </div>
-    <div class="col-lg-7 description">
+    <div class="col-lg-7 pt-2">
       <%= link_to @bean.roastery.name, roastery_path(@bean.roastery) %>
       <h1><%=@bean.name%></h1>
       <%=@bean.description%>
@@ -22,47 +22,73 @@
       </ul>
     </div>
 
-    <!-- Recipes -->
+
+
+
+
+
     <div>
       <h2>Community Recipes</h2>
+      <!-- Carousel recipes -->
 
         <% if @bean.recipes.any? %>
-          <div class="row">
-            <% @bean.recipes.each do |recipe| %>
-              <div class="card col-lg-4">
-                <div class="card-body">
-                  <% if recipe.user == current_user %>
-
-                    <%
-=begin%>
- <%
-  =begin%>
-  <%= link_to "Edit", edit_bean_recipe_path(@bean, recipe), class: "underline" %>
-                    <%= link_to "Delete", bean_recipe_path(@bean, recipe),
-                      method: :delete,
-                      data: { turbo_method: :delete, confirm: "Are you sure?" },
-                      class: "underline ml-2" %>
-  <%
-  =end%>
-<%
-=end%>
-
-                      <%= link_to edit_bean_recipe_path(@bean, recipe) do%>
-                      <i class="float-end fas fa-edit"></i>
-                      <% end %>
-                  <% end %>
-                  <h4><%= recipe.name %></h4>
-                  <p><%= recipe.instructions %></p>
-
+          <div id="beansCarousel" class="carousel slide" data-bs-ride="false">
+            <div class="carousel-inner py-3">
+              <% @bean.recipes.each_slice(3).with_index do |recipe_slice, index| %>
+                <div class="carousel-item <%= index.zero? ? 'active' : '' %>">
+                  <div class="d-flex justify-content-start">
+                    <% recipe_slice.each do |recipe| %>
+                      <div class="col-lg-4 d-flex align-items-stretch">
+                        <div class="card recipe-card">
+                          <div class="card-body">
+                            <% if recipe.user == current_user %>
+                                  <%= link_to edit_bean_recipe_path(@bean, recipe) do%>
+                                  <i class="float-end fas fa-edit"></i>
+                                  <% end %>
+                            <% end %>
+                            <h4><%= recipe.name %></h4>
+                            <p><%= recipe.instructions %></p>
+                          </div>
+                        </div>
+                      </div>
+                    <% end %>
+                  </div>
                 </div>
-              </div>
-            <% end %>
+              <% end %>
+            </div>
           </div>
+
+          <!-- arrow left -->
+          <button class="carousel-control-prev" type="button" data-bs-target="#beansCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+
+          <!-- arrow right -->
+          <button class="carousel-control-next" type="button" data-bs-target="#beansCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+
+       <!-- no recipes no carousel-->
         <% else %>
           <p>No recipes yet.</p>
         <% end %>
 
         <%= link_to "Add Recipe", new_bean_recipe_path(@bean), class: "btn btn-submit mt-4" %>
+    </div>
+<%
+=begin%>
+
+    <%= link_to "Edit", edit_bean_recipe_path(@bean, recipe), class: "underline" %>
+                      <%= link_to "Delete", bean_recipe_path(@bean, recipe),
+                        method: :delete,
+                        data: { turbo_method: :delete, confirm: "Are you sure?" },
+                        class: "underline ml-2" %>
+
+<%
+=end%>
+
 
   <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
@@ -84,7 +110,7 @@
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </button>
-</div>
+
 
         <%
 =begin%>
