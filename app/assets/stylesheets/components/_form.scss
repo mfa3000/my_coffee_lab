@@ -10,7 +10,7 @@
   transition: all 0.2s ease-in-out;
   font-family: $body-font;
   font-size: 14px;
-  background-color: $lightest-green;
+  background-color: $lightest-green-050;
   color: $dark-green;
 
   &:focus {
@@ -26,7 +26,7 @@
 }
 
 select.form-input {
-  background-color: $lightest-green;
+  background-color: $lightest-green-050;
   color: $dark-green;
   &:focus {
     background-color: white;
@@ -43,7 +43,7 @@ label {
   display: block;
 }
 
-h1 {
+.form-h1 {
   font-family: $headers-font;
   font-weight: bold;
   font-size: 28px;
@@ -51,7 +51,7 @@ h1 {
   margin-top: 20px;
 }
 
-h2 {
+.form-h2 {
   font-family: $headers-font;
   font-size: 20px;
   color: $dark-brown;
@@ -79,7 +79,7 @@ h2 {
   font-family: $body-font;
   font-size: 14px;
   color: $dark-green;
-  background-color: $lightest-green;
+  background-color: $lightest-green-050;
   padding: 12px;
   border-radius: 8px;
   margin-top: 15px;
@@ -124,11 +124,12 @@ h2 {
 }
 
 // 🔹 Improve Buttons
-.btn {
-  padding: 12px 20px;
+.form-btn {
+  padding: 4px 16px;
+  background-color: #fff;
+  color: $dark-green;
   border-radius: 8px;
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 14px;
   text-align: center;
   transition: background 0.3s ease;
 }
@@ -137,6 +138,7 @@ h2 {
 .form-group[data-controller="roastery-search"] {
   max-width: 350px;
   margin: auto;
+  margin-bottom: 20px;
   padding: 10px;
   background-color: $light-gray;
   border: 1px solid $dark-green-020;
@@ -161,6 +163,11 @@ h2 {
 }
 
 // 🔹 File upload styling
+
+.upload-container {
+  width: 100%;
+  max-width: 400px;
+}
 
 .upload-inline {
   display: flex;
@@ -215,4 +222,5 @@ h2 {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-top: 1rem;
   margin-bottom: 2rem;
+  width: 100%;
 }
