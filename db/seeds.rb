@@ -99,28 +99,51 @@ puts "Fake locations created"
 
 puts "creating fake data for beans"
 
+bean_data = [
+  { name: "Ethiopian Sunrise", description: "A bright, floral Ethiopian Yirgacheffe with delicate jasmine and citrus notes, perfect for a refreshing morning brew.", image_url:"https://res.cloudinary.com/dtqchggeh/image/upload/v1738749559/pexels-qui-nguyen-7862521-19097139_z3kpkt.png" },
+
+  { name: "Colombian Gold", description: "Smooth and balanced, this Colombian Supremo offers hints of caramel, red berries, and a lingering chocolatey finish.", image_url:"https://res.cloudinary.com/dtqchggeh/image/upload/v1738747988/bean_12_wmzvwz.png" },
+
+  { name: "Brazilian Dusk", description: "A smooth, nutty Brazilian coffee with notes of toasted almonds, milk chocolate, and a hint of caramel.", image_url:"https://res.cloudinary.com/dtqchggeh/image/upload/v1738747987/bean_8_kqmndl.png" },
+
+  { name: "Velvet Espresso", description: "A rich and creamy espresso blend with notes of dark chocolate, roasted almonds, and caramelized sugar.", image_url:"https://res.cloudinary.com/dtqchggeh/image/upload/v1738747985/bean_6_yqu7xv.png" },
+
+  { name: "Sumatran Spice", description: "A deep, earthy Sumatran blend with spicy undertones and hints of dark chocolate, perfect for espresso lovers.", image_url:"https://res.cloudinary.com/dtqchggeh/image/upload/v1738747985/bean_11_xjq2vr.png" },
+
+  { name: "Kenyan Peaberry", description: "Bright and juicy with a wine-like acidity, this Kenyan Peaberry features blackberry, plum, and citrus flavors.", image_url:"https://res.cloudinary.com/dtqchggeh/image/upload/v1738747984/bean_3_bqauye.png" },
+
+  { name: "Honey Process Reserve", description: "Grown using the honey processing method, this coffee boasts natural sweetness with caramel and stone fruit undertones.", image_url:"https://res.cloudinary.com/dtqchggeh/image/upload/v1738747984/bean_5_sogiwp.png" },
+
+  { name: "Antigua Dark Roast", description: "A well-balanced Guatemalan coffee with a chocolatey body, bright acidity, and subtle nutty flavors.", image_url:"https://res.cloudinary.com/dtqchggeh/image/upload/v1738747983/bean_7_dhp0yg.png" },
+
+  { name: "Honduran Harmony", description: "Smooth and well-rounded, this Honduran coffee features notes of almonds, brown sugar, and gentle citrus.", image_url:"https://res.cloudinary.com/dtqchggeh/image/upload/v1738747983/bean_10_pwagqk.png" },
+
+  { name: "Vietnamese Lotus", description: "A bold, full-bodied Vietnamese Robusta with intense chocolatey notes, low acidity, and a strong finish.", image_url:"https://res.cloudinary.com/dtqchggeh/image/upload/v1738747981/bean_9_qchghb.png" },
+
+  { name: "Geisha Reserve", description: "One of the most prized coffees in the world, this Geisha variety delivers exceptional floral aromas, vibrant acidity, and a tea-like body.", image_url:"https://res.cloudinary.com/dtqchggeh/image/upload/v1738747978/bean_2_nsjbfu.png" },
+
+  { name: "Mountain Chiapas", description: "This organic Mexican coffee showcases bright acidity, milk chocolate sweetness, and hints of roasted nuts.", image_url:"https://res.cloudinary.com/dtqchggeh/image/upload/v1738747977/bean_1_vuykht.png" }
+
+  # { name: "Andean Breeze", description: "A mild and smooth Peruvian coffee with caramel sweetness, citrus notes, and a clean finish.", image_url:"" },
+
+  # { name: "Monsoon Malabar Bold", description: "Uniquely processed, this Indian coffee has a bold, spicy character with low acidity and a syrupy mouthfeel.", image_url:"" },
+
+  # { name: "Red Bourbon Selection", description: "A complex Rwandan coffee with red fruit notes, floral aromas, and a silky body.", image_url:"" },
+
+  # { name: "Spiced Mocha", description: "A rare and ancient Yemeni coffee with winey acidity, deep chocolate notes, and hints of exotic spices.", image_url:"" }
+]
+
 brewing_method = ["espresso", "filter"]
 roast_level = ["dark", "medium", "light"]
 origins = ["Ethiopia", "Colombia", "Brazil", "Vietnam"]
 flavours = ["Fruity", "Nutty", "Chocolatey", "Floral", "Spicy"]
-picture_id = 0
 beans = []
 
-bean_image_urls = [
-  "https://res.cloudinary.com/dtqchggeh/image/upload/v1738596076/Screenshot_2025-02-03_at_16.19.35_ke4yjx.png",
-  "https://res.cloudinary.com/dtqchggeh/image/upload/v1738596074/Screenshot_2025-02-03_at_16.20.37_fyhizd.png",
-  "https://res.cloudinary.com/dtqchggeh/image/upload/v1738596073/Screenshot_2025-02-03_at_16.19.49_qpcllo.png",
-  "https://res.cloudinary.com/dtqchggeh/image/upload/v1738596073/Screenshot_2025-02-03_at_16.20.13_bdlz82.png",
-  "https://res.cloudinary.com/dtqchggeh/image/upload/v1738596072/Screenshot_2025-02-03_at_16.20.54_zawhld.png",
-]
-
-16.times do
-  image_url = bean_image_urls.sample
+bean_data.each_with_index do |data, index|
 
   bean = Bean.create!(
-    name: Faker::Coffee.blend_name,
-    description: Faker::Coffee.notes,
-    image: "https://picsum.photos/id/#{100+picture_id}/320/240",
+    name: data[:name],
+    description: data[:description],
     brewing_method: brewing_method.sample,
     roast_level: roast_level.sample,
     origin: origins.sample,
@@ -129,8 +152,8 @@ bean_image_urls = [
     user: users.sample,
   )
 
-  file = URI.open(image_url)
-  bean.main_photo.attach(io: file, filename: "bean#{picture_id}.png", content_type: "image/png")
+  file = URI.open(data[:image_url])
+  bean.main_photo.attach(io: file, filename: "bean_#{index + 1}.png", content_type: "image/png")
 
   beans << bean
 end
