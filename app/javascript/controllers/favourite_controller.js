@@ -7,7 +7,6 @@ export default class extends Controller {
     let button = event.currentTarget;
     let icon = button.querySelector("i.fa-heart");
     let isHeart = icon !=null;
-
     let elementId = this.element.dataset.beanId || this.element.dataset.roasteryId;
 
     if (!elementId) {
