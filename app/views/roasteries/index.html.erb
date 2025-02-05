@@ -1,35 +1,71 @@
 <div class="banner roasteries-banner">
     <h1 class="banner-title">Discover and share the best coffee spots</h1>
-    <%# <p class="banner-text">Discover your next favorite spot.</p> %>
 </div>
 
-<%= form_with(url: roasteries_path, method: "get", local: true) do %>
-  <div>
-    <%= label_tag :location, "Search by Location" %>
-    <%= text_field_tag :location, params[:location], placeholder: "Enter a location" %>
-    <%= submit_tag "Search" %>
-  </div>
-<% end %>
 
-<h1>All Roasteries</h1>
-
-<div>
-  <%= link_to "Add New Roastery", new_roastery_path %>
-</div>
-
-<div>
-  <% @roasteries.each do |roastery| %>
-    <div>
-      <h2><%= link_to roastery.name, roastery_path(roastery) %></h2>
-      <p><%= truncate(roastery.description, length: 100) %></p>
-      <div>
-        <strong>Locations:</strong>
-        <% roastery.locations.each do |location| %>
-          <p><%= location.address %> (<%#= location.location_type %>)</p>
-        <% end %>
-      </div>
+<div class="search-container d-flex justify-content-center mt-3">
+  <%= form_with(url: roasteries_path, method: "get", local: true, class: "search-form d-flex") do %>
+    <div class="input-search d-flex justify-content-center">
+      <%= text_field_tag :location, params[:location], placeholder: "Enter a location", class: "search-input" %>
+    </div>
+    <div class="btn-search d-flex justify-content-center">
+        <%= submit_tag "Search", class: "btn btn-primary search-btn" %>
     </div>
   <% end %>
+</div>
+
+<div class="search-divider"></div>
+
+
+<div class="header-container d-flex justify-content-between align-items-center">
+  <h1>All Roasteries</h1>
+  <%= link_to "Add New Roastery", new_roastery_path, class: 'link-primary' %>
+</div>
+
+
+<div class="container">
+  <div class="row justify content center ">
+    <% @roasteries.each do |roastery| %>
+    <div class="col-12 col-lg-6">
+
+      <% if roastery.image.present? %>
+        <img src="<%= roastery.image %>" class="card-img-top" alt="<%= roastery.name %>">
+      <% else %>
+        <img src="default-image.jpg" class="card-img-top" alt="Default Image">
+      <% end %>
+
+      <% if user_signed_in? %>
+         <div data-controller="favourite" data-roastery-id="<%= roastery.id %>" class="favorite-btn-container">
+            <%= link_to roastery_favourite_roastery_path(roastery),
+              method: (current_user.favourite_roasteries.exists?(roastery: roastery) ? :delete : :post),
+              remote: true,
+              class: "btn btn-light position-relative m-2 favorite-btn",
+              data: { action: "click->favourite#toggle", turbo_method: (current_user.favourite_roasteries.exists?(roastery: roastery) ? "delete" : "post"), turbo_action: "replace" } do %>
+              <i class="fa-solid fa-heart <%= 'text-danger' if current_user.favourite_roasteries.exists?(roastery: roastery) %>"></i>
+              <span id="favourites-count-<%= roastery.id %>" class="ms-2"><%= roastery.favourite_roasteries.count %></span>
+            <% end %>
+          </div>
+        <% end %>
+
+      <div class ="card shadow-sm justify-center">
+          <h2><%= link_to roastery.name, roastery_path(roastery) %></h2>
+          <p><%= truncate(roastery.description, length: 100) %></p>
+
+          <div class="text-center">
+              <strong>Locations:</strong>
+              <% roastery.locations.each do |location| %>
+                <p><%= location.address %> (<%#= location.location_type %>) </p>
+              <% end %>
+            </div>
+
+
+          <div class="text-center">
+              <%= link_to roastery.name, roastery_path(roastery), class: "text-primary" %>
+          </div>
+
+      </div>
+      <% end %>
+  </div>
 </div>
 
 <!-- Mapbox -->
