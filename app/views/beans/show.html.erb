@@ -64,7 +64,7 @@
 
         <%= link_to "Add Recipe", new_bean_recipe_path(@bean), class: "btn btn-submit mt-4" %>
 
-  <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+  <%# <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
       <img src="..." class="d-block w-100" alt="...">
@@ -84,8 +84,7 @@
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </button>
-</div>
-
+</div> %>
         <%
 =begin%>
  <ul class="list-disc pl-6">
@@ -161,26 +160,54 @@
     <p class="mt-4 text-sm text-gray-600">Sign in to leave a rating.</p>
   <% end %>
 
-<% if user_signed_in? %>
-  <div data-controller="favourite" data-bean-id="<%= @bean.id %>">
-    <% if current_user.favourite_beans.exists?(bean: @bean) %>
-      <%= link_to "Unfavourite", bean_favourite_bean_path(@bean),
-        method: :delete, remote: true, class: "btn btn-danger",
-        data: { action: "click->favourite#toggle", turbo_method: "delete", turbo_action: "replace" } %>
-    <% else %>
-      <%= link_to "Favourite", bean_favourite_bean_path(@bean),
-        method: :post, remote: true, class: "btn btn-primary",
-        data: { action: "click->favourite#toggle", turbo_method: "post", turbo_action: "replace" } %>
-    <% end %>
-  </div>
-<% end %>
+  <% if user_signed_in? %>
+    <div data-controller="favourite" data-bean-id="<%= @bean.id %>">
+      <% if current_user.favourite_beans.exists?(bean: @bean) %>
+        <%= link_to "Unfavourite", bean_favourite_bean_path(@bean),
+          method: :delete, remote: true, class: "btn btn-danger",
+          data: { action: "click->favourite#toggle", turbo_method: "delete", turbo_action: "replace" } %>
+      <% else %>
+        <%= link_to "Favourite", bean_favourite_bean_path(@bean),
+          method: :post, remote: true, class: "btn btn-primary",
+          data: { action: "click->favourite#toggle", turbo_method: "post", turbo_action: "replace" } %>
+      <% end %>
+    </div>
+  <% end %>
 
   <h3>Photos</h3>
-  <div>
-    <% @bean.photos.each do |photo| %>
-      <%= image_tag photo, width: 300, height: 200 %>
-    <% end %>
-  </div>
+  <!-- use cards to display images for dimensions -->
+  <% if @bean.photos.attached? %>
+    <div id="beanPhotosCarousel" class="carousel slide bean-photo-carousel mt-4" data-bs-interval="false">
+      <div class="carousel-inner">
+        <% @bean.photos.each_slice(4).with_index do |photo_group, index| %>
+          <div class="carousel-item <%= 'active' if index.zero? %>">
+            <div class="d-flex flex-wrap justify-content-center">
+              <% photo_group.each do |photo| %>
+                <div class="card mx-2 fixed-card">
+                  <img src="<%= url_for(photo) %>" class="card-img-top bean-card-image" alt="Bean Photo">
+                </div>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <!-- arrows -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#beanPhotosCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+
+      <button class="carousel-control-next" type="button" data-bs-target="#beanPhotosCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  <% else %>
+    <p class="no-photos-message">Be the first to add a photo!</p>
+  <% end %>
+
+
 
   <h4>Add Photos</h4>
 
@@ -196,8 +223,8 @@
 
 
   <div class="mt-4">
-  <%= link_to "Edit Bean", edit_bean_path(@bean), class: "btn" %>
-</div>
+    <%= link_to "Edit Bean", edit_bean_path(@bean), class: "btn" %>
+  </div>
 
   <h4>All Comments</h4>
 
