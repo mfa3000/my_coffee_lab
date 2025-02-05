@@ -1,0 +1,28 @@
+.search-container {
+  width: 100%;
+  max-width: 400px;
+}
+
+.search-input {
+  padding: 10px;
+}
+
+.search-btn {
+  padding: 10px 15px;
+}
+
+@media (max-width: 576px) {
+  .search-form {
+    flex-direction: column;
+  }
+
+  .search-input {
+    margin-bottom: 8px;
+  }
+
+  .search-btn {
+    width: 100%;
+    margin-bottom: 8px;
+    
+  }
+}
