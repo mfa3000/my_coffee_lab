@@ -24,7 +24,7 @@
   </div>
   <!-- beans carousel -->
 
-  <div id="beansCarousel" class="carousel slide mt-4" data-bs-ride="false">
+  <div id="beansCarousel" class="carousel slide mt-4 mb-4" data-bs-ride="false">
     <h5 class="carousel-headline">Beans you might like... </h5>
     <div class="carousel-inner">
       <% @beans.each_slice(3).with_index do |beans_slice, index| %>
@@ -37,7 +37,7 @@
                       class="card-img-top" alt="<%= bean.name %>">
                   <div class="card-body">
                     <h5 class="card-title"><%= bean.name %></h5>
-                    <p class="card-text"><%= bean.description %></p>
+                    <p class="card-text flex-grow-1"><%= truncate(bean.description, length: 70, separator: ' ', omission: '...') %></p>
                     <%= link_to "View Details", bean_path(bean), class: "btn btn-tertiary" %>
                   </div>
                 </div>
@@ -62,7 +62,6 @@
   </div>
 
   <!-- roasteries carousel -->
-
   <div id="roasteriesCarousel" class="carousel slide mt-4" data-bs-ride="false">
     <h5 class="carousel-headline">Your Next Favourite Roasteries... </h5>
     <div class="carousel-inner">
@@ -76,7 +75,7 @@
                       class="card-img-top" alt="<%= roastery.name %>">
                   <div class="card-body d-flex flex-column">
                     <h5 class="card-title"><%= roastery.name %></h5>
-                    <p class="card-text flex-grow-1"><%= truncate(roastery.description, length: 120, separator: ' ', omission: '...') %></p>
+                    <p class="card-text flex-grow-1"><%= truncate(roastery.description, length: 70, separator: ' ', omission: '...') %></p>
                     <%= link_to "View Details", roastery_path(roastery), class: "btn btn-tertiary mt-auto" %>
                   </div>
                 </div>
