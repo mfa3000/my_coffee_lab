@@ -5,8 +5,14 @@
 }
 
 .button-width {
-  width: 50%; /* Default for larger screens */
-  max-width: 450px; /* Prevents it from being too wide */
+  width: 50%;
+  max-width: 450px;
+}
+
+.carousel-headline {
+  color: $green;
+  font-style: italic;
+  text-align: left;
 }
 
 @media (max-width: 768px) { /* Medium screens */
