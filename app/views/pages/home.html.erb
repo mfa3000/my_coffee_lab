@@ -2,21 +2,23 @@
   <h1 class="banner-title">MyCoffeeLab: a hub for coffee lovers!</h1>
   <p class="banner-text">Explore beans and roasteries, share your recipes, and connect with the coffee community.</p>
 </div>
+
 <div class="home-page container">
   <!-- discover cards -->
-  <div class="options d-flex justify-content-center gap-3">
-    <%= link_to beans_path, class: "discover-card-link" do %>
-      <div class="discover-card" style="background-image: url('https://res.cloudinary.com/dtqchggeh/image/upload/v1738705081/AdobeStock_1006684240_Preview_qvclzb.png');">
-        <span class="discover-card-text">Explore Beans</span>
-      </div>
-    <% end %>
+ <div class="options d-flex justify-content-between">
+  <a href="<%= beans_path %>" class="discover-card-link">
+    <div class="discover-card" style="background-image: url('https://res.cloudinary.com/dtqchggeh/image/upload/v1738705081/AdobeStock_1006684240_Preview_qvclzb.png');">
+      <span class="discover-card-text">Explore Beans</span>
+    </div>
+  </a>
 
-    <%= link_to roasteries_path, class: "discover-card-link" do %>
-      <div class="discover-card" style="background-image: url('https://res.cloudinary.com/dtqchggeh/image/upload/v1738705081/AdobeStock_498566838_Preview_sgpaot.png');">
-        <span class="discover-card-text">Explore Roasteries</span>
-      </div>
-    <% end %>
-  </div>
+  <a href="<%= roasteries_path %>" class="discover-card-link">
+    <div class="discover-card" style="background-image: url('https://res.cloudinary.com/dtqchggeh/image/upload/v1738705081/AdobeStock_498566838_Preview_sgpaot.png');">
+      <span class="discover-card-text">Explore Roasteries</span>
+    </div>
+  </a>
+</div>
+
 
   <!-- discover buttons -->
   <!-- <div class="options d-flex justify-content-center gap-3">
