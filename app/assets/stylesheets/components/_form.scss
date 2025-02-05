@@ -43,7 +43,7 @@ label {
   display: block;
 }
 
-h1 {
+.form-h1 {
   font-family: $headers-font;
   font-weight: bold;
   font-size: 28px;
@@ -51,7 +51,7 @@ h1 {
   margin-top: 20px;
 }
 
-h2 {
+.form-h2 {
   font-family: $headers-font;
   font-size: 20px;
   color: $dark-brown;
@@ -124,7 +124,7 @@ h2 {
 }
 
 // 🔹 Improve Buttons
-.btn {
+.form-btn {
   padding: 12px 20px;
   border-radius: 8px;
   font-size: 16px;
