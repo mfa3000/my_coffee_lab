@@ -23,7 +23,9 @@ Rails.application.routes.draw do
       get 'search'
     end
 
-    resources :roastery_comments, only: [:create]
+    resources :roastery_comments, only: [:create, :destroy] do
+      resource :roastery_comment_votes, only: [:create, :destroy]
+    end
     resources :roastery_reviews, only: [:create]
 
     resource :favourite_roastery, only: [:create, :destroy], controller: 'favourite_roasteries'

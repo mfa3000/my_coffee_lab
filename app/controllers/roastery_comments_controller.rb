@@ -1,5 +1,6 @@
 class RoasteryCommentsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_roastery_comment, only: [:destroy]
 
   def create
     @roastery = Roastery.find(params[:roastery_id])
@@ -25,9 +26,23 @@ class RoasteryCommentsController < ApplicationController
     end
   end
 
+  def destroy
+    @roastery_comment.destroy
+
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to @roastery_comment.roastery, notice: "Comment deleted!" }
+    end
+  end
+
   private
 
   def comment_params
     params.require(:roastery_comment).permit(:comment)
+  end
+
+  def set_roastery_comment
+    @roastery_comment = RoasteryComment.find(params[:id])
+    redirect_to @roastery_comment.roastery, alert: "Not authorized!" unless @roastery_comment.user == current_user
   end
 end
