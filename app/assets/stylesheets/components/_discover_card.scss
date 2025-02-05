@@ -5,16 +5,18 @@
   width: 100%;
   max-width: 960px;
   margin: 0 auto;
-  padding: 0 10px;
+  padding: 0 15px;
+  flex-wrap: wrap; // Ensures wrapping when necessary
 
   .discover-card-link {
-    flex: 0 0 auto;
+    flex: 1; // Allow flexibility
+    max-width: calc(1.5 * 300px); // Large: 1.5x carousel card width (450px)
   }
 
   .discover-card {
-    width: calc(1.5 * 300px);
+    width: 100%; // Let parent determine width
     max-width: 450px;
-    height: 450px;
+    height: 300px;
     background-size: cover;
     background-position: center;
     display: flex;
@@ -28,6 +30,7 @@
 
     &:hover {
       transform: translateY(-5px);
+      filter: brightness(80%);
     }
   }
 
@@ -42,29 +45,40 @@
 
 // **Responsive Behavior**
 @media (max-width: 992px) {
+  // Tablets
   .options {
-    flex-direction: row;
     justify-content: center;
     gap: 20px;
   }
 
+  .discover-card-link {
+    max-width: 300px;
+  }
+
   .discover-card {
-    // Match carousel card width
-    width: 300px;
     height: 300px;
   }
 }
 
 @media (max-width: 576px) {
+  // Mobile
   .options {
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 0;
+  }
+
+  .discover-card-link {
+    max-width: 110px; // Shrink container
+    flex: 0 0 auto; // Prevent stretching
   }
 
   .discover-card {
-     // Full width for small screens
-    width: 100%;
-    max-width: 300px;
-    height: 300px;
+    width: 100%; // Follow parent width
+    height: 110px; // Keep square shape
+  }
+
+  .discover-card-text {
+    font-size: 0.7rem; // Adjust text size for smaller cards
   }
 }
