@@ -24,7 +24,7 @@
     <div class="preview-container" data-file-upload-target="preview"></div>
 
 
-<h2 class="text-xl font-bold mt-6">Locations</h2>
+<h2 class="text-xl font-bold mt-6 form-h2">Locations</h2>
 
 <div id="locations-container" data-controller="location" data-location-target="locationsContainer">
   <%= f.fields_for :locations do |location_fields| %>
@@ -43,7 +43,7 @@
       <%= location_fields.hidden_field :_destroy, class: "location-destroy" %>
 
       <div class="col-span-2 flex justify-end mt-2">
-        <button type="button" class="btn btn-secondary" data-action="click->location#removeLocation">
+        <button type="button" class="form-btn " data-action="click->location#removeLocation">
           Remove Location
         </button>
       </div>
@@ -51,7 +51,7 @@
   <% end %>
 
   <div class="mt-4 text-center">
-    <button type="button" class="btn btn-secondary" data-action="click->location#addLocation">
+    <button type="button" class="form-btn " data-action="click->location#addLocation">
       Add Another Location
     </button>
   </div>

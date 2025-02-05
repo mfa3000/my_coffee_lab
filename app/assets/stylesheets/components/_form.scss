@@ -10,7 +10,7 @@
   transition: all 0.2s ease-in-out;
   font-family: $body-font;
   font-size: 14px;
-  background-color: $lightest-green;
+  background-color: $lightest-green-050;
   color: $dark-green;
 
   &:focus {
@@ -26,7 +26,7 @@
 }
 
 select.form-input {
-  background-color: $lightest-green;
+  background-color: $lightest-green-050;
   color: $dark-green;
   &:focus {
     background-color: white;
@@ -79,7 +79,7 @@ label {
   font-family: $body-font;
   font-size: 14px;
   color: $dark-green;
-  background-color: $lightest-green;
+  background-color: $lightest-green-050;
   padding: 12px;
   border-radius: 8px;
   margin-top: 15px;
@@ -125,10 +125,11 @@ label {
 
 // 🔹 Improve Buttons
 .form-btn {
-  padding: 12px 20px;
+  padding: 4px 16px;
+  background-color: #fff;
+  color: $dark-green;
   border-radius: 8px;
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 14px;
   text-align: center;
   transition: background 0.3s ease;
 }
@@ -137,6 +138,7 @@ label {
 .form-group[data-controller="roastery-search"] {
   max-width: 350px;
   margin: auto;
+  margin-bottom: 20px;
   padding: 10px;
   background-color: $light-gray;
   border: 1px solid $dark-green-020;
