@@ -5,11 +5,11 @@
       <%= image_tag @bean.main_photo, class: "responsive-image" %>
       <% end %>
     </div>
-    <div class="col-lg-7 pt-2">
+    <div class="col-lg-7 pt-3">
       <%= link_to @bean.roastery.name, roastery_path(@bean.roastery) %>
       <h1><%=@bean.name%></h1>
-      <%=@bean.description%>
-      <ul class="description-list">
+      <p class="pt-1"><%=@bean.description%></p>
+      <ul class="description-list pt-1">
         <li>
           <strong>Origin: </strong><%=@bean.origin%>
         </li>
@@ -27,7 +27,7 @@
 
 
 
-    <div>
+    <div class="recipes pt-3">
       <h2>Community Recipes</h2>
       <!-- Carousel recipes -->
 
