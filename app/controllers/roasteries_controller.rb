@@ -1,3 +1,5 @@
+require 'open-uri'
+
 class RoasteriesController < ApplicationController
   before_action :set_roastery, only: [:show, :destroy]
   before_action :authorize_user, only: [:destroy]
