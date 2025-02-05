@@ -29,19 +29,17 @@ export default class extends Controller {
       return response.json();
     })
     .then(data => {
-      if (data.favorited) {
-        button.innerText = "Unfavourite";
-        button.classList.remove("btn-primary");
-        button.classList.add("btn-danger");
-        icon.classList.add("text-danger");
-        button.dataset.turboMethod = "delete";
-      } else {
-        button.innerText = "Favourite";
-        button.classList.remove("btn-danger");
-        button.classList.add("btn-primary");
-        icon.classList.remove("text-danger");
-        button.dataset.turboMethod = "post";
-      }
+      let newMethod = data.favorited ? "delete" : "post";
+
+      button.innerText = data.favorited ? "Unfavourite" : "Favourite";
+      button.classList.toggle("btn-primary", !data.favorited);
+      button.classList.toggle("btn-danger", data.favorited);
+      icon?.classList.toggle("text-danger", data.favorited);
+
+      button.dataset.turboMethod = newMethod;
+      button.setAttribute("data-turbo-method", newMethod);
+      button.setAttribute("href", `/beans/${elementId}/favourite_bean`);
+
       let countElement = document.querySelector(`#favourites-count-${elementId}`);
       if (countElement) {
         countElement.textContent = data.favourites_count;
