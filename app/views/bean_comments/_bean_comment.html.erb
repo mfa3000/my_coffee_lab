@@ -1,6 +1,4 @@
-<div id="bean-comment-<%= bean_comment.id %>" data-controller="vote" data-vote-id-value="
-<%= bean_comment.id %>" data-vote-bean-id-value="<%= bean_comment.bean.id %>" data-vote-voted-value="
-<%= user_voted?(bean_comment) %>">
+<div id="bean-comment-<%= bean_comment.id %>" data-controller="vote">
   <small>
     <strong><%= bean_comment.user.user_name %></strong>
     <i><%= bean_comment.created_at.strftime("%a %b %e at %l:%M %p") %></i>
@@ -15,22 +13,25 @@
             class: "text-red-500 hover:underline text-sm ml-2" %>
     <% end %>
 
-  <button data-action="click->vote#toggle">
-    <span data-vote-target="icon"><%= user_voted?(bean_comment) ? "❤️" : "🤍" %></span>
-  </button>
-  <span data-vote-target="count"><%= bean_comment.votes_count %></span>
-</div>
+    <button data-action="click->vote#test">TEST</button>
 
-<% if user_signed_in? %>
-  <div data-controller="vote" data-bean-comment-id="<%= bean_comment.id %>">
-    <% if bean_comment.bean_comment_votes.exists?(user: current_user) %>
-      <%= link_to "Unvote", bean_bean_comment_votes_path(@bean),
-        method: :delete, remote: true, class: "btn btn-danger",
-        data: { action: "click->vote#toggle", turbo_method: "delete", turbo_action: "replace" } %>
-    <% else %>
-      <%= link_to "Vote", bean_bean_comment_votes_path(@bean, bean_comment),
-        method: :post, remote: true, class: "btn btn-primary",
-        data: { action: "click->vote#toggle", turbo_method: "post", turbo_action: "replace" } %>
-    <% end %>
-  </div>
-<% end %>
+  <% if user_signed_in? %>
+    <div>
+      <% if bean_comment.bean_comment_votes.exists?(user: current_user) %>
+      <% bean_comment_vote = bean_comment.bean_comment_votes.find_by(user: current_user) %>
+        <%= link_to "❤️", bean_bean_comment_bean_comment_votes_path(@bean, bean_comment, bean_comment_vote),
+          data: { turbo_method: :delete}, class: "btn btn-danger" %>
+      <% else %>
+        <!--<%= link_to "🤍", bean_bean_comment_bean_comment_votes_path(@bean, bean_comment, BeanCommentVote.new),
+          method: :post, remote: true, class: "btn btn-primary",
+          data: { action: "click->vote#toggle" } %>-->
+        <%= simple_form_for [@bean, bean_comment, BeanCommentVote.new] do |f| %>
+          <%= f.submit "🤍", class: "btn btn-primary" %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+
+    <span><%= bean_comment.votes_count %></span>
+
+</div>
