@@ -137,20 +137,6 @@ end
 
 puts "fake beans created"
 
-
-# puts "creating fake data for locations"
-# location_type = ["Cafe", "Roastery and Cafe", "Warehouse"]
-
-# 16.times do
-#   Location.create!(
-#     address: Faker::Address.full_address,
-#     location_type: location_type.sample,
-#     roastery: roasteries.sample,
-#   )
-# end
-
-puts "fake locations created"
-
 puts "creating fake data for bean comments"
 bean_comments = []
 50.times do
