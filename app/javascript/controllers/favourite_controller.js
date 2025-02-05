@@ -5,6 +5,7 @@ export default class extends Controller {
     event.preventDefault();
 
     let button = event.currentTarget;
+    let icon = button.querySelector("i.fa-heart");
 
     let elementId = this.element.dataset.beanId || this.element.dataset.roasteryId;
 
@@ -29,17 +30,18 @@ export default class extends Controller {
     })
     .then(data => {
       if (data.favorited) {
-        button.innerText = "Unfavourite";
-        button.classList.remove("btn-primary");
-        button.classList.add("btn-danger");
+        icon.classList.add("text-danger");
         button.dataset.turboMethod = "delete";
       } else {
-        button.innerText = "Favourite";
-        button.classList.remove("btn-danger");
-        button.classList.add("btn-primary");
+        icon.classList.remove("text-danger");
         button.dataset.turboMethod = "post";
       }
+      let countElement = document.querySelector(`#favourites-count-${elementId}`);
+      if (countElement) {
+        countElement.textContent = data.favourites_count;
+      }
+
     })
-    .catch(error => console.error("Error:", error));
+    .catch(error => console.error("❌ Erreur :", error))
   }
 }
