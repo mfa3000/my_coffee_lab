@@ -1,9 +1,9 @@
-<div id="bean-comment-<%= bean_comment.id %>" data-controller="vote">
+<div class="mt-3" id="bean-comment-<%= bean_comment.id %>" data-controller="vote">
   <small>
     <strong><%= bean_comment.user.user_name %></strong>
     <i><%= bean_comment.created_at.strftime("%a %b %e at %l:%M %p") %></i>
   </small>
-  <p><%= bean_comment.comment %></p>
+  <p class="my-1"><%= bean_comment.comment %></p>
 
     <% if bean_comment.user == current_user %>
       <%= link_to "Delete",
@@ -26,5 +26,5 @@
     </div>
   <% end %>
 
-  
+
 </div>

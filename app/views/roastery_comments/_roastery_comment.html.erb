@@ -1,9 +1,9 @@
-<div id="roastery-comment-<%= roastery_comment.id %>">
+<div class="mt-3" id="roastery-comment-<%= roastery_comment.id %>">
   <small>
     <strong><%= roastery_comment.user.user_name %></strong>
     <i><%= roastery_comment.created_at.strftime("%a %b %e at %l:%M %p") %></i>
   </small>
-  <p><%= roastery_comment.comment %></p>
+  <p class="my-1"><%= roastery_comment.comment %></p>
 </div>
 
   <% if roastery_comment.user == current_user %>
