@@ -1,23 +1,22 @@
 .responsive-image {
-  max-width: 100%;
-  height: auto;
-  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+
 
 }
 
 .image-container {
   max-width: 100%; /* Ensure the container does not exceed its parent's width */
   overflow: hidden; /* Hide any overflow content */
-  padding: 2rem;
+  max-height: 350px;
 }
 
-.description {
-
-  padding: 2rem;
-}
 
 .container-details {
-  background-color: $lightest-green-050;
+  // background-color: $lightest-green-050;
+  padding: 2rem;
 }
 
 .description-list {
@@ -27,4 +26,12 @@
 
 .description-list > * {
   margin-top: 1rem;
+}
+
+.recipe-card:hover {
+  transform: none;
+}
+
+.recipe-card {
+  background-color: $lightest-green-050;
 }
