@@ -76,7 +76,7 @@
 
         <%= link_to "Add Recipe", new_bean_recipe_path(@bean), class: "btn btn-submit mt-4" %>
 
-  <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+  <%# <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
       <img src="..." class="d-block w-100" alt="...">
@@ -96,8 +96,7 @@
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </button>
-</div>
-
+</div> %>
         <%
 =begin%>
  <ul class="list-disc pl-6">
@@ -126,8 +125,6 @@
 <%
 =end%>
 
-
-
 <%
 =begin%>
  t.string "name"
@@ -147,39 +144,85 @@
 =end%>
 
 
+<h4 style="margin-top: 300px" class="mt-6 text-lg font-bold">
+  Average Rating:
+  <span id="average-rating-<%= @bean.id %>">
+    <%= @bean.average_rating || "No ratings yet" %>
+  </span>
+  <i class="fas fa-star" style="color: #333D29;"></i>
+</h4>
 
 
-<h4 style="margin-top: 300px"class="mt-6 text-lg font-bold">Average Rating: <span id="average-rating-<%= @bean.id %>"><%= @bean.average_rating || "No ratings yet" %></span> ⭐</h4>
+<% if user_signed_in? %>
+  <h4>Your Rating:</h4>
+  <div data-controller="rating"
+       data-rating-type="bean"
+       data-rating-id="<%= @bean.id %>"
+       data-rating-user-rating="<%= @bean.bean_reviews.find_by(user: current_user)&.rating || 0 %>">
+
+    <div class="stars">
+      <% (1..5).each do |star| %>
+        <span class="star cursor-pointer"
+              data-action="click->rating#submitRating"
+              data-rating-value="<%= star %>">
+          <i class="fas fa-star"></i>
+        </span>
+      <% end %>
+    </div>
+    <p class="rating-message hidden text-green-600"></p>
+  </div>
+<% else %>
+  <p class="mt-4 text-sm text-gray-600">Sign in to leave a rating.</p>
+<% end %>
 
   <% if user_signed_in? %>
-    <h4>Your Rating:</h4>
-    <div data-controller="rating"
-        data-rating-type="bean"
-        data-rating-id="<%= @bean.id %>"
-        data-rating-user-rating="<%= @bean.bean_reviews.find_by(user: current_user)&.rating || 0 %>">
+    <div data-controller="favourite" data-bean-id="<%= @bean.id %>">
+      <% if current_user.favourite_beans.exists?(bean: @bean) %>
+        <%= link_to "Unfavourite", bean_favourite_bean_path(@bean),
+          method: :delete, remote: true, class: "btn btn-danger",
+          data: { action: "click->favourite#toggle", turbo_method: "delete", turbo_action: "replace" } %>
+      <% else %>
+        <%= link_to "Favourite", bean_favourite_bean_path(@bean),
+          method: :post, remote: true, class: "btn btn-primary",
+          data: { action: "click->favourite#toggle", turbo_method: "post", turbo_action: "replace" } %>
+      <% end %>
+    </div>
+  <% end %>
 
-      <div class="stars">
-        <% (1..5).each do |star| %>
-          <span class="star cursor-pointer"
-                data-action="click->rating#submitRating"
-                data-rating-value="<%= star %>">
-            ⭐
-          </span>
+  <h3>Photos</h3>
+  <!-- use cards to display images for dimensions -->
+  <% if @bean.photos.attached? %>
+    <div id="beanPhotosCarousel" class="carousel slide bean-photo-carousel mt-4" data-bs-interval="false">
+      <div class="carousel-inner">
+        <% @bean.photos.each_slice(4).with_index do |photo_group, index| %>
+          <div class="carousel-item <%= 'active' if index.zero? %>">
+            <div class="d-flex flex-wrap justify-content-center">
+              <% photo_group.each do |photo| %>
+                <div class="card mx-2 fixed-card">
+                  <img src="<%= url_for(photo) %>" class="card-img-top bean-card-image" alt="Bean Photo">
+                </div>
+              <% end %>
+            </div>
+          </div>
         <% end %>
       </div>
-      <p class="rating-message hidden text-green-600"></p>
+
+      <!-- arrows -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#beanPhotosCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+
+      <button class="carousel-control-next" type="button" data-bs-target="#beanPhotosCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
     </div>
   <% else %>
-    <p class="mt-4 text-sm text-gray-600">Sign in to leave a rating.</p>
+    <p class="no-photos-message">Be the first to add a photo!</p>
   <% end %>
 
 
-  <h3>Photos</h3>
-  <div>
-    <% @bean.photos.each do |photo| %>
-      <%= image_tag photo, width: 300, height: 200 %>
-    <% end %>
-  </div>
 
   <h4>Add Photos</h4>
 
@@ -195,8 +238,8 @@
 
 
   <div class="mt-4">
-  <%= link_to "Edit Bean", edit_bean_path(@bean), class: "btn" %>
-</div>
+    <%= link_to "Edit Bean", edit_bean_path(@bean), class: "btn" %>
+  </div>
 
   <h4>All Comments</h4>
 
