@@ -5,15 +5,13 @@
 
 </div>
 
-<div class="filters-container">
+<div class="search-container d-flex justify-content-center mt-3">
   <%= form_with(url: beans_path, method: :get, local: true, class: "filter-form") do |form| %>
-
-<div class="search-container d-flex justify-content-center">
-  <div class="search-bar d-flex justify-content-center">
+  <div class="input-search d-flex justify-content-center">
     <%= form.label :query, 'Search Beans ', class: "sr-only" %>
     <%= form.text_field :query, value: params[:query], placeholder: "Search beans ...", class: "search-input" %>
   </div>
-  <div class="search-btn d-flex justify-content-center">
+  <div class="btn-search d-flex justify-content-center">
     <%= form.submit 'Search', class: 'btn btn-primary' %>
   </div>
 </div>
@@ -54,8 +52,7 @@
 
           <!-- favori-->
           <% if user_signed_in? %>
-          <img src="<%= bean.main_photo.attached? ? url_for(bean.main_photo) : 'https://your-default-image-url.com' %>"
-            class="card-img-top" alt="<%= bean.name %>">
+          <img src="<%= bean.image %>" class="card-img-top" alt="<%= bean.name %>">
 
           <div data-controller="favourite" data-bean-id="<%= bean.id %>"class="favorite-btn-container">
             <%= link_to bean_favourite_bean_path(bean),
