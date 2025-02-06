@@ -54,18 +54,43 @@
   <% end %> -->
 
   <h3>Photos</h3>
-  <div>
-    <% @roastery.photos.each do |photo| %>
-      <%= image_tag photo, width: 300, height: 200 %>
-    <% end %>
-  </div>
+  <% if @roastery.photos.attached? %>
+    <div id="roasteryPhotosCarousel" class="carousel slide roastery-photo-carousel mt-4" data-bs-interval="false">
+      <div class="carousel-inner">
+        <% @roastery.photos.each_slice(4).with_index do |photo_group, index| %>
+          <div class="carousel-item <%= 'active' if index.zero? %>">
+            <div class="d-flex flex-wrap justify-content-center">
+              <% photo_group.each do |photo| %>
+                <div class="card mx-2 fixed-card">
+                  <img src="<%= url_for(photo) %>" class="card-img-top roastery-card-image" alt="Roastery Photo">
+                </div>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
 
+      <button class="carousel-control-prev" type="button" data-bs-target="#roasteryPhotosCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+
+      <button class="carousel-control-next" type="button" data-bs-target="#roasteryPhotosCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  <% else %>
+    <p class="no-photos-message">Be the first to add a photo!</p>
+  <% end %>
+
+  <!-- Upload Form -->
   <h4>Add Photos</h4>
-
   <%= form_with model: @roastery, url: roastery_roastery_photos_path(@roastery), method: :post, local: true, multipart: true do |form| %>
     <%= form.file_field :photos, multiple: true, accept: "image/*" %>
     <%= form.submit "Upload" %>
   <% end %>
+
 
   <h4>Locations:</h4>
   <ul>
