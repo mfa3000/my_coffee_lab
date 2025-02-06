@@ -97,13 +97,16 @@
 }
 
 .category-icon {
-  color: $brown;
+  color: rgb(0, 0, 0);
   margin-left: 0.6rem;
   font-size: 1.2rem;
+  width: 20px;
+  height: auto;
+  vertical-align: middle;
 }
 
 .favourite-icon {
-  color: rgb(193, 52, 9);
+  color: rgb(157, 40, 4);
   margin-left: 0.6rem;
   font-size: 1.2rem;
 }

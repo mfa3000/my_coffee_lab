@@ -17,7 +17,7 @@
     <div class="profile-content">
       <div class="section">
         <h5 class=$body-font>
-          Your Favorite Beans <i class="fas fa-heart category-icon"></i>
+          Your Favorite Beans <i class="fas fa-heart favourite-icon"></i>
         </h5>
         <% if @user.favourite_beans.any? %>
           <div class="image-grid">
@@ -38,7 +38,7 @@
 
       <div class="section">
         <h5>
-          Your Favorite Roasteries <i class="fas fa-heart category-icon"></i>
+          Your Favorite Roasteries <i class="fas fa-heart category-icon favourite-icon"></i>
         </h5>
         <% if @user.favourite_roasteries.any? %>
           <div class="image-grid">
@@ -59,7 +59,7 @@
 
       <div class="section">
         <h5>
-          Beans Created by You <i class="fas fa-coffee-bean category-icon"></i>
+          Beans Created by You <%= image_tag("bean_icon.png", class: "category-icon", alt: "Coffee Bean Icon") %>
         </h5>
         <% if @user_beans.any? %>
           <div class="image-grid">
