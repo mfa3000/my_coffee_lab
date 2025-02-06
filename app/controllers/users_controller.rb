@@ -1,8 +1,5 @@
 class UsersController < ApplicationController
-  # before_a has_many :favourite_beans, dependent: :destroy
-
-  has_many :favourite_beans, dependent: :destroy
-  has_many :favourite_beans, through: :favourite_beans, source: :bean
+  before_action :authenticate_user!
 
   def profile
     @user = current_user
