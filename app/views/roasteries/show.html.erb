@@ -1,59 +1,74 @@
-<div class="container">
-  <h1><%=@roastery.name%></h1>
-  <% if @roastery.main_photo.attached? %>
-    <img src="<%= url_for(@roastery.main_photo) %>" alt="Roastery Photo" class="rounded shadow-lg w-full h-auto">
-  <% end %>
-
-  <ul>
-    <li>Description: <%=@roastery.description%></li>
-    <li>Roastery URL: <%=@roastery.roastery_url%></li>
-  </ul>
-
-  <h4 style="margin-top: 300px" class="mt-6 text-lg font-bold">
-    Average Rating:
-    <span id="average-rating-<%= @roastery.id %>">
-      <%= @roastery.average_rating || "No ratings yet" %>
-    </span>
-    <i class="fas fa-star" style="color: #333D29;"></i>
-  </h4>
-
-  <% if user_signed_in? %>
-    <h4>Your Rating:</h4>
-    <div data-controller="rating"
-        data-rating-type="roastery"
-        data-rating-id="<%= @roastery.id %>"
-        data-rating-user-rating="<%= @roastery.roastery_reviews.find_by(user: current_user)&.rating || 0 %>">
-
-      <div class="stars">
-        <% (1..5).each do |star| %>
-          <span class="star cursor-pointer"
-                data-action="click->rating#submitRating"
-                data-rating-value="<%= star %>">
-            <i class="fas fa-star"></i>
-          </span>
-        <% end %>
+<div class="container container-details">
+  <div class="row">
+    <div class="col-lg-5 position-relative image-container favorite-image-container" data-controller="favourite" data-roasteryn-id="<%= @roastery.id %>">
+      <% if @roastery.main_photo.attached? %>
+        <img src="<%= url_for(@roastery.main_photo) %>" alt="Roastery Photo" class="rounded shadow-lg w-full h-auto">
+      <% end %>
+          <!-- Heart Favorite Icon -->
+      <% if user_signed_in? %>
+        <div class="favorite-btn-container">
+          <%= link_to roastery_favourite_roastery_path(@roastery),
+            method: (current_user.favourite_roasteries.exists?(roastery: @roastery) ? :delete : :post),
+            remote: true,
+            class: "btn btn-light position-relative m-2 favorite-btn",
+            data: { action: "click->favourite#toggle", turbo_method: (current_user.favourite_roasteries.exists?(roastery: @roastery) ? "delete" : "post"), turbo_action: "replace" } do %>
+            <i class="fa-solid fa-heart <%= 'text-danger' if current_user.favourite_roasteries.exists?(roastery: @roastery) %>"></i>
+            <span id="favourites-count-<%= @roastery.id %>" class="ms-2"><%= @roastery.favourite_roasteries.count %></span>
+          <% end %>
+        </div>
+      <% end %>
       </div>
-      <p class="rating-message hidden text-green-600"></p>
+
+      <div class="col-lg-7 pt-3">
+        <p class="float-end">
+          ø
+          <span id="average-rating-<%= @roastery.id %>">
+          <%= @roastery.average_rating || "No ratings yet" %>
+          </span>
+          <i class="fas fa-star" style="color: #333D29;"></i>
+        </p>
+
+        <h1 class="mt-2"><%=@roastery.name%></h1>
+        <p class="pt-1"><%=@roastery.description%>
+  </div>
+</div>
+
+<div class="search-divider"></div>
+  <h3>Rating</h3>
+      <p>
+        Community Rating: ø
+        <span id="average-rating-<%= @roastery.id %>">
+        <%= @roastery.average_rating || "No ratings yet" %>
+        </span>
+        <i class="fas fa-star" style="color: #333D29;"></i>
+      </p>
+<% if user_signed_in? %>
+
+  <div data-controller="rating"
+       data-rating-type="roastery"
+       data-rating-id="<%= @roastery.id %>"
+       data-rating-user-rating="<%= @roastery.roastery_reviews.find_by(user: current_user)&.rating || 0 %>">
+
+    <div class="stars">
+      <p>Your Rating:
+      <% (1..5).each do |star| %>
+        <span class="star cursor-pointer"
+              data-action="click->rating#submitRating"
+              data-rating-value="<%= star %>">
+          <i class="fas fa-star"></i>
+        </span>
+      <% end %>
+      </p>
+    </div>
+    <p class="rating-message hidden text-green-600"></p>
     </div>
   <% else %>
     <p class="mt-4 text-sm text-gray-600">Sign in to leave a rating.</p>
   <% end %>
 
-  <!-- <% if user_signed_in? %>
-    <div data-controller="favourite" data-roastery-id="<%= @roastery.id %>">
-      <% if current_user.favourite_roasteries.exists?(roastery: @roastery) %>
-        <%= link_to "Unfavourite", roastery_favourite_roastery_path(@roastery),
-          method: :delete, remote: true, class: "btn btn-danger",
-          data: { action: "click->favourite#toggle", turbo_method: "delete", turbo_action: "replace" } %>
-      <% else %>
-        <%= link_to "Favourite", roastery_favourite_roastery_path(@roastery),
-          method: :post, remote: true, class: "btn btn-primary",
-          data: { action: "click->favourite#toggle", turbo_method: "post", turbo_action: "replace" } %>
-      <% end %>
-    </div>
-  <% end %> -->
+<div class="search-divider"></div>
 
-  <h3>Photos</h3>
+  <h3>Community Photos </h3>
   <% if @roastery.photos.attached? %>
     <div id="roasteryPhotosCarousel" class="carousel slide roastery-photo-carousel mt-4" data-bs-interval="false">
       <div class="carousel-inner">
@@ -84,39 +99,49 @@
     <p class="no-photos-message">Be the first to add a photo!</p>
   <% end %>
 
-  <!-- Upload Form -->
-  <h4>Add Photos</h4>
+
   <%= form_with model: @roastery, url: roastery_roastery_photos_path(@roastery), method: :post, local: true, multipart: true do |form| %>
     <%= form.file_field :photos, multiple: true, accept: "image/*" %>
     <%= form.submit "Upload" %>
   <% end %>
 
 
-  <h4>Locations:</h4>
+<div class="search-divider"></div>
+
+<h4>Locations:</h4>
+<div class="location">
   <ul>
     <% @roastery.locations.each do |location| %>
-      <ul>
-        <strong>Type:</strong> <%= location.location_type %><br>
-        <strong>Address:</strong> <%= location.address %>
-      </ul>
-    <% end %>
-    <%= link_to "Edit Roastery", edit_roastery_path(@roastery), class: "btn mt-4" %>
+  <ul>
+    <strong>Type:</strong> <%= location.location_type %><br>
+    <strong>Address:</strong> <%= location.address %>
   </ul>
+  <% end %>
+  <%= link_to "Edit Roastery", edit_roastery_path(@roastery), class: "btn mt-4" %>
+  </ul>
+</div>
+
+
+<div class="search-divider"></div>
 
   <h4>All Comments</h4>
 
-  <div id="roastery_<%= @roastery.id %>_comments">
+  <div  class="comment" id="roastery_<%= @roastery.id %>_comments">
     <%= render @roastery.roastery_comments %>
+    <%= turbo_stream_from "roastery_#{@roastery.id}_comments" %>
+
   </div>
 
-  <%= turbo_stream_from "roastery_#{@roastery.id}_comments" %>
+  <div  class="comment_input">
+    <%= simple_form_for [@roastery, RoasteryComment.new],
+      html: { data: { controller: "reset-form", action: "turbo:submit-end->reset-form#reset" } } do |f| %>
 
-<%= simple_form_for [@roastery, RoasteryComment.new],
-  html: { data: { controller: "reset-form", action: "turbo:submit-end->reset-form#reset" } } do |f| %>
+      <%= f.text_area :comment, placeholder: "Write a comment..." %>
+      <%= f.submit "Post" %>
+    <% end %>
+  </div>
 
-  <%= f.text_area :comment, placeholder: "Write a comment..." %>
-  <%= f.submit "Post" %>
-<% end %>
-</div>
+<div class="search-divider"></div>
+
 
 <p>Roastery ID: <%= @roastery.id %></p>
