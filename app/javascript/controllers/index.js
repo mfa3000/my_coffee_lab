@@ -13,9 +13,14 @@ document.addEventListener("DOMContentLoaded", function() {
   const filterFields = document.querySelectorAll('.filter-options select');
   const searchInput = document.querySelector(".search-input");
 
+  if (filterOptions) {
+    filterOptions.style.display = "none"; // Masquer au départ pour éviter un état incohérent
+  }
+
   if (toggleButton && filterOptions) {
     toggleButton.addEventListener("click", function() {
-      filterOptions.style.display = filterOptions.style.display === "block" ? "none" : "block";
+      const currentDisplay = window.getComputedStyle(filterOptions).display;
+      filterOptions.style.display = currentDisplay === "none" ? "block" : "none";
     });
   }
 
@@ -33,10 +38,7 @@ document.addEventListener("DOMContentLoaded", function() {
         field.value = '';
       });
 
-
       resetFiltersLink.style.display = 'none';
-
-
       filterOptions.style.display = "block";
     });
   }
@@ -45,8 +47,6 @@ document.addEventListener("DOMContentLoaded", function() {
     searchInput.addEventListener('input', function() {
       if (searchInput.value === '') {
         resetFiltersLink.style.display = 'none';
-
-
         filterFields.forEach(function(field) {
           field.value = '';
         });
@@ -54,5 +54,3 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   }
 });
-
-// cards
