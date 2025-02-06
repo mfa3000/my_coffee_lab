@@ -19,5 +19,4 @@ class Bean < ApplicationRecord
   def favourites_count
     favourite_beans.count
   end
-  
 end
