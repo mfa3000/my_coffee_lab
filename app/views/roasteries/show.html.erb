@@ -102,7 +102,7 @@
 
   <%= form_with model: @roastery, url: roastery_roastery_photos_path(@roastery), method: :post, local: true, multipart: true do |form| %>
     <%= form.file_field :photos, multiple: true, accept: "image/*" %>
-    <%= form.submit "Upload" %>
+    <%= form.submit "Upload", class: "btn btn-tertiary my-3"%>
   <% end %>
 
 
@@ -126,20 +126,17 @@
 
   <h4>All Comments</h4>
 
-  <div  class="comment" id="roastery_<%= @roastery.id %>_comments">
+  <div  id="roastery_<%= @roastery.id %>_comments">
     <%= render @roastery.roastery_comments %>
-    <%= turbo_stream_from "roastery_#{@roastery.id}_comments" %>
-
   </div>
+  <%= turbo_stream_from "roastery_#{@roastery.id}_comments" %>
 
-  <div  class="comment_input">
-    <%= simple_form_for [@roastery, RoasteryComment.new],
-      html: { data: { controller: "reset-form", action: "turbo:submit-end->reset-form#reset" } } do |f| %>
+<%= simple_form_for [@roastery, RoasteryComment.new],
+  html: { data: { controller: "reset-form", action: "turbo:submit-end->reset-form#reset" } } do |f| %>
 
-      <%= f.text_area :comment, placeholder: "Write a comment..." %>
-      <%= f.submit "Post" %>
-    <% end %>
-  </div>
+  <%= f.text_area :comment, placeholder: "Add a comment...", class: "rounded-2 p-2 mt-4 mb-2 w-100" %>
+  <%= f.submit "Post", class: "btn btn-tertiary" %>
+<% end %>
 
 <div class="search-divider"></div>
 
