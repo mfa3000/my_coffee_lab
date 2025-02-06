@@ -1,11 +1,8 @@
 <div class="container profile-container">
     <div class="profile-header">
       <div class="avatar-container">
-        <% if @user.avatar.attached? %>
-          <img src="<%= url_for(@user.avatar) %>" alt="User Avatar" class="avatar">
-        <% else %>
-          <img src="https://via.placeholder.com/150" alt="User Avatar" class="avatar">
-        <% end %>
+        <img src="<%= @user.avatar.attached? ? url_for(@user.avatar) : 'https://via.placeholder.com/150' %>"
+            alt="User Avatar" class="avatar">
       </div>
       <h4 class="username"><%= @user.user_name %></h4>
       <p class="email"><%= @user.email %></p>
@@ -24,7 +21,8 @@
             <% @user.favourite_beans.each do |favourite| %>
               <div class="image-item">
                 <%= link_to bean_path(favourite.bean) do %>
-                  <img src="<%= favourite.bean.image.present? ? favourite.bean.image : 'https://via.placeholder.com/150' %>" alt="<%= favourite.bean.name %>" class="bean-image">
+                  <img src="<%= favourite.bean.main_photo.attached? ? url_for(favourite.bean.main_photo) : 'https://res.cloudinary.com/dtqchggeh/image/upload/v1738669535/AdobeStock_297520243_compressed_vsea7t.png' %>"
+                     alt="<%= favourite.bean.name %>" class="bean-image">
                   <p class="item-name"><%= favourite.bean.name %></p>
                 <% end %>
               </div>
@@ -44,7 +42,8 @@
             <% @user.favourite_roasteries.each do |favourite| %>
               <div class="image-item">
                 <%= link_to roastery_path(favourite.roastery) do %>
-                  <img src="<%= favourite.roastery.image.present? ? favourite.roastery.image : 'https://via.placeholder.com/150' %>" alt="<%= favourite.roastery.name %>" class="roastery-image">
+                  <img src="<%= favourite.roastery.main_photo.attached? ? url_for(favourite.roastery.main_photo) : 'https://res.cloudinary.com/dtqchggeh/image/upload/v1738670181/AdobeStock_108622833_Preview_ppobqc.png' %>"
+                     alt="<%= favourite.roastery.name %>" class="roastery-image">
                   <p class="item-name"><%= favourite.roastery.name %></p>
                 <% end %>
               </div>
@@ -64,7 +63,8 @@
             <% @user_beans.each do |bean| %>
               <div class="image-item">
                 <%= link_to bean_path(bean) do %>
-                  <img src="<%= bean.image.present? ? bean.image : 'https://via.placeholder.com/150' %>" alt="<%= bean.name %>" class="bean-image">
+                  <img src="<%= bean.main_photo.attached? ? url_for(bean.main_photo) : 'https://res.cloudinary.com/dtqchggeh/image/upload/v1738669535/AdobeStock_297520243_compressed_vsea7t.png' %>"
+                     alt="<%= bean.name %>" class="bean-image">
                   <p class="item-name"><%= bean.name %></p>
                 <% end %>
                 <%= link_to edit_bean_path(bean), class: "edit-icon" do %>
@@ -87,7 +87,8 @@
             <% @user_places.each do |place| %>
               <div class="image-item">
                 <%= link_to roastery_path(place) do %>
-                  <img src="<%= place.image.present? ? place.image : 'https://via.placeholder.com/150' %>" alt="<%= place.name %>" class="roastery-image">
+                  <img src="<%= place.main_photo.attached? ? url_for(place.main_photo) : 'https://res.cloudinary.com/dtqchggeh/image/upload/v1738670181/AdobeStock_108622833_Preview_ppobqc.png' %>"
+                     alt="<%= place.name %>" class="roastery-image">
                   <p class="item-name"><%= place.name %></p>
                 <% end %>
                 <%= link_to edit_roastery_path(place), class: "edit-icon" do %>
