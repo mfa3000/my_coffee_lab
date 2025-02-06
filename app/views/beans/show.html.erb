@@ -109,7 +109,7 @@
 
   <%= form_with model: @bean, url: bean_bean_photos_path(@bean), method: :post, local: true, multipart: true do |form| %>
     <%= form.file_field :photos, multiple: true, accept: "image/*" %>
-    <%= form.submit "Upload" %>
+    <%= form.submit "Upload", class: "btn btn-tertiary my-3" %>
   <% end %>
 
 
@@ -166,14 +166,14 @@
 <%= simple_form_for [@bean, BeanComment.new],
   html: { data: { controller: "reset-form", action: "turbo:submit-end->reset-form#reset" } } do |f| %>
 
-  <%= f.text_area :comment, placeholder: "Add a comment..." %>
-  <%= f.submit "Post" %>
+  <%= f.text_area :comment, placeholder: "Add a comment...", class: "rounded-2 p-2 mt-4 mb-2 w-100" %>
+  <%= f.submit "Post", class: "btn btn-tertiary" %>
 <% end %>
 
 <div class="search-divider"></div>
 
   <div class="mt-4">
-  <p> Anything not correct?
+  <p> Anything incorrect?
     <%= link_to "Edit Bean >", edit_bean_path(@bean), class: "link-primary" %>
   </p>
   </div>
