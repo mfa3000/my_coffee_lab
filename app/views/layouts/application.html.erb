@@ -11,7 +11,14 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
 
     <%= javascript_importmap_tags %>
+    <%= favicon_link_tag 'favicon-32x32.png', rel: 'icon', type: 'image/png', sizes: '32x32' %>
 
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="MyCoffeeLab - A Hub for Coffee Lovers">
+    <meta property="og:description" content="Explore coffee beans, roasteries, share your recipes, and connect with the coffee community.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="<%= request.original_url %>">
+    <meta property="og:image" content="<%= image_url('og-image.png') %>">
   </head>
 
   <body>
