@@ -29,7 +29,7 @@
             <% end %>
 
             <% if user_signed_in? %>
-              <div data-controller="favourite" data-roastery-id="<%= roastery.id %>" class="position-absolute top-0 end-0 m-2">
+              <div data-controller="favourite" data-roastery-id="<%= roastery.id %>" class="favorite-btn-container">
                 <%= link_to roastery_favourite_roastery_path(roastery),
                   method: (current_user.favourite_roasteries.exists?(roastery: roastery) ? :delete : :post),
                   remote: true,
