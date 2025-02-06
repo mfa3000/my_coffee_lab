@@ -48,9 +48,14 @@
         <div class="card h-100 shadow-sm position-relative">
 
 
-          <!-- favori-->
+          <!-- favorite -->
+
           <% if user_signed_in? %>
-          <img src="<%= bean.image %>" class="card-img-top" alt="<%= bean.name %>">
+            <% if bean.main_photo.attached? %>
+              <%= image_tag bean.main_photo, class: "card-img-top" %>
+            <% else %>
+              <img src="default-image.jpg" class="card-img-top" alt="Default Image">
+            <% end %>
 
           <div data-controller="favourite" data-bean-id="<%= bean.id %>"class="favorite-btn-container">
             <%= link_to bean_favourite_bean_path(bean),
