@@ -12,6 +12,8 @@ class Roastery < ApplicationRecord
   validates :name, presence: true
   validates :description, presence: true
 
+  geocoded_by :address
+
   def average_rating
     return 0 if roastery_reviews.empty?
     roastery_reviews.average(:rating).round(1)
