@@ -144,31 +144,36 @@
 =end%>
 
 
+<h4 style="margin-top: 300px" class="mt-6 text-lg font-bold">
+  Average Rating:
+  <span id="average-rating-<%= @bean.id %>">
+    <%= @bean.average_rating || "No ratings yet" %>
+  </span>
+  <i class="fas fa-star" style="color: #333D29;"></i>
+</h4>
 
 
-<h4 style="margin-top: 300px"class="mt-6 text-lg font-bold">Average Rating: <span id="average-rating-<%= @bean.id %>"><%= @bean.average_rating || "No ratings yet" %></span> ⭐</h4>
+<% if user_signed_in? %>
+  <h4>Your Rating:</h4>
+  <div data-controller="rating"
+       data-rating-type="bean"
+       data-rating-id="<%= @bean.id %>"
+       data-rating-user-rating="<%= @bean.bean_reviews.find_by(user: current_user)&.rating || 0 %>">
 
-  <% if user_signed_in? %>
-    <h4>Your Rating:</h4>
-    <div data-controller="rating"
-        data-rating-type="bean"
-        data-rating-id="<%= @bean.id %>"
-        data-rating-user-rating="<%= @bean.bean_reviews.find_by(user: current_user)&.rating || 0 %>">
-
-      <div class="stars">
-        <% (1..5).each do |star| %>
-          <span class="star cursor-pointer"
-                data-action="click->rating#submitRating"
-                data-rating-value="<%= star %>">
-            ⭐
-          </span>
-        <% end %>
-      </div>
-      <p class="rating-message hidden text-green-600"></p>
+    <div class="stars">
+      <% (1..5).each do |star| %>
+        <span class="star cursor-pointer"
+              data-action="click->rating#submitRating"
+              data-rating-value="<%= star %>">
+          <i class="fas fa-star"></i>
+        </span>
+      <% end %>
     </div>
-  <% else %>
-    <p class="mt-4 text-sm text-gray-600">Sign in to leave a rating.</p>
-  <% end %>
+    <p class="rating-message hidden text-green-600"></p>
+  </div>
+<% else %>
+  <p class="mt-4 text-sm text-gray-600">Sign in to leave a rating.</p>
+<% end %>
 
   <% if user_signed_in? %>
     <div data-controller="favourite" data-bean-id="<%= @bean.id %>">
