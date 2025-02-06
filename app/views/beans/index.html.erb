@@ -10,9 +10,7 @@
   <div class="input-search d-flex justify-content-center">
     <%= form.label :query, 'Search Beans ', class: "sr-only" %>
     <%= form.text_field :query, value: params[:query], placeholder: "Search beans ...", class: "search-input" %>
-  </div>
-  <div class="btn-search d-flex justify-content-center">
-    <%= form.submit 'Search', class: 'btn btn-primary' %>
+    <%= form.submit 'Search', class: 'btn btn-primary search-btn' %>
   </div>
 </div>
 

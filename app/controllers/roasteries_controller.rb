@@ -12,14 +12,18 @@ class RoasteriesController < ApplicationController
     @roasteries = Roastery.includes(:locations).all
 
     if params[:location].present?
-      results = Geocoder.search(params[:location])
-      if results.present?
-        latitude = results.first.coordinates[0]
-        longitude = results.first.coordinates[1]
+      location = Geocoder.search(params[:location])
+
+      if location.present?
+        # raise
+        latitude = location.first.coordinates[0]
+        longitude = location.first.coordinates[1]
+
+        @roasteries = Roastery.near([latitude, longitude], 50)
+        # raise
       end
-      @roasteries = Roastery.where(
-        id: Location.near([latitude, longitude], 50).pluck(:roastery_id))
     end
+    
     @markers = []
     @roasteries.each do |roastery|
       roastery.locations.each do |location|

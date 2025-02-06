@@ -73,6 +73,7 @@ roasteries_data.each_with_index do |data, index|
     name: data[:name],
     description: data[:description],
     image: data[:image_url],
+    address: data[:address],
     roastery_url: "https://#{data[:name].parameterize}.com",
     user: users.sample
   )
