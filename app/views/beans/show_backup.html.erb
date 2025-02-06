@@ -1,0 +1,190 @@
+<%
+=begin%>
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="..." class="d-block w-100" alt="...">
+      <p>test1</p>
+    </div>
+    <div class="carousel-item">
+      <img src="..." class="d-block w-100" alt="...">
+            <p>test2</p>
+
+    </div>
+    <div class="carousel-item">
+      <img src="..." class="d-block w-100" alt="...">
+            <p>test3</p>
+
+    </div>
+  </div>
+</div>
+
+
+ <div class="row">
+<div class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner py-3">
+
+    <% @bean.recipes.each_slice(3).with_index do |recipe_slice, index| %>
+
+      <!-- Slide for Large Screens (3 items per slide) -->
+      <div class="carousel-item <%= index.zero? ? 'active' : '' %> d-none d-lg-block">
+        <%
+=begin%>
+ <div class="container">
+          <div class="row">
+            <% recipe_slice.each do |recipe| %>
+              <div class="col-lg-3 d-flex align-items-stretch">
+                <div class="card recipe-card">
+                  <div class="card-body">
+                    <% if recipe.user == current_user %>
+                      <%= link_to edit_bean_recipe_path(@bean, recipe) do %>
+                        <i class="float-end fas fa-edit"></i>
+                      <% end %>
+                    <% end %>
+                    <h4><%= recipe.name %></h4>
+                    <p><%= recipe.instructions %></p>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+      <div><%= index %></div>
+      </div>
+
+    <% end %>
+
+    <!-- Slide for Mobile (1 item per slide) -->
+
+ <% @bean.recipes.each_with_index do |recipe, index| %>
+      <div class="carousel-item <%= index.zero? ? 'active' : '' %> d-block d-lg-none">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-10">
+              <div class="card recipe-card">
+                <div class="card-body">
+                  <% if recipe.user == current_user %>
+                    <%= link_to edit_bean_recipe_path(@bean, recipe) do %>
+                      <i class="float-end fas fa-edit"></i>
+                    <% end %>
+                  <% end %>
+                  <h4><%= recipe.name %></h4>
+                  <p><%= recipe.instructions %></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+</div>
+  </div>
+</div>
+<%
+=end%>
+
+
+
+<%
+=begin%>
+    <div class="recipes pt-5">
+      <h2>Community Recipes</h2>
+      <!-- Carousel recipes -->
+
+        <% if @bean.recipes.any? %>
+          <div class="carousel slide" data-bs-ride="false">
+            <div class="carousel-inner py-3">
+              <% @bean.recipes.each_slice(3).with_index do |recipe_slice, index| %>
+                <div class="carousel-item <%= index.zero? ? 'active' : '' %> d-block d-md-none">
+                  <div class="d-flex justify-content-start">
+                    <% recipe_slice.each do |recipe| %>
+                      <div class="col-lg-4 d-flex align-items-stretch">
+                        <div class="card recipe-card">
+                          <div class="card-body">
+                            <% if recipe.user == current_user %>
+                                  <%= link_to edit_bean_recipe_path(@bean, recipe) do%>
+                                  <i class="float-end fas fa-edit"></i>
+                                  <% end %>
+                            <% end %>
+                            <h4><%= recipe.name %></h4>
+                            <p><%= recipe.instructions %></p>
+                          </div>
+                        </div>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+
+
+       <!-- no recipes no carousel-->
+        <% else %>
+          <p>No recipes yet.</p>
+        <% end %>
+
+        <%= link_to "Add Recipe", new_bean_recipe_path(@bean), class: "btn btn-submit mt-4" %>
+    </div>
+</div>
+
+
+
+    <%= link_to "Edit", edit_bean_recipe_path(@bean, recipe), class: "underline" %>
+                      <%= link_to "Delete", bean_recipe_path(@bean, recipe),
+                        method: :delete,
+                        data: { turbo_method: :delete, confirm: "Are you sure?" },
+                        class: "underline ml-2" %>
+
+<%
+=end%>
+
+
+
+        <%
+=begin%>
+ <ul class="list-disc pl-6">
+        <% @bean.recipes.each do |recipe| %>
+          <li class="">
+            <strong><%= recipe.name %></strong>
+            <p><%= recipe.instructions %></p>
+            <% if recipe.user == current_user %>
+              <%= link_to "Edit", edit_bean_recipe_path(@bean, recipe), class: "underline" %>
+              <%= link_to "Delete", bean_recipe_path(@bean, recipe),
+                  method: :delete,
+                  data: { turbo_method: :delete, confirm: "Are you sure?" },
+                  class: "underline ml-2" %>
+            <% end %>
+          </li>
+        <% end %>
+        </ul>
+        </div>
+         <% else %>
+          <p>No recipes yet.</p>
+        <% end %>
+        <%= link_to "Add Recipe", new_bean_recipe_path(@bean), class: "btn btn-submit mt-4" %>
+
+    </div>
+  </div>
+<%
+=end%>
+
+<%
+=begin%>
+ t.string "name"
+    t.text "description"
+    t.string "image"
+    t.string "roast_level"
+    t.string "brewing_method"
+    t.bigint "user_id", null: false
+    t.bigint "roastery_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "origin"
+    t.string "flavour"
+    t.index ["roastery_id"], name: "index_beans_on_roastery_id"
+    t.index ["user_id"], name: "index_beans_on_user_id"
+<%
+=end%>

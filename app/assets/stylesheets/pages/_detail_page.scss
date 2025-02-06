@@ -1,18 +1,21 @@
 .responsive-image {
-  max-width: 100%;
-  height: auto;
-  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+
 
 }
 
 .image-container {
   max-width: 100%; /* Ensure the container does not exceed its parent's width */
   overflow: hidden; /* Hide any overflow content */
+  max-height: 350px;
 }
 
 
 .container-details {
-  background-color: $lightest-green-050;
+  // background-color: $lightest-green-050;
   padding: 2rem;
 }
 
@@ -27,4 +30,8 @@
 
 .recipe-card:hover {
   transform: none;
+}
+
+.recipe-card {
+  background-color: $lightest-green-050;
 }
