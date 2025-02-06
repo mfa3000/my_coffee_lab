@@ -17,14 +17,14 @@
     <div data-controller="vote" data-bean-comment-id="<%= bean_comment.id %>">
       <% if bean_comment.bean_comment_votes.exists?(user: current_user) %>
         <%= link_to "❤️", bean_bean_comment_bean_comment_votes_path(@bean, bean_comment, bean_comment.bean_comment_votes.find_by(user: current_user)),
-            data: { action: "click->vote#toggle", turbo_method: :delete }, class: "btn btn-danger" %>
+            data: { action: "click->vote#toggle", turbo_method: :delete }, class: "" %>
       <% else %>
         <%= link_to "🤍", bean_bean_comment_bean_comment_votes_path(@bean, bean_comment, BeanCommentVote.new),
-            data: { action: "click->vote#toggle", turbo_method: :post }, class: "btn btn-primary" %>
+            data: { action: "click->vote#toggle", turbo_method: :post }, class: "" %>
       <% end %>
+      <span id="votes-count-<%= bean_comment.id %>"><%= bean_comment.votes_count %></span>
     </div>
   <% end %>
 
-  <span id="votes-count-<%= bean_comment.id %>"><%= bean_comment.votes_count %></span>
-
+  
 </div>
