@@ -124,6 +124,18 @@ label {
 }
 
 // 🔹 Improve Buttons
+
+.form-btn-primary {
+  background-color: $brown;
+  color: white;
+  border: none;
+  margin-bottom: 20px;
+
+  &:hover {
+    background-color: $dark-brown;
+  }
+}
+
 .form-btn {
   padding: 4px 16px;
   background-color: #fff;
