@@ -15,4 +15,8 @@ class Bean < ApplicationRecord
     return 0 if bean_reviews.empty?
     bean_reviews.average(:rating).round(1)
   end
+
+  def favourites_count
+    favourite_beans.count
+  end
 end

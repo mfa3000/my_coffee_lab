@@ -1,0 +1,11 @@
+.section-divider {
+  border: none;
+  height: 2px;
+  background-color: $dark-green;
+  width: 100%;
+}
+
+.section-divider-container {
+  max-width: 600px;
+  margin: 2rem auto;
+}

@@ -123,14 +123,6 @@ bean_data = [
   { name: "Geisha Reserve", description: "One of the most prized coffees in the world, this Geisha variety delivers exceptional floral aromas, vibrant acidity, and a tea-like body.", image_url:"https://res.cloudinary.com/dtqchggeh/image/upload/v1738747978/bean_2_nsjbfu.png" },
 
   { name: "Mountain Chiapas", description: "This organic Mexican coffee showcases bright acidity, milk chocolate sweetness, and hints of roasted nuts.", image_url:"https://res.cloudinary.com/dtqchggeh/image/upload/v1738747977/bean_1_vuykht.png" }
-
-  # { name: "Andean Breeze", description: "A mild and smooth Peruvian coffee with caramel sweetness, citrus notes, and a clean finish.", image_url:"" },
-
-  # { name: "Monsoon Malabar Bold", description: "Uniquely processed, this Indian coffee has a bold, spicy character with low acidity and a syrupy mouthfeel.", image_url:"" },
-
-  # { name: "Red Bourbon Selection", description: "A complex Rwandan coffee with red fruit notes, floral aromas, and a silky body.", image_url:"" },
-
-  # { name: "Spiced Mocha", description: "A rare and ancient Yemeni coffee with winey acidity, deep chocolate notes, and hints of exotic spices.", image_url:"" }
 ]
 
 brewing_method = ["espresso", "filter"]
@@ -161,24 +153,107 @@ end
 puts "fake beans created"
 
 puts "creating fake data for bean comments"
+bean_comments_texts = [
+  "Super clean acidity—bright, citrusy, and great as a pour-over.",
+  "Rich chocolate and caramel notes—perfect for espresso lovers!",
+  "Smooth and nutty with a touch of spice—amazing as a French press!",
+  "This bean has incredible sweetness—almost like honey in your cup.",
+  "Vibrant and juicy—this coffee is a berry bomb!",
+  "Great crema and deep chocolate notes—fantastic for lattes!",
+  "Tried this natural fruity bean—it’s like drinking blueberries!",
+  "Incredibly smooth mouthfeel—so silky and balanced!",
+  "Bright acidity and tea-like body—reminds me of a light white wine.",
+  "One of the best Guatemalan coffees I’ve had—chocolatey and rich!",
+  "Tried this washed Ethiopian on a Chemex, and it was incredibly clean—floral aromas, citrusy acidity, and a delicate tea-like body with a honeyed finish.",
+  "Pulled a shot of this bean on my espresso machine—balanced caramel sweetness, medium body, and a lingering nutty finish. No need for sugar at all!",
+  "This natural-processed Brazilian coffee had a syrupy mouthfeel and deep chocolatey notes. Brewed it as a cold brew, and it was smooth and refreshing!",
+  "The anaerobic fermentation on this coffee gives it an intense tropical fruit punch flavor—it’s like mango, pineapple, and a hint of red wine all in one cup.",
+  "Brewed this Sumatran as a French press, and it was so bold and earthy. Deep notes of dark chocolate, spice, and a velvety finish made it perfect for slow sipping.",
+  "This bean is one of the brightest coffees I’ve ever tasted—huge berry notes, crisp acidity, and a red wine-like mouthfeel. Would recommend for adventurous drinkers!",
+  "Tried this washed Guatemalan as a flat white, and it held up beautifully in milk. Nutty sweetness with hints of brown sugar and a smooth, buttery finish.",
+  "Had my first honey-processed bean, and wow—the caramelization makes it incredibly sweet and complex. Brewed it in an AeroPress, and it was like liquid gold!",
+  "Dialed in this Ethiopian for espresso, and it was stunning—juicy acidity, bright floral notes, and a lingering peach sweetness that made every sip exciting.",
+  "This micro-lot Panama Geisha is something special—floral aromatics, silky texture, and an aftertaste that lingers like jasmine tea. Worth every penny!",
+  "This washed Ethiopian has delicate floral notes and crisp acidity—makes a fantastic morning pour-over.",
+  "A beautifully balanced Colombian coffee with caramel sweetness, juicy red fruit, and a chocolate finish.",
+  "This Sumatran coffee is bold and earthy with deep spice notes—perfect for those who love strong, full-bodied brews.",
+  "Incredibly smooth and nutty with hints of hazelnut and brown sugar—great for an everyday espresso.",
+  "I get notes of citrus, honey, and a tea-like body—this Kenyan Peaberry is truly unique!",
+  "The natural processing really shines here—deep berry flavors, syrupy body, and a sweet lingering finish.",
+  "One of the cleanest coffees I’ve had—bright, crisp, and floral with a juicy mouthfeel.",
+  "Brewed this in my AeroPress, and it was bursting with caramel and dried fruit flavors!",
+  "Perfectly balanced acidity and body—makes a super versatile coffee for different brew methods.",
+  "This dark roast is bold but smooth, with chocolate and molasses notes—great for lattes!",
+  "The fruit-forward profile of this Ethiopian coffee is stunning—tastes like blueberries and jasmine.",
+  "Love the wine-like acidity in this one—it’s juicy and complex with a long, sweet finish.",
+  "A comforting, well-rounded coffee with milk chocolate sweetness and a nutty undertone.",
+  "Tried this as an espresso shot—so smooth, rich, and naturally sweet with a thick crema."
+]
+
 bean_comments = []
-50.times do
+bean_comments_texts.each do |comment_text|
   bean_comments << BeanComment.create!(
-    comment: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+    comment: comment_text,
     user: users.sample,
-    bean: beans.sample,
+    bean: beans.sample
   )
 end
 
 puts "fake bean comments created"
 
 puts "creating fake data for roastery comments"
+puts "Assigning fixed roastery comments..."
+roastery_comments_texts = [
+  "Their washed Ethiopian is bright, clean, and citrusy—a fantastic pour-over!",
+  "Their honey-processed Costa Rican is syrupy, sweet, and full-bodied.",
+  "You can taste the caramelization in their beans—so much natural sweetness!",
+  "Their Kenyan espresso has such juicy acidity and a wine-like finish.",
+  "A true coffee nerd’s paradise—great beans, great roasting, and great people!",
+  "They roast light, letting the beans’ natural flavors shine—love their approach!",
+  "Tried their Sumatran dark roast—earthy, spicy, and incredibly bold.",
+  "Love their experimental roasting techniques—always something new to discover!",
+  "The natural Ethiopian here is wild—tastes like blueberries and jasmine!",
+  "Their baristas are dialed in—every espresso shot is smooth, sweet, and balanced.",
+  "Tried their natural-processed Ethiopian on a V60, and the fruit notes exploded—tasted like blueberry jam with a tea-like finish. The clarity was next level!",
+  "Had an amazing chat with their head roaster about fermentation processing. Their anaerobic Colombian was funky, boozy, and super complex—never had anything like it!",
+  "Love that they offer cupping sessions! I was able to taste the differences between washed and natural processing side by side—it completely changed how I think about coffee.",
+  "This roastery sources beans with insane attention to detail. Their micro-lot Honduran coffee had such refined caramel and nutty flavors with a lingering sweetness.",
+  "I had a cortado with their single-origin El Salvadoran, and even in milk, the flavor shined. Super balanced with a creamy mouthfeel and sweet, nutty undertones.",
+  "Their Geisha variety is unreal. Brewed it as a Chemex and got jasmine, mango, and a delicate honey sweetness—it felt more like tea than coffee in the best way!",
+  "Was blown away by their aged Sumatra—it had deep spice, earthy notes, and a full-bodied mouthfeel. Perfect for those who love intense, bold coffee!",
+  "If you’re into ultra-light roasts, this is the place. Their washed Kenyan is incredibly bright, with grapefruit acidity and a long, tea-like finish.",
+  "One of the few roasteries that truly understands espresso. Their medium roast Guatemalan creates a rich, chocolatey shot with balanced acidity and zero bitterness.",
+  "What sets them apart is their transparency—every bag of beans comes with origin details, altitude, processing method, and even tasting notes for optimal brewing.",
+  "Had a fascinating conversation with the roaster about their honey-processed beans—sweet, syrupy, and full-bodied.",
+  "Their espresso roast is well-balanced, no overpowering bitterness, just a smooth mix of chocolate, nuts, and a touch of fruit.",
+  "I love that they experiment with different roast profiles—tried their latest light roast, and it had the perfect tea-like body.",
+  "Their approach to slow roasting really brings out the caramelization in their beans—so much sweetness without over-roasting.",
+  "The Kenyan single origin here bursts with blackcurrant and grapefruit acidity—one of the best I’ve had.",
+  "I was blown away by their anaerobic fermentation coffee—super complex with funky tropical fruit notes.",
+  "They focus on Nordic-style roasting, meaning you get ultra-bright, juicy cups with a delicate body—perfect for pour-overs.",
+  "Tried their new natural-processed Brazilian—so much body and a lingering chocolatey sweetness that holds up well in milk.",
+  "They source some of the rarest micro-lots, and their Panama Geisha is on another level—floral, tea-like, and super aromatic.",
+  "Their roasting consistency is impressive—every batch of their Colombian beans maintains that perfect balance of acidity and sweetness.",
+  "I love how they highlight terroir in their coffees—you can really taste the difference between their Ethiopian and Kenyan beans.",
+  "Their honey-processed Costa Rican coffee is exceptional—notes of dried fruit, caramel, and a rich, syrupy mouthfeel.",
+  "Not only do they roast great coffee, but their baristas really understand extraction—my V60 had perfect clarity and sweetness.",
+  "I always appreciate a roastery that provides detailed brew guides for their beans—makes dialing in espresso so much easier!",
+  "You can tell their beans are roasted with care—no burned notes, just clean, well-developed flavors that shine through.",
+  "Their washed Yirgacheffe has such a delicate floral aroma—brewing it as a Chemex really enhances its clarity.",
+  "Really love how they highlight small producers—each coffee tells a story about the farm and its processing method.",
+  "Had a shot of their single-origin espresso—bright, juicy, and so well-balanced that I didn’t even need sugar or milk.",
+  "Great to see a roastery focusing on sustainable and direct trade relationships—the quality really speaks for itself.",
+  "The depth of their Sumatran dark roast is incredible—spicy, earthy, and with a rich, velvety body.",
+  "Tried their espresso flight—amazing how different roast levels and origins completely change the flavor profile."
+]
+
 roastery_comments = []
-50.times do
+
+roastery_comments_texts.each do |comment_text|
   roastery_comments << RoasteryComment.create!(
-    comment: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+    comment: comment_text,
     user: users.sample,
-    roastery: roasteries.sample,
+    roastery: roasteries.sample
   )
 end
 

@@ -23,6 +23,15 @@
   background-color: white;
   color: $dark-green;
   border: 1px solid $dark-green;
+  white-space: nowrap;
+  font-size: clamp(0.8rem, 1rem, 1.2rem);
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 15px;
+  min-width: 120px;
+  max-width: 100%;
 
   &:hover {
     background-color: $dark-green-005;
@@ -31,5 +40,3 @@
   }
 
 }
-
-

@@ -9,29 +9,35 @@
     <li>Roastery URL: <%=@roastery.roastery_url%></li>
   </ul>
 
-  <h4 class="mt-6 text-lg font-bold">Average Rating: <span id="average-rating-<%= @roastery.id %>"><%= @roastery.average_rating || "No ratings yet" %></span> ⭐</h4>
+  <h4 style="margin-top: 300px" class="mt-6 text-lg font-bold">
+    Average Rating:
+    <span id="average-rating-<%= @roastery.id %>">
+      <%= @roastery.average_rating || "No ratings yet" %>
+    </span>
+    <i class="fas fa-star" style="color: #333D29;"></i>
+  </h4>
 
-<% if user_signed_in? %>
-  <h4>Your Rating:</h4>
-  <div data-controller="rating"
-      data-rating-type="roastery"
-      data-rating-id="<%= @roastery.id %>"
-      data-rating-user-rating="<%= @roastery.roastery_reviews.find_by(user: current_user)&.rating || 0 %>">
+  <% if user_signed_in? %>
+    <h4>Your Rating:</h4>
+    <div data-controller="rating"
+        data-rating-type="roastery"
+        data-rating-id="<%= @roastery.id %>"
+        data-rating-user-rating="<%= @roastery.roastery_reviews.find_by(user: current_user)&.rating || 0 %>">
 
-    <div class="stars">
-      <% (1..5).each do |star| %>
-        <span class="star cursor-pointer"
-              data-action="click->rating#submitRating"
-              data-rating-value="<%= star %>">
-          ⭐
-        </span>
-      <% end %>
+      <div class="stars">
+        <% (1..5).each do |star| %>
+          <span class="star cursor-pointer"
+                data-action="click->rating#submitRating"
+                data-rating-value="<%= star %>">
+            <i class="fas fa-star"></i>
+          </span>
+        <% end %>
+      </div>
+      <p class="rating-message hidden text-green-600"></p>
     </div>
-    <p class="rating-message hidden text-green-600"></p>
-  </div>
-<% else %>
-  <p class="mt-4 text-sm text-gray-600">Sign in to leave a rating.</p>
-<% end %>
+  <% else %>
+    <p class="mt-4 text-sm text-gray-600">Sign in to leave a rating.</p>
+  <% end %>
 
 <% if user_signed_in? %>
   <div data-controller="favourite" data-roastery-id="<%= @roastery.id %>">

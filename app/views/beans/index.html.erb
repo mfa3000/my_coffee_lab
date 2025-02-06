@@ -8,40 +8,30 @@
 <div class="filters-container">
   <%= form_with(url: beans_path, method: :get, local: true, class: "filter-form") do |form| %>
 
-<!-- Container button search  -->
-<div class="search-container">
-  <!-- Search -->
-  <div class="search-bar">
+<div class="search-container d-flex justify-content-center">
+  <div class="search-bar d-flex justify-content-center">
     <%= form.label :query, 'Search Beans ', class: "sr-only" %>
     <%= form.text_field :query, value: params[:query], placeholder: "Search beans ...", class: "search-input" %>
   </div>
-
-  <!-- Search button -->
-  <div class="search-btn">
-    <%= form.submit 'Search', class: 'btn btn-secondary' %>
+  <div class="search-btn d-flex justify-content-center">
+    <%= form.submit 'Search', class: 'btn btn-primary' %>
   </div>
 </div>
 
 <div class="search-divider"></div>
 
-<!-- Filter  -->
-<div class="filters-controls m8">
+<div class="filters-controls">
   <button type="button" class="filter-icon" id="toggle-filters">
     <i class="fa fa-filter"></i>
   </button>
 
-  <a href="<%= beans_path(query: params[:query]) %>"
-     id="reset-filters"
-     class="reset-filters-link"
-     style="display: none;">
-    Reset
-  </a>
+  <a href="<%= beans_path(query: params[:query]) %>" id="reset-filters" class="reset-filters-link" style="display: none;">Reset</a>
 
-   <div class="add-bean-btn">
-        <%= link_to "Add New Bean", new_bean_path, class:'btn btn-tertiary' %>
-      </div>
-
+  <div class="add-bean-btn">
+    <%= link_to "Add New Bean", new_bean_path, class: 'btn btn-tertiary' %>
+  </div>
 </div>
+
 
 <!-- Filters -->
 <div class="filter-options" id="filter-options" style="display: none;">
@@ -56,38 +46,66 @@
 <!-- cards -->
 
 <div class="container mt-4">
-  <div class="row">
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4">
     <% @beans.each do |bean| %>
-      <div class="col-md-4 mb-4">
+      <div class="col mb-4 d-flex justify-content-center">
         <div class="card h-100 shadow-sm position-relative">
 
-          <!-- Bouton Favori -->
-          <button class="btn btn-light position-absolute top-0 end-0 m-2 favorite-btn">
-            <i class="fa-solid fa-heart"></i>
-          </button>
 
-          <img src="<%= bean.image %>" class="card-img-top" alt="<%= bean.name %>">
+          <!-- favori-->
+          <% if user_signed_in? %>
+          <img src="<%= bean.main_photo.attached? ? url_for(bean.main_photo) : 'https://your-default-image-url.com' %>"
+            class="card-img-top" alt="<%= bean.name %>">
+
+          <div data-controller="favourite" data-bean-id="<%= bean.id %>"class="favorite-btn-container">
+            <%= link_to bean_favourite_bean_path(bean),
+              method: (current_user.favourite_beans.exists?(bean: bean) ? :delete : :post),
+              remote: true,
+              class: "btn btn-light position-relative m-2 favorite-btn",
+              data: { action: "click->favourite#toggle", turbo_method: (current_user.favourite_beans.exists?(bean: bean) ? "delete" : "post"), turbo_action: "replace" } do %>
+              <i class="fa-solid fa-heart <%= 'text-danger' if current_user.favourite_beans.exists?(bean: bean) %>"></i>
+              <span id="favourites-count-<%= bean.id %>" class="ms-2"><%= bean.favourite_beans.count %></span>
+            <% end %>
+          </div>
+          <% end %>
+
 
           <div class="card-body d-flex flex-column">
             <h5 class="card-title text-center"><%= bean.name %></h5>
-            <p class="text-muted text-center"><i class="fa-solid fa-map-marker-alt"></i> <%= bean.origin %></p>
 
-            <div class="mt-auto">
-              <ul class="list-inline text-center">
-                <li class="list-inline-item">
-                  <i class="fa-solid fa-coffee"></i> <%= bean.brewing_method %>
-                </li>
-                <li class="list-inline-item">
-                  <i class="fa-solid fa-seedling"></i> <%= bean.flavour %>
-                </li>
-                <li class="list-inline-item">
-                  <i class="fa-solid fa-mug-hot"></i> <%= bean.roast_level %>
-                </li>
-              </ul>
+             <div class="text-center">
+                <%= link_to bean.roastery.name, roastery_path(bean.roastery), class: "text-primary" %>
+            </div>
 
-              <div class="text-center my-3">
-                <a href="<%= bean_path(bean) %>" class="btn btn-tertiary">See More</a>
+            <p class="text-muted text-center">
+              Origin: <%= bean.origin %>
+            </p>
+
+            <div class="specifications text-center">
+              <div class="bean-intensity">
+                <% if (bean.roast_level === 'light') %>
+                  <%= image_tag "bean_icon.png", alt: "Light Roast Bean", width: 20, class: "visible" %>
+                  <%= image_tag "bean_icon.png", alt: "Medium Roast Bean", width: 20, class: "transparent" %>
+                  <%= image_tag "bean_icon.png", alt: "Dark Roast Bean", width: 20, class: "transparent" %>
+                <%  elsif (bean.roast_level === 'medium') %>
+                  <%= image_tag "bean_icon.png", alt: "Light Roast Bean", width: 20, class: "visible" %>
+                  <%= image_tag "bean_icon.png", alt:"Medium Roast Bean", width:20, class: "visible" %>
+                  <%= image_tag "bean_icon.png", alt: "Dark Roast Bean", width: 20, class: "transparent" %>
+
+                <% elsif (bean.roast_level === 'dark') %>
+                  <%= image_tag "bean_icon.png", alt: "Light Roast Bean", width: 20, class: "visible" %>
+                  <%= image_tag "bean_icon.png", alt:"Medium Roast Bean", width:20, class: "visible" %>
+                  <%= image_tag "bean_icon.png", alt: "Dark Roast Bean", width: 20, class: "visible" %>
+                <% end %>
               </div>
+            </div>
+
+            <p class="text-center"><i class="fa-solid fa-book"></i> <%= bean.recipes.count %> Recipes</p>
+
+            <p class="text-center"><i class="fa-solid fa-comment"></i> <%= bean.bean_comments.count %> Comments</p>
+
+            <div class="text-center my-3">
+              <a href="<%= bean_path(bean) %>" class="btn btn-tertiary">View details</a>
             </div>
           </div>
 
