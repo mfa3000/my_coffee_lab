@@ -12,7 +12,13 @@ class RoasteriesController < ApplicationController
     @roasteries = Roastery.includes(:locations).all
 
     if params[:location].present?
-      @roasteries = Roastery.near(params[:location], 10)
+      results = Geocoder.search(params[:location])
+      if results.present?
+        latitude = results.first.coordinates[0]
+        longitude = results.first.coordinates[1]
+      end
+      @roasteries = Roastery.where(
+        id: Location.near([latitude, longitude], 50).pluck(:roastery_id))
     end
     @markers = []
     @roasteries.each do |roastery|
@@ -34,7 +40,7 @@ class RoasteriesController < ApplicationController
 
   def create
     @roastery = current_user.roasteries.build(roastery_params)
-
+    @roastery.address = params[:roastery][:locations_attributes]["0"][:address]
     unless params[:roastery][:main_photo].present?
       @roastery.main_photo.attach(io: URI.open("https://res.cloudinary.com/dtqchggeh/image/upload/v1738670181/AdobeStock_108622833_Preview_ppobqc.png"), filename: "default_roastery.png", content_type: "image/png")
     end

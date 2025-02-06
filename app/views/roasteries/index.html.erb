@@ -16,6 +16,10 @@
 
 <div class="search-divider"></div>
 
+<div class="d-flex justify-content-end me-3 mb-3">
+  <%= link_to "➕ Add new roastery", new_roastery_path, class: "text text-primary " %>
+</div>
+
 <div class="container-fluid">
   <div class="row">
     <% @roasteries.each do |roastery| %>
@@ -55,7 +59,7 @@
             <p class="text-center"><i class="fa-solid fa-comment"></i> <%= roastery.roastery_comments.count %> Comments</p>
 
             <div class="text-center">
-              <%= link_to "View More", roastery_path(roastery), class: "btn btn-primary" %>
+              <%= link_to "More details", roastery_path(roastery), class: "btn btn-tertiary" %>
             </div>
           </div>
         </div>
@@ -66,57 +70,9 @@
 
 
 <!-- Mapbox -->
-<!-- Floating CTA Button -->
-<button id="toggle-map" class="btn btn-tertiary position-fixed floating-btn">Show Map</button>
-
-<!-- Hidden Map Section -->
-<div id="map-container" class="position-fixed top-0 start-0 w-100 h-100 bg-white d-none" style="z-index: 999; opacity: 0; transition: opacity 0.3s ease-in-out;">
-  <button id="close-map" class="btn btn-danger position-absolute top-0 end-0 m-3">Close</button>
-  <div id="map" data-controller="map" data-map-api-key-value="<%= ENV['MAPBOX_ACCESS_TOKEN'] %>" data-map-markers-value="<%= @markers.to_json %>" style="height: 100%;"></div>
-</div>
-
-<style>
-  .floating-btn {
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000;
-    transition: transform 0.3s ease-in-out;
-  }
-  .floating-btn.scrolled {
-    transform: scale(1.1);
-  }
-</style>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const toggleMapBtn = document.getElementById("toggle-map");
-    const mapContainer = document.getElementById("map-container");
-    const closeMapBtn = document.getElementById("close-map");
-
-    toggleMapBtn.addEventListener("click", function() {
-      if (mapContainer.classList.contains("d-none")) {
-        mapContainer.classList.remove("d-none");
-        setTimeout(() => mapContainer.style.opacity = "1", 10);
-        toggleMapBtn.textContent = "Hide Map";
-      } else {
-        mapContainer.style.opacity = "0";
-        setTimeout(() => mapContainer.classList.add("d-none"), 300);
-        toggleMapBtn.textContent = "Show Map";
-      }
-    });
-
-    closeMapBtn.addEventListener("click", function() {
-      mapContainer.style.opacity = "0";
-      setTimeout(() => mapContainer.classList.add("d-none"), 300);
-      toggleMapBtn.textContent = "Show Map";
-    });
-
-    window.addEventListener("scroll", function() {
-      if (window.scrollY > 100) {
-        toggleMapBtn.classList.add("scrolled");
-      } else {
-        toggleMapBtn.classList.remove("scrolled");
-      }
-    });
-  });
-</script>
+<div
+  id="map"
+  data-controller="map"
+  data-map-api-key-value="<%= ENV['MAPBOX_ACCESS_TOKEN'] %>"
+  data-map-markers-value="<%= @markers.to_json %>"
+  style="height: 500px;">
