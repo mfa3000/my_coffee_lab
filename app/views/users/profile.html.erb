@@ -112,8 +112,8 @@
             <ul>
               <% @user.recipes.each do |recipe| %>
                 <li>
-                  <%= link_to recipe.name, recipe_path(recipe) %>
-                  <%= link_to "editIcon", edit_recipe_path(recipe), class: "edit-icon" %>
+                  <%= link_to recipe.name, edit_bean_recipe_path(recipe.bean, recipe) %>
+                  <%= link_to "editIcon", edit_bean_recipe_path(recipe.bean, recipe), class: "edit-icon" %>
                 </li>
               <% end %>
             </ul>
@@ -124,3 +124,11 @@
     </div>
   </div>
 </div>
+
+                  <%
+=begin%>
+ <%= link_to recipe.name, edit_bean_recipe_path(recipe.bean, ) %>
+
+ <%= link_to "editIcon", edit_bean_recipe_path(recipe), class: "edit-icon" %>
+<%
+=end%>
