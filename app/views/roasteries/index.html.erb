@@ -7,9 +7,7 @@
   <%= form_with(url: roasteries_path, method: "get", local: true, class: "search-form d-flex") do %>
     <div class="input-search d-flex justify-content-center">
       <%= text_field_tag :location, params[:location], placeholder: "Enter a location", class: "search-input" %>
-    </div>
-    <div class="btn-search d-flex justify-content-center">
-        <%= submit_tag "Search", class: "btn btn-primary search-btn" %>
+      <%= submit_tag "Search", class: "btn btn-primary search-btn" %>
     </div>
   <% end %>
 </div>
