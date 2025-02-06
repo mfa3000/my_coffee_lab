@@ -33,12 +33,17 @@ export default class extends Controller {
       let newMethod = data.favorited ? "delete" : "post";
       button.dataset.turboMethod = newMethod;
       button.setAttribute("data-turbo-method", newMethod);
-      button.setAttribute("href", `/beans/${elementId}/favourite_bean`);
+
+      if (this.element.dataset.beanId) {
+        button.setAttribute("href", `/beans/${elementId}/favourite_bean`);
+      } else if (this.element.dataset.roasteryId) {
+        button.setAttribute("href", `/roasteries/${elementId}/favourite_roastery`);
+      }
 
       if (isHeart) {
         icon.classList.toggle("text-danger", data.favorited);
         icon.classList.toggle("text-secondary", !data.favorited);
-        
+
       } else {
         button.innerText = data.favorited ? "Unfavourite" : "Favourite";
         button.classList.toggle("btn-primary", !data.favorited);
@@ -48,7 +53,7 @@ export default class extends Controller {
 
       let countElement = document.querySelector(`#favourites-count-${elementId}`);
       if (countElement) {
-        countElement.textContent = data.favourites_count;
+        countElement.textContent = data.favourites_count !== undefined ? data.favourites_count : "0";
       }
     })
     .catch(error => console.error("❌ Error:", error));

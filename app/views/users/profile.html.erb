@@ -1,8 +1,11 @@
 <div class="container profile-container">
     <div class="profile-header">
       <div class="avatar-container">
-        <img src="<%= @user.avatar.attached? ? url_for(@user.avatar) : 'https://via.placeholder.com/150' %>"
-            alt="User Avatar" class="avatar">
+        <% if @user.avatar.attached? %>
+        <img src="<%= url_for(@user.avatar) %>" alt="User Avatar" class="avatar">
+      <% else %>
+        <img src="https://res.cloudinary.com/dtqchggeh/image/upload/v1738842344/T02NE0241-U081RD448AY-761f40047aec-512_z8r1ib.jpg" alt="Default Avatar" class="avatar">
+      <% end %>
       </div>
       <h4 class="username"><%= @user.user_name %></h4>
       <p class="email"><%= @user.email %></p>

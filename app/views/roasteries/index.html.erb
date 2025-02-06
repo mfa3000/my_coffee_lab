@@ -16,6 +16,10 @@
 
 <div class="search-divider"></div>
 
+<div class="d-flex justify-content-end me-3 mb-3">
+  <%= link_to "➕ Add new roastery", new_roastery_path, class: "text text-primary " %>
+</div>
+
 <div class="container-fluid">
   <div class="row">
     <% @roasteries.each do |roastery| %>
@@ -29,7 +33,7 @@
             <% end %>
 
             <% if user_signed_in? %>
-              <div data-controller="favourite" data-roastery-id="<%= roastery.id %>" class="position-absolute top-0 end-0 m-2">
+              <div data-controller="favourite" data-roastery-id="<%= roastery.id %>" class="favorite-btn-container">
                 <%= link_to roastery_favourite_roastery_path(roastery),
                   method: (current_user.favourite_roasteries.exists?(roastery: roastery) ? :delete : :post),
                   remote: true,
@@ -55,7 +59,7 @@
             <p class="text-center"><i class="fa-solid fa-comment"></i> <%= roastery.roastery_comments.count %> Comments</p>
 
             <div class="text-center">
-              <%= link_to "View More", roastery_path(roastery), class: "btn btn-primary" %>
+              <%= link_to "More details", roastery_path(roastery), class: "btn btn-tertiary" %>
             </div>
           </div>
         </div>
@@ -72,4 +76,3 @@
   data-map-api-key-value="<%= ENV['MAPBOX_ACCESS_TOKEN'] %>"
   data-map-markers-value="<%= @markers.to_json %>"
   style="height: 500px;">
-</div>
