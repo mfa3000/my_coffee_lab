@@ -6,6 +6,7 @@ export default class extends Controller {
 
     let button = event.currentTarget;
     let icon = button.querySelector("i.fa-heart");
+
     let isHeart = icon !== null;
 
     let elementId = this.element.dataset.beanId || this.element.dataset.roasteryId;
@@ -37,6 +38,12 @@ export default class extends Controller {
       if (isHeart) {
         icon.classList.toggle("text-danger", data.favorited);
         icon.classList.toggle("text-secondary", !data.favorited);
+        
+      } else {
+        button.innerText = data.favorited ? "Unfavourite" : "Favourite";
+        button.classList.toggle("btn-primary", !data.favorited);
+        button.classList.toggle("btn-danger", data.favorited);
+
       }
 
       let countElement = document.querySelector(`#favourites-count-${elementId}`);
