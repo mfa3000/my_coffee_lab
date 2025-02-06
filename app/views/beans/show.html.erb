@@ -22,14 +22,15 @@
       <% end %>
     </div>
     <div class="col-lg-7 pt-3">
- <p class="float-end">
-          <span id="average-rating-<%= @bean.id %>">
-          <%= @bean.average_rating || "No ratings yet" %>
-          </span>
+      <p class="float-end">
+        ø
+        <span id="average-rating-<%= @bean.id %>">
+        <%= @bean.average_rating || "No ratings yet" %>
+        </span>
         <i class="fas fa-star" style="color: #333D29;"></i>
       </p>
-      <%= link_to @bean.roastery.name, roastery_path(@bean.roastery), class: "fst-italic" %>
-      <h1><%=@bean.name%></h1>
+      <%= link_to @bean.roastery.name, roastery_path(@bean.roastery), class: "fst-italic mb-2" %>
+      <h1 class="mt-2"><%=@bean.name%></h1>
       <p class="pt-1"><%=@bean.description%></p>
       <ul class="description-list pt-1">
         <li>
@@ -106,8 +107,6 @@
   <% end %>
 
 
-  <p class="mt-4">Add your photos:</p>
-
   <%= form_with model: @bean, url: bean_bean_photos_path(@bean), method: :post, local: true, multipart: true do |form| %>
     <%= form.file_field :photos, multiple: true, accept: "image/*" %>
     <%= form.submit "Upload" %>
@@ -118,16 +117,23 @@
 
 
 
-
-
+<h3>Rating</h3>
+      <p>
+        Community Rating: ø
+        <span id="average-rating-<%= @bean.id %>">
+        <%= @bean.average_rating || "No ratings yet" %>
+        </span>
+        <i class="fas fa-star" style="color: #333D29;"></i>
+      </p>
 <% if user_signed_in? %>
-  <h3>Your Rating</h3>
+
   <div data-controller="rating"
        data-rating-type="bean"
        data-rating-id="<%= @bean.id %>"
        data-rating-user-rating="<%= @bean.bean_reviews.find_by(user: current_user)&.rating || 0 %>">
 
     <div class="stars">
+      <p>Your Rating:
       <% (1..5).each do |star| %>
         <span class="star cursor-pointer"
               data-action="click->rating#submitRating"
@@ -135,6 +141,8 @@
           <i class="fas fa-star"></i>
         </span>
       <% end %>
+
+      </p>
     </div>
     <p class="rating-message hidden text-green-600"></p>
   </div>
@@ -143,18 +151,6 @@
 <% end %>
 
 
-
-
-
-
-
-
-
-
-
-  <div class="mt-4">
-    <%= link_to "Edit Bean", edit_bean_path(@bean), class: "btn" %>
-  </div>
 
 <div class="search-divider"></div>
 
@@ -173,3 +169,21 @@
   <%= f.text_area :comment, placeholder: "Write a comment..." %>
   <%= f.submit "Post" %>
 <% end %>
+
+<div class="search-divider"></div>
+
+
+
+
+
+
+
+
+
+
+  <div class="mt-4">
+  <p> Anything not correct?
+    <%= link_to "Edit Bean >", edit_bean_path(@bean), class: "link-primary" %>
+  </p>
+  </div>
+</div>
