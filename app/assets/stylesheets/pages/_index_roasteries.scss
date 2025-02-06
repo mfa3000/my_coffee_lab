@@ -23,6 +23,31 @@
   .search-btn {
     width: 100%;
     margin-bottom: 8px;
-    
+
   }
+}
+
+
+#map-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  z-index: 999;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.floating-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  transition: transform 0.3s ease-in-out;
+}
+
+.floating-btn.scrolled {
+  transform: scale(1.1);
 }

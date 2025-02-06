@@ -21,7 +21,11 @@
 
           <li class="nav-item">
             <%= link_to profile_path, class: "nav-link p-0" do %>
-              <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar-img", alt: "User avatar" %>
+             <% if current_user.avatar.attached? %>
+                <img src="<%= url_for(current_user.avatar) %>" alt="User Avatar" class="avatar-img">
+              <% else %>
+                <img src="https://res.cloudinary.com/dtqchggeh/image/upload/v1738842344/T02NE0241-U081RD448AY-761f40047aec-512_z8r1ib.jpg" alt="Default Avatar" class="avatar-img">
+              <% end %>
             <% end %>
           </li>
         <% else %>
