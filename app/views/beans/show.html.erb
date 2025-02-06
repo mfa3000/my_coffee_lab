@@ -118,13 +118,13 @@
 
 
 <h3>Rating</h3>
-      <p>
+      <!-- <p>
         Community Rating: ø
         <span id="average-rating-<%= @bean.id %>">
         <%= @bean.average_rating || "No ratings yet" %>
         </span>
         <i class="fas fa-star" style="color: #333D29;"></i>
-      </p>
+      </p> -->
 <% if user_signed_in? %>
 
   <div data-controller="rating"
