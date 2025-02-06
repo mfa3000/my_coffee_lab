@@ -4,14 +4,13 @@
     <i><%= roastery_comment.created_at.strftime("%a %b %e at %l:%M %p") %></i>
   </small>
   <p class="my-1"><%= roastery_comment.comment %></p>
-</div>
 
   <% if roastery_comment.user == current_user %>
-    <%= link_to "Delete",
+    <%= link_to "",
           [roastery_comment.roastery, roastery_comment],
           method: :delete,
           data: { turbo_method: :delete, confirm: "Are you sure?" },
-          class: "text-red-500 hover:underline text-sm ml-2" %>
+          class: "fas fa-trash-alt float-end" %>
   <% end %>
 
   <% if user_signed_in? %>
