@@ -155,7 +155,7 @@
 <div class="search-divider"></div>
 
 
-  <h4>All Comments</h4>
+  <h3>Comments</h3>
 
   <div id="bean_<%= @bean.id %>_comments">
     <%= render @bean.bean_comments %>
@@ -166,12 +166,11 @@
 <%= simple_form_for [@bean, BeanComment.new],
   html: { data: { controller: "reset-form", action: "turbo:submit-end->reset-form#reset" } } do |f| %>
 
-  <%= f.text_area :comment, placeholder: "Write a comment..." %>
+  <%= f.text_area :comment, placeholder: "Add a comment..." %>
   <%= f.submit "Post" %>
 <% end %>
 
 <div class="search-divider"></div>
-
 
   <div class="mt-4">
   <p> Anything not correct?

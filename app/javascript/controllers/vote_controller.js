@@ -36,13 +36,13 @@ export default class extends Controller {
   updateButton(button, liked) {
     if (liked) {
       button.innerText = "❤️";
-      button.classList.remove("btn-primary");
-      button.classList.add("btn-danger");
+      button.classList.remove();
+      button.classList.add();
       button.dataset.turboMethod = "delete";
     } else {
       button.innerText = "🤍";
-      button.classList.remove("btn-danger");
-      button.classList.add("btn-primary");
+      button.classList.remove();
+      button.classList.add();
       button.dataset.turboMethod = "post";
     }
   }
